@@ -7,12 +7,12 @@
 - [Information](#information)
 - [Features](#features)
 - [Compatibility](#compatibility)
-- [License](#license)
+- [License and Development](#license-and-development)
 
 ---
 
 ### Information
-This is a Minecraft mod with focus on PvP features. All features are cosmetical only, so there is no effect on the game like range or similar. Anyways features like FullBright or hitboxes can improve your gameplay.
+This is a Minecraft mod with focus on PvP features. All features are cosmetical only, so there is no effect on the game like range or similar. Anyways features like FullBright or hitboxes can improve your gameplay.\
 The mod is still in the first beta, so there may be some bugs. If you find some, you can report this in the issues tab in the repository.
 
 ---
@@ -58,8 +58,9 @@ Problems noticed:
 
 ---
 
-### License
-This mod is licensed under [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html). For more information head to /LICENSE
+### License and Development
+This mod is licensed under [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html). For more information head to /LICENSE.\
+This mod is based on [Architectury Loom](https://github.com/romangraef/Forge1.8.9Template).
 
 ---
 
