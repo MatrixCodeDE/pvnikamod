@@ -1,9 +1,21 @@
 # Pvnika Mod for Forge
 
-**Multifuctional Minecraft PvP Mod for Forge 1.8.9**
+## Multifuctional Minecraft PvP Mod for Forge 1.8.9
 
+### Contents
+
+- [Information](#information)
+- [Features](#features)
+- [Compatibility](#compatibility)
+- [License](#license)
+
+---
+
+### Information
 This is a Minecraft mod with focus on PvP features. All features are cosmetical only, so there is no effect on the game like range or similar. Anyways features like FullBright or hitboxes can improve your gameplay.
 The mod is still in the first beta, so there may be some bugs. If you find some, you can report this in the issues tab in the repository.
+
+---
 
 ### Features
 
@@ -32,6 +44,29 @@ The mod is still in the first beta, so there may be some bugs. If you find some,
 
 If you miss a feature, feel free to ask!
 
+---
+
+### Compatibility
+This mod used Mixins to modify the minecraft source code, so there can be some incompatibility with other mods which does the same.\
+Problems noticed:
+- OldAnimationMod
+  - Menu buttons not shown
+- ESSENTIAL
+  - Menus
+  - Tablist
+- Any mod that uses custom buttons in the ingame menu (ESC menu)
+
+---
+
+### License
+This mod is licensed under [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html). For more information head to /LICENSE
+
+---
+
 > **Disclaimer:** I'm not responsible for any bans/mutes whatever. Use on your own risk!
 
-#### ~ Matrix
+---
+
+Hope you enjoy this mod!
+
+### ~ Matrix
