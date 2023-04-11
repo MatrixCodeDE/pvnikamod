@@ -1,0 +1,18 @@
+{
+  "package": "de.matrix.mixin",
+  "refmap": "mixins.pvnikamod.refmap.json",
+  "minVersion": "0.7",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "client.MixinInventoryPlayer",
+    "gui.MixinGuiIngameMenu",
+    "gui.MixinGuiMainMenu",
+    "gui.MixinGuiPlayerTabOverlay",
+    "renderer.MixinEntityRenderer",
+    "renderer.MixinRendererLivingEntity",
+    "renderer.MixinRender",
+    "renderer.MixinRenderManager"
+  ]
+}

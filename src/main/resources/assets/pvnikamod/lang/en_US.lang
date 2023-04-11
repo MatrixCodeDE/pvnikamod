@@ -1,0 +1,47 @@
+menu.pvnika.name=Pvnika Mod
+
+menu.pvnika.general.name=General
+menu.pvnika.general.customMenu=Custom Menu
+menu.pvnika.general.ownNameTag=Own Nametag
+menu.pvnika.general.pingOnTab=Ping on Tablist
+menu.pvnika.general.confirmDisconnect=Confirm Disconnect
+menu.pvnika.general.fullBright=Fullbright
+
+menu.pvnika.particles.name=Particles
+menu.pvnika.particles.multiplier=Multiplier
+menu.pvnika.particles.alwaysParticles=Always Particles
+menu.pvnika.particles.alwaysSharpnessParticles=Sharpness Particles
+
+menu.pvnika.hitbox.name=Hitbox
+menu.pvnika.hitbox.index.name=Group
+menu.pvnika.hitbox.index.none=None
+menu.pvnika.hitbox.index.player=Player
+menu.pvnika.hitbox.index.animals=Animals
+menu.pvnika.hitbox.index.monsters=Monsters
+menu.pvnika.hitbox.index.items=Items
+menu.pvnika.hitbox.index.projectiles=Projectiles
+menu.pvnika.hitbox.index.other=Other
+
+menu.pvnika.crosshair.name=Crosshair
+menu.pvnika.crosshair.size=Size
+menu.pvnika.crosshair.gap=Gap
+menu.pvnika.crosshair.height=Height
+menu.pvnika.crosshair.width=Width
+menu.pvnika.crosshair.thickness=Thickness
+menu.pvnika.crosshair.outthick=Outline
+
+menu.pvnika.zoom.name=Zoom
+menu.pvnika.zoom.smooth=Smooth Zoom
+menu.pvnika.zoom.scrollable=Scrollable
+menu.pvnika.zoom.default=Default Zoom
+
+menu.pvnika.all.custom=Custom
+menu.pvnika.all.activated=Activated
+menu.pvnika.all.advanced=Advanced
+
+menu.pvnika.all.color.red=Red
+menu.pvnika.all.color.green=Green
+menu.pvnika.all.color.blue=Blue
+menu.pvnika.all.color.alpha=Alpha
+menu.pvnika.all.chroma.name=Chroma
+menu.pvnika.all.chroma.speed=Chroma Speed

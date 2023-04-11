@@ -1,0 +1,15 @@
+menu.pvnika.name=Pvnika Mod
+
+menu.pvnika.general.name=Allgemein
+menu.pvnika.general.ownNameTag=Eigener Name
+menu.pvnika.general.pingOnTab=Ping in der Tabliste
+menu.pvnika.general.confirmDisconnect=Verlassen bestätigen
+
+menu.pvnika.particles.name=Partikel
+menu.pvnika.particles.multiplier=Faktor
+menu.pvnika.particles.alwaysParticles=Immer Partikel
+menu.pvnika.particles.alwaysSharpnessParticles=Schärfe Partikel
+
+menu.pvnika.hitbox.name=Hitbox
+
+menu.pvnika.crosshair.name=Fadenkreuz
