@@ -83,7 +83,7 @@ public class TabList extends GuiPlayerTabOverlay {
                 j = Math.max(j, columns);
             }
         }
-        i += maxPing + 2;
+        i += maxPing + 1;
 
 
         list = list.subList(0, Math.min(list.size(), 80));
@@ -186,7 +186,7 @@ public class TabList extends GuiPlayerTabOverlay {
                     int ab = xPos + i + 1;
                     int ac = ab + n;
                     if (ac - ab > 5) {
-                        this.drawScoreboardValues(scoreObjectiveIn, yPos, gameProfile.getName(), ab, ac, networkPlayerInfo2);
+                        this.drawScoreboardValues(scoreObjectiveIn, yPos, gameProfile.getName(), ab, ac, networkPlayerInfo2, maxPing);
                     }
                 }
 
@@ -256,7 +256,7 @@ public class TabList extends GuiPlayerTabOverlay {
         this.zLevel -= 100.0F;
     }
 
-    private void drawScoreboardValues(ScoreObjective scoreObjective, int i, String string, int j, int k, NetworkPlayerInfo networkPlayerInfo) {
+    private void drawScoreboardValues(ScoreObjective scoreObjective, int i, String string, int j, int k, NetworkPlayerInfo networkPlayerInfo, int pingLen) {
         int l = scoreObjective.getScoreboard().getValueFromObjective(string, scoreObjective).getScorePoints();
         if (scoreObjective.getRenderType() == IScoreObjectiveCriteria.EnumRenderType.HEARTS) {
             this.mc.getTextureManager().bindTexture(icons);
@@ -317,12 +317,12 @@ public class TabList extends GuiPlayerTabOverlay {
                         string2 = string2 + "hp";
                     }
 
-                    this.mc.fontRendererObj.drawStringWithShadow(string2, (float)((k + j) / 2 - this.mc.fontRendererObj.getStringWidth(string2) / 2), (float)i, p);
+                    this.mc.fontRendererObj.drawStringWithShadow(string2, (float)((k + j) / 2 - this.mc.fontRendererObj.getStringWidth(string2) / 2 - pingLen - 2), (float)i, p);
                 }
             }
         } else {
             String string3 = EnumChatFormatting.YELLOW + "" + l;
-            this.mc.fontRendererObj.drawStringWithShadow(string3, (float)(k - this.mc.fontRendererObj.getStringWidth(string3)), (float)i, 16777215);
+            this.mc.fontRendererObj.drawStringWithShadow(string3, (float)(k - this.mc.fontRendererObj.getStringWidth(string3)) - pingLen - 2, (float)i, 16777215);
         }
 
     }

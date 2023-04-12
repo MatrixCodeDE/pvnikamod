@@ -4,6 +4,7 @@ import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.modutils.CrosshairDraw;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 
@@ -38,7 +39,12 @@ public class CrosshairRenderer {
             Color white = new Color(255, 255, 255, 255);
             Color black = new Color(0, 0, 0, 255);
             Color red = new Color(255, 0, 0, 255);
-            if (health > 8.0F && !this.mc.thePlayer.isSpectator() || this.mc.thePlayer.capabilities.isCreativeMode) {
+            EntityPlayerSP playerSP = this.mc.thePlayer;
+            if (playerSP == null){
+                crosshairDraw.drawDot(x, y, red, black);
+                crosshairDraw.displayCrossCrosshair(x, y, red, black);
+            } else
+            if (health > 8.0F && !playerSP.isSpectator() || playerSP.capabilities.isCreativeMode) {
                 //RenderManager.drawDot(x, y, 2.0F, white);
                 crosshairDraw.drawDot(x, y, white, black);
                 crosshairDraw.displayCrossCrosshair(x, y, white, black);

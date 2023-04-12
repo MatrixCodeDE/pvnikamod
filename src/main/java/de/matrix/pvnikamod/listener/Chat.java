@@ -20,7 +20,7 @@ public class Chat {
     private final String[] winTriggers = new String[]{" (Win)"};
     private boolean end;
     private boolean win;
-    private double delay = -1.0D;
+    private int delay = -1;
 
 
     public Chat(){
@@ -41,39 +41,42 @@ public class Chat {
 
     public void handleChat(IChatComponent chatComponent){
         String str = EnumChatFormatting.getTextWithoutFormattingCodes(chatComponent.getUnformattedText());
-        if (str != null && str.startsWith(" ")){
+        if (str != null && ( str.startsWith(" ") || str.startsWith("+") ) ){
             if (!this.end) {
                 for (String trig : this.triggers){
                     if (str.contains(trig)) {
+                        PvnikaMod.logger.info("Pvnika Endgame");
                         this.end = true;
-                        this.delay = 1.0D;
+                        this.delay = 5;
                         break;
                     }
                 }
-            } else {
-                for (String trig : this.winTriggers){
-                    if (str.contains(trig)) {
-                        this.win = true;
-                        break;
-                    }
+            }
+            for (String trig : this.winTriggers){
+                if (str.contains(trig)) {
+                    PvnikaMod.logger.info("Pvnika Wingame");
+                    this.win = true;
+                    break;
                 }
             }
         }
     }
 
     public void waiter(){
-        if(delay <= 0.0D && delay != -1.0D){
-            delay = -1.0D;
-            if (true){
-                //sendMessage("gg");
+        if(delay <= 0 && delay != -1){
+            delay = -1;
+            PvnikaMod.logger.info("Pvnika GG: "+win);
+            if (win){
+                sendMessage("gg");
                 PvnikaMod.logger.info("Pvnika GG should be triggered");
+            } else {
+                PvnikaMod.logger.info("Pvnika GG should not be triggered");
             }
             win = false;
             end = false;
         } else
-        if (delay > 0.0D){
-            System.out.println(delay);
-            delay -= 0.05D;
+        if (delay > 0){
+            delay -= 1;
         }
     }
 
