@@ -41,6 +41,9 @@ The mod is still in the first beta, so there may be some bugs. If you find some,
   - Smooth/Hard Zoom
   - Scrollable
   - Default Zoom (1x-50x)
+- Movement
+  - ToggleSneak
+  - ToggleSprint
 
 If you miss a feature, feel free to ask!
 

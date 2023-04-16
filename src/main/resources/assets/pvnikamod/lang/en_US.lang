@@ -35,6 +35,10 @@ menu.pvnika.zoom.smooth=Smooth Zoom
 menu.pvnika.zoom.scrollable=Scrollable
 menu.pvnika.zoom.default=Default Zoom
 
+menu.pvnika.movement.name=Movement
+menu.pvnika.movement.toggleSneak=Toggle Sneak
+menu.pvnika.movement.toggleSprint=Toggle Sprint
+
 menu.pvnika.all.custom=Custom
 menu.pvnika.all.activated=Activated
 menu.pvnika.all.advanced=Advanced

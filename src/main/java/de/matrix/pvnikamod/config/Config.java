@@ -42,6 +42,9 @@ public class Config {
     public boolean zoom_scrollable;
     public double zoom_default;
 
+    public boolean movement_toggleSneak;
+    public boolean movement_toggleSprint;
+
     public Configuration config;
 
     public Config(File configFile){
@@ -84,6 +87,9 @@ public class Config {
         this.zoom_scrollable = this.config.get("zoom", "scrollable", false).getBoolean();
         this.zoom_default = this.config.get("zoom", "default", 3.0).getDouble();
 
+        this.movement_toggleSneak = this.config.get("movement", "toggleSneak", true).getBoolean();
+        this.movement_toggleSprint = this.config.get("movement", "toggleSprint", false).getBoolean();
+
         this.config.save();
     }
 
@@ -120,6 +126,9 @@ public class Config {
         this.config.get("zoom", "smooth", false).set(this.zoom_smooth);
         this.config.get("zoom", "scrollable", false).set(this.zoom_scrollable);
         this.config.get("zoom", "default", 3.0).set(this.zoom_default);
+
+        this.config.get("movement", "toggleSneak", true).set(this.movement_toggleSneak);
+        this.config.get("movement", "toggleSprint", false).set(this.movement_toggleSprint);
 
         this.config.save();
     }

@@ -7,10 +7,16 @@ import de.matrix.pvnikamod.renderer.CrosshairRenderer;
 import de.matrix.pvnikamod.modutils.ParticlesUtils;
 import de.matrix.pvnikamod.modutils.ZoomUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.MovementInputFromOptions;
 import net.minecraftforge.client.GuiIngameForge;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.fml.client.GuiModList;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -24,6 +30,9 @@ public class Events {
     private final CrosshairRenderer crosshairRenderer;
     private final ZoomUtils zoomUtils;
     private float playerHealth;
+
+    private boolean toggled_sneak = false;
+    private boolean toggled_sprint = false;
 
     public Events(){
         this.mod = PvnikaMod.getInstance();
@@ -59,14 +68,52 @@ public class Events {
     }
 
     @SubscribeEvent
+    public void onPlayerTickEvent(TickEvent.PlayerTickEvent event){
+        if (this.config.movement_toggleSneak){
+            KeyBinding.setKeyBindState(this.mc.gameSettings.keyBindSneak.getKeyCode(), toggled_sneak);
+        }
+        if (this.config.movement_toggleSprint){
+            KeyBinding.setKeyBindState(this.mc.gameSettings.keyBindSprint.getKeyCode(), toggled_sprint);
+        }
+    }
+
+    @SubscribeEvent
     public void trackKeyInputs(InputEvent.KeyInputEvent event){
         if (PvnikaMod.openPvnikaGui.isPressed()){
             this.mc.displayGuiScreen(new GuiClientOptions(null));
+        } else
+        if (this.mc.gameSettings.keyBindSneak.isPressed()){
+            if (this.config.movement_toggleSneak){
+                toggled_sneak = !toggled_sneak;
+            } else {
+                toggled_sneak = false;
+            }
+        }
+        if (this.mc.gameSettings.keyBindSprint.isPressed()){
+            if (this.config.movement_toggleSprint){
+                toggled_sprint = !toggled_sprint;
+            } else {
+                toggled_sprint = false;
+            }
         }
     }
 
     @SubscribeEvent
     public void trackMouseInputs(InputEvent.MouseInputEvent event){
         this.zoomUtils.mouseEvent(Mouse.getDWheel());
+        if (this.mc.gameSettings.keyBindSneak.isPressed()){
+            if (this.config.movement_toggleSneak){
+                toggled_sneak = !toggled_sneak;
+            } else {
+                toggled_sneak = false;
+            }
+        }
+        if (this.mc.gameSettings.keyBindSprint.isPressed()){
+            if (this.config.movement_toggleSprint){
+                toggled_sprint = !toggled_sprint;
+            } else {
+                toggled_sprint = false;
+            }
+        }
     }
 }
