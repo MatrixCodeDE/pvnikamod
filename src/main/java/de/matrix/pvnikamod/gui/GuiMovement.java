@@ -2,13 +2,12 @@ package de.matrix.pvnikamod.gui;
 
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
-import de.matrix.pvnikamod.modutils.BooleanColor;
+import de.matrix.pvnikamod.utils.BooleanColor;
 import de.matrix.pvnikamod.modutils.MovementUtils;
 import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 
 import java.io.IOException;

@@ -44,7 +44,7 @@ public class Chat {
             if (!this.end) {
                 for (String trig : this.triggers){
                     if (str.contains(trig)) {
-                        PvnikaMod.logger.info("Pvnika Endgame");
+                        PvnikaMod.sendLog("Pvnika Endgame");
                         this.end = true;
                         this.delay = 5;
                         break;
@@ -53,7 +53,7 @@ public class Chat {
             }
             for (String trig : this.winTriggers){
                 if (str.contains(trig)) {
-                    PvnikaMod.logger.info("Pvnika Wingame");
+                    PvnikaMod.sendLog("Pvnika Wingame");
                     this.win = true;
                     break;
                 }
@@ -64,12 +64,12 @@ public class Chat {
     public void waiter(){
         if(delay <= 0 && delay != -1){
             delay = -1;
-            PvnikaMod.logger.info("Pvnika GG: "+win);
+            PvnikaMod.sendLog("Pvnika GG: "+win);
             if (win){
                 sendMessage("gg");
-                PvnikaMod.logger.info("Pvnika GG should be triggered");
+                PvnikaMod.sendLog("Pvnika GG should be triggered");
             } else {
-                PvnikaMod.logger.info("Pvnika GG should not be triggered");
+                PvnikaMod.sendLog("Pvnika GG should not be triggered");
             }
             win = false;
             end = false;

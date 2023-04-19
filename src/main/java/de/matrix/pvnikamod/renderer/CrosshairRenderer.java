@@ -3,10 +3,12 @@ package de.matrix.pvnikamod.renderer;
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.modutils.CrosshairDraw;
+import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.Render;
 
 import java.awt.*;
 
@@ -53,6 +55,7 @@ public class CrosshairRenderer {
                 crosshairDraw.drawDot(x, y, red, black);
                 crosshairDraw.displayCrossCrosshair(x, y, red, black);
             }
+            RenderManager.drawRoundedRect(1,1,30,30, 2.0f, ColorUtil.rgbToDec(0, 0, 0), 128);
             RenderManager.post();
         }
     }

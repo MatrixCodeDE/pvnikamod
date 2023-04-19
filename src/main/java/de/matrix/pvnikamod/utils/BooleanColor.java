@@ -1,8 +1,9 @@
-package de.matrix.pvnikamod.modutils;
+package de.matrix.pvnikamod.utils;
 
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -25,6 +26,14 @@ public class BooleanColor {
             color = "§a";
         }
         return color + text;
+    }
+
+    public static String enableText(boolean istrue){
+        String str = I18n.format("menu.pvnika.all.disabled");
+        if(istrue){
+            str = I18n.format("menu.pvnika.all.enabled");
+        }
+        return boolColor(istrue, str);
     }
 
 }

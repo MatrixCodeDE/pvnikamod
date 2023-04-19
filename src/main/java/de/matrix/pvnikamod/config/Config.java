@@ -45,6 +45,11 @@ public class Config {
     public boolean movement_toggleSneak;
     public boolean movement_toggleSprint;
 
+    public boolean iginfos_showFPS;
+    public double[] iginfos_PosX = new double[2];
+    public double[] iginfos_PosY = new double[2];
+    public boolean iginfos_showCoords;
+
     public Configuration config;
 
     public Config(File configFile){
@@ -90,6 +95,9 @@ public class Config {
         this.movement_toggleSneak = this.config.get("movement", "toggleSneak", true).getBoolean();
         this.movement_toggleSprint = this.config.get("movement", "toggleSprint", false).getBoolean();
 
+        this.iginfos_PosX = this.config.get("ingameinfos", "posx", new double[]{1, 1}).getDoubleList();
+        this.iginfos_PosY = this.config.get("ingameinfos", "posy", new double[]{1, 1}).getDoubleList();
+
         this.config.save();
     }
 
@@ -129,6 +137,9 @@ public class Config {
 
         this.config.get("movement", "toggleSneak", true).set(this.movement_toggleSneak);
         this.config.get("movement", "toggleSprint", false).set(this.movement_toggleSprint);
+
+        this.config.get("ingameinfos", "posx", new double[]{1, 1}).set(this.iginfos_PosX);
+        this.config.get("ingameinfos", "posy", new double[]{1, 1}).set(this.iginfos_PosY);
 
         this.config.save();
     }

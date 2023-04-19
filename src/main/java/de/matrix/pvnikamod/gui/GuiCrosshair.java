@@ -3,7 +3,7 @@ package de.matrix.pvnikamod.gui;
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.renderer.CrosshairRenderer;
-import de.matrix.pvnikamod.modutils.BooleanColor;
+import de.matrix.pvnikamod.utils.BooleanColor;
 import de.matrix.pvnikamod.modutils.CrosshairUtils;
 import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.Minecraft;

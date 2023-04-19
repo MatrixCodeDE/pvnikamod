@@ -39,9 +39,17 @@ menu.pvnika.movement.name=Movement
 menu.pvnika.movement.toggleSneak=Toggle Sneak
 menu.pvnika.movement.toggleSprint=Toggle Sprint
 
+menu.pvnika.iginfos.name=Ingame Infos
+menu.pvnika.iginfos.fps.name=FPS
+menu.pvnika.iginfos.coordinates.name=Coordinates
+
 menu.pvnika.all.custom=Custom
-menu.pvnika.all.activated=Activated
+menu.pvnika.all.enabled=Enabled
+menu.pvnika.all.disabled=Disabled
 menu.pvnika.all.advanced=Advanced
+
+menu.pvnika.all.posx=Position X
+menu.pvnika.all.posy=Position Y
 
 menu.pvnika.all.color.red=Red
 menu.pvnika.all.color.green=Green
