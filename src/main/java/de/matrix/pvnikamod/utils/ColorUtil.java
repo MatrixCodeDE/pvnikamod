@@ -47,4 +47,9 @@ public class ColorUtil {
         return dec;
     }
 
+    public static int colorToDec(Color color){
+        int dec = rgbToDec(color.getRed(), color.getGreen(), color.getBlue());
+        return dec;
+    }
+
 }

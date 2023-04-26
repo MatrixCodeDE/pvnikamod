@@ -50,6 +50,7 @@ public class Config {
     public double[] iginfos_PosY = new double[2];
     public boolean iginfos_showCoords;
 
+
     public Configuration config;
 
     public Config(File configFile){
@@ -92,11 +93,13 @@ public class Config {
         this.zoom_scrollable = this.config.get("zoom", "scrollable", false).getBoolean();
         this.zoom_default = this.config.get("zoom", "default", 3.0).getDouble();
 
-        this.movement_toggleSneak = this.config.get("movement", "toggleSneak", true).getBoolean();
+        this.movement_toggleSneak = this.config.get("movement", "toggleSneak", false).getBoolean();
         this.movement_toggleSprint = this.config.get("movement", "toggleSprint", false).getBoolean();
 
-        this.iginfos_PosX = this.config.get("ingameinfos", "posx", new double[]{1, 1}).getDoubleList();
-        this.iginfos_PosY = this.config.get("ingameinfos", "posy", new double[]{1, 1}).getDoubleList();
+        this.iginfos_showFPS = this.config.get("ingameinfos", "showFPS", false).getBoolean();
+        this.iginfos_PosX = this.config.get("ingameinfos", "posx", new double[]{0, 0}).getDoubleList();
+        this.iginfos_PosY = this.config.get("ingameinfos", "posy", new double[]{0, 0}).getDoubleList();
+        this.iginfos_showCoords = this.config.get("ingameinfos", "showCoords", false).getBoolean();
 
         this.config.save();
     }
@@ -135,12 +138,15 @@ public class Config {
         this.config.get("zoom", "scrollable", false).set(this.zoom_scrollable);
         this.config.get("zoom", "default", 3.0).set(this.zoom_default);
 
-        this.config.get("movement", "toggleSneak", true).set(this.movement_toggleSneak);
+        this.config.get("movement", "toggleSneak", false).set(this.movement_toggleSneak);
         this.config.get("movement", "toggleSprint", false).set(this.movement_toggleSprint);
 
-        this.config.get("ingameinfos", "posx", new double[]{1, 1}).set(this.iginfos_PosX);
-        this.config.get("ingameinfos", "posy", new double[]{1, 1}).set(this.iginfos_PosY);
+        this.config.get("ingameinfos", "showFPS", false).set(this.iginfos_showFPS);
+        this.config.get("ingameinfos", "posx", new double[]{0, 0}).set(this.iginfos_PosX);
+        this.config.get("ingameinfos", "posy", new double[]{0, 0}).set(this.iginfos_PosY);
+        this.config.get("ingameinfos", "showCoords", false).set(this.iginfos_showCoords);
 
         this.config.save();
     }
 }
+

@@ -18,8 +18,6 @@ public class CrosshairRenderer {
     private final Config config;
     private final Minecraft mc;
     private final CrosshairDraw crosshairDraw;
-    public boolean isBed = false;
-    public boolean isCore = false;
 
     public CrosshairRenderer() {
         this.mod = PvnikaMod.getInstance();
@@ -56,11 +54,6 @@ public class CrosshairRenderer {
                 //RenderManager.drawDot(x, y, 2.0F, Color.WHITE);
                 crosshairDraw.drawDot(x, y, red, black);
                 crosshairDraw.displayCrossCrosshair(x, y, red, black);
-            }
-            if (isBed){
-                RenderManager.drawRoundedRect(1,1,30,30, 2.0f, ColorUtil.rgbToDec(255, 0, 0), 128);
-            } else if (isCore){
-                RenderManager.drawRoundedRect(1,1,30,30, 2.0f, ColorUtil.rgbToDec(0, 255, 255), 128);
             }
             RenderManager.post();
         }

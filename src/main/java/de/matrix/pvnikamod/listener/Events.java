@@ -17,6 +17,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MovementInputFromOptions;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.client.GuiModList;
@@ -72,6 +73,7 @@ public class Events {
                 crosshairRenderer.render(x, y, this.playerHealth);
             }
         }
+
     }
 
     @SubscribeEvent
@@ -82,13 +84,6 @@ public class Events {
         if (this.config.movement_toggleSprint){
             KeyBinding.setKeyBindState(this.mc.gameSettings.keyBindSprint.getKeyCode(), toggled_sprint);
         }
-        Item targetItem = this.implementation.getTargetBlockItem();
-        boolean isBed = targetItem != null && targetItem == Item.getItemById(355);
-        boolean isCore = targetItem != null && targetItem == Item.getItemById(138);
-        this.crosshairRenderer.isBed = isBed;
-        this.crosshairRenderer.isCore = isCore;
-        float dmgValue = 0.0f;
-
     }
 
     @SubscribeEvent
@@ -133,6 +128,6 @@ public class Events {
 
     @SubscribeEvent
     public void onBreak(BlockEvent.BreakEvent event){
-        System.out.println();
+        //System.out.println();
     }
 }

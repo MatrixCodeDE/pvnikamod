@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GuiIngameMenu.class)
-public class MixinGuiIngameMenu extends GuiScreen {
+public abstract class MixinGuiIngameMenu extends GuiScreen {
 
     /**
      * @author Matrix

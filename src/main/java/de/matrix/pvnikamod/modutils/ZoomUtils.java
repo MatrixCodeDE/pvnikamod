@@ -68,10 +68,10 @@ public class ZoomUtils {
             }
 
             if (strength > 0){
-                this.currentLevel = this.currentLevel * 1.0f;
+                this.currentLevel = this.currentLevel * 1.1f;
             } else
             if (strength < 0){
-                this.currentLevel = this.currentLevel * 1.0f;
+                this.currentLevel = this.currentLevel * 0.9f;
             }
 
             this.currentLevel = MathHelper.clamp_float(this.currentLevel, 1.0f, 50.0f);

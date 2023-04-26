@@ -42,7 +42,7 @@ public class GuiIngameInfos extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground();
 
-        this.drawCenteredString(fontRendererObj, I18n.format("menu.pvnika.iginfos.fps.name"), width / 2, 40, ColorUtil.rgbToDec(85, 255, 255));
+        this.drawCenteredString(fontRendererObj, I18n.format("menu.pvnika.iginfos.name"), width / 2, 40, ColorUtil.rgbToDec(85, 255, 255));
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

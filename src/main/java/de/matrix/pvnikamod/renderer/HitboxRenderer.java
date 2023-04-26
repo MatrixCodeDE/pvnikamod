@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityHanging;
 import net.minecraft.entity.item.EntityEnderEye;
 import net.minecraft.entity.item.EntityFireworkRocket;
@@ -53,7 +54,7 @@ public class HitboxRenderer {
             if (entity instanceof EntityPlayer){
                 renderGroup = 1;
             } else
-            if (entity instanceof EntityAnimal || entity instanceof EntityAmbientCreature){
+            if (entity instanceof EntityAnimal || entity instanceof EntityAmbientCreature || entity instanceof EntityAgeable){
                 renderGroup = 2;
             } else
             if (entity instanceof EntityMob){

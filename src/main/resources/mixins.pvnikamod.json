@@ -7,6 +7,7 @@
   ],
   "client": [
     "client.MixinInventoryPlayer",
+    "client.MixinPlayerControllerMP",
     "gui.MixinGuiIngameMenu",
     "gui.MixinGuiMainMenu",
     "gui.MixinGuiPlayerTabOverlay",

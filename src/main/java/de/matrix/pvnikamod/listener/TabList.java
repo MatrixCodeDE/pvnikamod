@@ -4,6 +4,7 @@ import com.google.common.collect.Ordering;
 import com.mojang.authlib.GameProfile;
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
+import de.matrix.pvnikamod.utils.ColorUtil;
 import de.matrix.pvnikamod.utils.PlayerComparator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -22,9 +23,11 @@ import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldSettings;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.scoreboard.IScoreObjectiveCriteria;
 
+import java.awt.*;
 import java.util.Iterator;
 import java.util.List;
 
@@ -216,7 +219,6 @@ public class TabList extends GuiPlayerTabOverlay {
         int ping = networkPlayerInfoIn.getResponseTime();
         String pingStr = ping + "ms";
         int strWidth = this.mc.fontRendererObj.getStringWidth(pingStr);
-
         if (ping < 0) {
             m = 5;
         } else if (ping < 150) {
@@ -232,19 +234,26 @@ public class TabList extends GuiPlayerTabOverlay {
         }
 
         if (ping < 50){
-            pingColor = 65280;
+            // 0-49
+            pingColor = ColorUtil.colorToDec(new Color(0, 255, 0));
         } else if (ping < 100) {
-            pingColor = 5635840;
+            // 50-99
+            pingColor = ColorUtil.colorToDec(new Color(85, 255, 0));
         } else if (ping < 150) {
-            pingColor = 11206400;
+            // 100-149
+            pingColor = ColorUtil.colorToDec(new Color(170, 255, 0));
         } else if (ping < 200) {
-            pingColor = 16776960;
+            // 150-199
+            pingColor = ColorUtil.colorToDec(new Color(255, 255, 0));
         } else if (ping < 250) {
-            pingColor = 16755200;
+            // 200-249
+            pingColor = ColorUtil.colorToDec(new Color(255, 170, 0));
         } else if (ping < 300) {
-            pingColor = 16733440;
+            // 250-299
+            pingColor = ColorUtil.colorToDec(new Color(255, 85, 0));
         } else {
-            pingColor = 16711680;
+            // 300+
+            pingColor = ColorUtil.colorToDec(new Color(255, 0, 0));
         }
 
         this.zLevel += 100.0F;
