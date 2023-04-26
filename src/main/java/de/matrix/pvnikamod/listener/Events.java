@@ -6,14 +6,19 @@ import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.renderer.CrosshairRenderer;
 import de.matrix.pvnikamod.modutils.ParticlesUtils;
 import de.matrix.pvnikamod.modutils.ZoomUtils;
+import de.matrix.pvnikamod.renderer.RenderManager;
+import de.matrix.pvnikamod.utils.BooleanColor;
+import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.item.Item;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MovementInputFromOptions;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.client.GuiModList;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -27,8 +32,9 @@ public class Events {
     private final PvnikaMod mod;
     private final Config config;
     private final Minecraft mc;
-    private final CrosshairRenderer crosshairRenderer;
+    public final CrosshairRenderer crosshairRenderer;
     private final ZoomUtils zoomUtils;
+    private Implementation implementation;
     private float playerHealth;
 
     private boolean toggled_sneak = false;
@@ -40,6 +46,7 @@ public class Events {
         this.mc = Minecraft.getMinecraft();
         this.crosshairRenderer = new CrosshairRenderer();
         this.zoomUtils = this.mod.zoomUtils;
+        this.implementation = new Implementation();
     }
 
     @SubscribeEvent
@@ -75,6 +82,13 @@ public class Events {
         if (this.config.movement_toggleSprint){
             KeyBinding.setKeyBindState(this.mc.gameSettings.keyBindSprint.getKeyCode(), toggled_sprint);
         }
+        Item targetItem = this.implementation.getTargetBlockItem();
+        boolean isBed = targetItem != null && targetItem == Item.getItemById(355);
+        boolean isCore = targetItem != null && targetItem == Item.getItemById(138);
+        this.crosshairRenderer.isBed = isBed;
+        this.crosshairRenderer.isCore = isCore;
+        float dmgValue = 0.0f;
+
     }
 
     @SubscribeEvent
@@ -115,5 +129,10 @@ public class Events {
                 toggled_sprint = false;
             }
         }
+    }
+
+    @SubscribeEvent
+    public void onBreak(BlockEvent.BreakEvent event){
+        System.out.println();
     }
 }
