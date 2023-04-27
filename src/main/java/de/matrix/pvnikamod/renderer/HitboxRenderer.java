@@ -48,7 +48,7 @@ public class HitboxRenderer {
         if (entity != null && !entity.isInvisible() && this.renderManager != null){
             this.storeDebugBoundingBox = this.renderManager.isDebugBoundingBox();
             this.renderManager.setDebugBoundingBox(false);
-            if (!this.config.hitbox_advanced) {
+            if (!this.config.hitboxSettings.advanced) {
                 renderGroup = 0;
             } else
             if (entity instanceof EntityPlayer){
@@ -73,9 +73,9 @@ public class HitboxRenderer {
                 return;
             }
             int i = renderGroup;
-            if (this.config.hitbox_activated[i]) {
-                if (!this.config.hitbox_chroma[i]) {
-                    this.renderBoundingBox(entity, x, y, z, this.config.hitbox_r[i], this.config.hitbox_g[i], this.config.hitbox_b[i], this.config.hitbox_a[i]);
+            if (this.config.hitboxSettings.activated[i]) {
+                if (!this.config.hitboxSettings.chroma[i]) {
+                    this.renderBoundingBox(entity, x, y, z, this.config.hitboxSettings.red[i], this.config.hitboxSettings.green[i], this.config.hitboxSettings.blue[i], this.config.hitboxSettings.alpha[i]);
                 } else {
                     Color chroma = getChroma(i);
                     this.renderBoundingBox(entity, x, y, z, chroma.getRed(), chroma.getGreen(), chroma.getBlue(), chroma.getAlpha());
@@ -86,7 +86,7 @@ public class HitboxRenderer {
     }
 
     private Color getChroma(int group) {
-        float time = (float)((System.currentTimeMillis() * (this.config.hitbox_speed[group])) % (5000L)) / 5000.0F;
+        float time = (float)((System.currentTimeMillis() * (this.config.hitboxSettings.speed[group])) % (5000L)) / 5000.0F;
         Color color =  Color.getHSBColor(time, 0.8F, 0.8F);
         return color;
     }

@@ -53,59 +53,59 @@ public class GuiHitbox extends GuiScreen {
         int i = -2;
         int j = 24;
         buttonList.add(this.advancedButton = new GuiButton(0, width / 2 - 60, height / 4 + 0 + i, 120, 20, I18n.format("menu.pvnika.all.advanced")));
-        buttonList.add(this.groupSlider = new GuiSlider(1, width / 2 - 60, height / 4 + j + i, 120, 20, I18n.format("menu.pvnika.hitbox.index.name") + ": ", "", 1, 6, this.config.hitbox_group, false, true));
+        buttonList.add(this.groupSlider = new GuiSlider(1, width / 2 - 60, height / 4 + j + i, 120, 20, I18n.format("menu.pvnika.hitbox.index.name") + ": ", "", 1, 6, this.config.hitboxSettings.group, false, true));
         buttonList.add(this.activated = new GuiButton(2, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.all.activated")));
         buttonList.add(this.chromaButton = new GuiButton(3, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, I18n.format("menu.pvnika.all.chroma.name")));
-        buttonList.add(this.rSlider = new GuiSlider(4, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.all.color.red") + ": ", "", 0, 255, this.config.hitbox_r[this.config.hitbox_group], false, true));
-        buttonList.add(this.gSlider = new GuiSlider(5, width / 2 - 60, height / 4 + 5 * j + i, 120, 20, I18n.format("menu.pvnika.all.color.green") + ": ", "", 0, 255, this.config.hitbox_g[this.config.hitbox_group], false, true));
-        buttonList.add(this.bSlider = new GuiSlider(6, width / 2 - 60, height / 4 + 6 * j + i, 120, 20, I18n.format("menu.pvnika.all.color.blue") + ": ", "", 0, 255, this.config.hitbox_b[this.config.hitbox_group], false, true));
-        buttonList.add(this.aSlider = new GuiSlider(7, width / 2 - 60, height / 4 + 7 * j + i, 120, 20, I18n.format("menu.pvnika.all.color.alpha") + ": ", "", 0, 255, this.config.hitbox_a[this.config.hitbox_group], false, true));
-        buttonList.add(this.speedSlider = new GuiSlider(9, width / 2 - 60, height / 4 + 8 * j + i, 120, 20, I18n.format("menu.pvnika.all.chroma.speed") + ": ", "", 1, 10, this.config.hitbox_r[this.config.hitbox_group], false, true));
+        buttonList.add(this.rSlider = new GuiSlider(4, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.all.color.red") + ": ", "", 0, 255, this.config.hitboxSettings.red[this.config.hitboxSettings.group], false, true));
+        buttonList.add(this.gSlider = new GuiSlider(5, width / 2 - 60, height / 4 + 5 * j + i, 120, 20, I18n.format("menu.pvnika.all.color.green") + ": ", "", 0, 255, this.config.hitboxSettings.green[this.config.hitboxSettings.group], false, true));
+        buttonList.add(this.bSlider = new GuiSlider(6, width / 2 - 60, height / 4 + 6 * j + i, 120, 20, I18n.format("menu.pvnika.all.color.blue") + ": ", "", 0, 255, this.config.hitboxSettings.blue[this.config.hitboxSettings.group], false, true));
+        buttonList.add(this.aSlider = new GuiSlider(7, width / 2 - 60, height / 4 + 7 * j + i, 120, 20, I18n.format("menu.pvnika.all.color.alpha") + ": ", "", 0, 255, this.config.hitboxSettings.alpha[this.config.hitboxSettings.group], false, true));
+        buttonList.add(this.speedSlider = new GuiSlider(9, width / 2 - 60, height / 4 + 8 * j + i, 120, 20, I18n.format("menu.pvnika.all.chroma.speed") + ": ", "", 1, 10, this.config.hitboxSettings.speed[this.config.hitboxSettings.group], false, true));
         buttonList.add(this.backButton = new GuiButton(10, width / 2 - 30, height / 4 + 9 * j + i, 60, 20, I18n.format("gui.back")));
         refreshButtons();
     }
 
     public void refreshButtons(){
-        this.groupSlider.setValue(this.config.hitbox_group);
-        this.groupSlider.displayString = translateGroup[this.config.hitbox_group];
-        this.rSlider.setValue(this.config.hitbox_r[this.config.hitbox_group]);
-        this.gSlider.setValue(this.config.hitbox_g[this.config.hitbox_group]);
-        this.bSlider.setValue(this.config.hitbox_b[this.config.hitbox_group]);
-        this.aSlider.setValue(this.config.hitbox_a[this.config.hitbox_group]);
+        this.groupSlider.setValue(this.config.hitboxSettings.group);
+        this.groupSlider.displayString = translateGroup[this.config.hitboxSettings.group];
+        this.rSlider.setValue(this.config.hitboxSettings.red[this.config.hitboxSettings.group]);
+        this.gSlider.setValue(this.config.hitboxSettings.green[this.config.hitboxSettings.group]);
+        this.bSlider.setValue(this.config.hitboxSettings.blue[this.config.hitboxSettings.group]);
+        this.aSlider.setValue(this.config.hitboxSettings.alpha[this.config.hitboxSettings.group]);
         this.rSlider.updateSlider();
         this.gSlider.updateSlider();
         this.bSlider.updateSlider();
         this.aSlider.updateSlider();
-        this.speedSlider.setValue(this.config.hitbox_speed[this.config.hitbox_group]);
+        this.speedSlider.setValue(this.config.hitboxSettings.speed[this.config.hitboxSettings.group]);
         this.speedSlider.updateSlider();
         int i = -2;
         int j = 24;
-        this.advancedButton.displayString = BooleanColor.boolColor(this.config.hitbox_advanced, I18n.format("menu.pvnika.all.advanced"));
-        if (!this.config.hitbox_advanced) {
-            this.config.hitbox_group = 0;
+        this.advancedButton.displayString = BooleanColor.boolColor(this.config.hitboxSettings.advanced, I18n.format("menu.pvnika.all.advanced"));
+        if (!this.config.hitboxSettings.advanced) {
+            this.config.hitboxSettings.group = 0;
             this.groupSlider.visible = false;
         } else {
-            if (this.config.hitbox_group == 0) {
-                this.config.hitbox_group = this.config.hitbox_last;
+            if (this.config.hitboxSettings.group == 0) {
+                this.config.hitboxSettings.group = this.config.hitboxSettings.lastGroup;
             }
-            this.groupSlider.setValue(this.config.hitbox_group);
+            this.groupSlider.setValue(this.config.hitboxSettings.group);
             this.groupSlider.visible = true;
             this.groupSlider.yPosition = height / 4 + j + i;
             i += 24;
         }
         this.activated.yPosition = height / 4 + j + i;
-        this.activated.displayString = BooleanColor.boolColor(this.config.hitbox_activated[this.config.hitbox_group], I18n.format("menu.pvnika.all.activated"));
+        this.activated.displayString = BooleanColor.boolColor(this.config.hitboxSettings.activated[this.config.hitboxSettings.group], I18n.format("menu.pvnika.all.activated"));
         this.chromaButton.yPosition = height / 4 + 2 * j + i;
-        this.chromaButton.displayString = BooleanColor.boolColor(this.config.hitbox_chroma[this.config.hitbox_group], I18n.format("menu.pvnika.all.chroma.name"));
-        if (!this.config.hitbox_chroma[this.config.hitbox_group]) {
+        this.chromaButton.displayString = BooleanColor.boolColor(this.config.hitboxSettings.chroma[this.config.hitboxSettings.group], I18n.format("menu.pvnika.all.chroma.name"));
+        if (!this.config.hitboxSettings.chroma[this.config.hitboxSettings.group]) {
             this.rSlider.visible = true;
             this.gSlider.visible = true;
             this.bSlider.visible = true;
             this.aSlider.visible = true;
-            this.rSlider.setValue(this.config.hitbox_r[this.config.hitbox_group]);
-            this.gSlider.setValue(this.config.hitbox_g[this.config.hitbox_group]);
-            this.bSlider.setValue(this.config.hitbox_b[this.config.hitbox_group]);
-            this.aSlider.setValue(this.config.hitbox_a[this.config.hitbox_group]);
+            this.rSlider.setValue(this.config.hitboxSettings.red[this.config.hitboxSettings.group]);
+            this.gSlider.setValue(this.config.hitboxSettings.green[this.config.hitboxSettings.group]);
+            this.bSlider.setValue(this.config.hitboxSettings.blue[this.config.hitboxSettings.group]);
+            this.aSlider.setValue(this.config.hitboxSettings.alpha[this.config.hitboxSettings.group]);
             this.speedSlider.visible = false;
             this.rSlider.yPosition = height / 4 + 3 * j + i;
             this.gSlider.yPosition = height / 4 + 4 * j + i;
@@ -118,7 +118,7 @@ public class GuiHitbox extends GuiScreen {
             this.bSlider.visible = false;
             this.aSlider.visible = false;
             this.speedSlider.visible = true;
-            this.speedSlider.setValue(this.config.hitbox_speed[this.config.hitbox_group]);
+            this.speedSlider.setValue(this.config.hitboxSettings.speed[this.config.hitboxSettings.group]);
             this.speedSlider.yPosition = height / 4 + 3 * j + i;
             this.backButton.yPosition = height / 4 + 4 * j + i;
         }
@@ -162,14 +162,14 @@ public class GuiHitbox extends GuiScreen {
 
     protected void mouseReleased(int mouseX, int mouseY, int releaseButton) {
         super.mouseReleased(mouseX, mouseY, releaseButton);
-        this.config.hitbox_r[this.config.hitbox_group] = this.rSlider.getValueInt();
-        this.config.hitbox_g[this.config.hitbox_group] = this.gSlider.getValueInt();
-        this.config.hitbox_b[this.config.hitbox_group] = this.bSlider.getValueInt();
-        this.config.hitbox_a[this.config.hitbox_group] = this.aSlider.getValueInt();
-        this.config.hitbox_speed[this.config.hitbox_group] = this.speedSlider.getValueInt();
-        if (this.config.hitbox_group != 0) {
-            this.config.hitbox_group = this.groupSlider.getValueInt();
-            this.config.hitbox_last = this.config.hitbox_group;
+        this.config.hitboxSettings.red[this.config.hitboxSettings.group] = this.rSlider.getValueInt();
+        this.config.hitboxSettings.green[this.config.hitboxSettings.group] = this.gSlider.getValueInt();
+        this.config.hitboxSettings.blue[this.config.hitboxSettings.group] = this.bSlider.getValueInt();
+        this.config.hitboxSettings.alpha[this.config.hitboxSettings.group] = this.aSlider.getValueInt();
+        this.config.hitboxSettings.speed[this.config.hitboxSettings.group] = this.speedSlider.getValueInt();
+        if (this.config.hitboxSettings.group != 0) {
+            this.config.hitboxSettings.group = this.groupSlider.getValueInt();
+            this.config.hitboxSettings.lastGroup = this.config.hitboxSettings.group;
         }
         refreshButtons();
     }

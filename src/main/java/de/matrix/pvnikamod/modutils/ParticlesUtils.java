@@ -23,13 +23,13 @@ public class ParticlesUtils {
     }
 
     public void toggleAlwaysParticles() {
-        boolean alwaysParticles = this.config.alwaysParticles;
-        this.config.alwaysParticles = !alwaysParticles;
+        boolean alwaysParticles = this.config.particleSettings.alwaysParticles;
+        this.config.particleSettings.alwaysParticles = !alwaysParticles;
     }
 
     public void toggleSharpnessParticles() {
-        boolean alwaysSharpnessParticles = this.config.alwaysSharpnessParticles;
-        this.config.alwaysSharpnessParticles = !alwaysSharpnessParticles;
+        boolean alwaysSharpnessParticles = this.config.particleSettings.alwaysSharpnessParticles;
+        this.config.particleSettings.alwaysSharpnessParticles = !alwaysSharpnessParticles;
     }
 
     public void onAttack(AttackEntityEvent event) {
@@ -38,12 +38,12 @@ public class ParticlesUtils {
             EntityPlayer player = Minecraft.getMinecraft().thePlayer;
             boolean criticalHit = player.fallDistance > 0.0F && !player.isPotionActive(Potion.blindness);
             float enchantment = EnchantmentHelper.getModifierForCreature(player.getHeldItem(), ((EntityLivingBase) entity).getCreatureAttribute());
-            for (int i = 0; i < this.config.particleMultiplier; i++) {
-                if (criticalHit || this.config.alwaysParticles) {
+            for (int i = 0; i < this.config.particleSettings.particleMultiplier; i++) {
+                if (criticalHit || this.config.particleSettings.alwaysParticles) {
                     Minecraft.getMinecraft().thePlayer.onCriticalHit(entity);
                 }
 
-                if (enchantment > 0.0F || this.config.alwaysSharpnessParticles) {
+                if (enchantment > 0.0F || this.config.particleSettings.alwaysSharpnessParticles) {
                     Minecraft.getMinecraft().thePlayer.onEnchantmentCritical(entity);
                 }
                 if (Minecraft.getDebugFPS() < 30){

@@ -10,7 +10,7 @@ import javax.swing.text.ParagraphView;
 public class MiscRenderer {
 
     public static void toggleFullBright(){
-        if (PvnikaMod.getInstance().getConfig().fullBright){
+        if (PvnikaMod.getInstance().getConfig().generalSettings.fullBright){
             PvnikaMod.getInstance().mc.gameSettings.gammaSetting = 15.0f;
         } else {
             PvnikaMod.getInstance().mc.gameSettings.gammaSetting = 1.0f;

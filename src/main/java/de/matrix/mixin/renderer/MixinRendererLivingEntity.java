@@ -49,7 +49,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
     protected boolean canRenderName(T entity) {
 
         EntityPlayerSP entityplayersp = Minecraft.getMinecraft().thePlayer;
-        if(entity == entityplayersp && PvnikaMod.getInstance().getConfig().ownNameTag){
+        if(entity == entityplayersp && PvnikaMod.getInstance().getConfig().generalSettings.ownNameTag){
             return true;
         }
         if (entity instanceof EntityPlayer && entity != entityplayersp) {

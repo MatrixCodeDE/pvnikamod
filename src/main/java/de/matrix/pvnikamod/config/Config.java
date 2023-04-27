@@ -1,34 +1,12 @@
 package de.matrix.pvnikamod.config;
 
+import de.matrix.pvnikamod.config.ingame.IGModules;
+import de.matrix.pvnikamod.config.settings.*;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
 
 public class Config {
-
-    // GuiGeneral 0 - 2
-    public boolean customMenu;
-    public boolean ownNameTag;
-    public boolean pingOnTab;
-    public boolean confirmDisconnect;
-    public boolean fullBright;
-
-    // GuiParticles 3 - 4
-    public double particleMultiplier = 1;
-    public boolean alwaysParticles;
-    public boolean alwaysSharpnessParticles;
-
-    // GuiHitbox 5 - 13
-    public boolean hitbox_advanced;
-    public int hitbox_group;
-    public int hitbox_last;
-    public boolean[] hitbox_activated = new boolean[7];
-    public int[] hitbox_a = new int[7];
-    public int[] hitbox_r = new int[7];
-    public int[] hitbox_g = new int[7];
-    public int[] hitbox_b = new int[7];
-    public boolean[] hitbox_chroma = new boolean[7];
-    public int[] hitbox_speed = new int[7];
 
     public boolean crosshair_custom;
     public int crosshair_gap;
@@ -50,36 +28,50 @@ public class Config {
     public double[] iginfos_PosY = new double[2];
     public boolean iginfos_showCoords;
 
+    public GeneralSettings generalSettings;
+    public ParticleSettings particleSettings;
+    public HitboxSettings hitboxSettings;
+    public CrosshairSettings crosshairSettings;
+    public ZoomSettings zoomSettings;
+    public MovementSettings movementSettings;
+    public IGModules igModules;
 
     public Configuration config;
 
     public Config(File configFile){
         this.config = new Configuration(configFile);
+        this.igModules = new IGModules();
+        this.generalSettings = new GeneralSettings();
+        this.particleSettings = new ParticleSettings();
+        this.hitboxSettings = new HitboxSettings();
+        this.crosshairSettings = new CrosshairSettings();
+        this.zoomSettings = new ZoomSettings();
+        this.movementSettings = new MovementSettings();
     }
 
     public void loadConfig() {
         this.config.load();
 
-        this.customMenu = this.config.get("general", "customMenu", false).getBoolean();
-        this.ownNameTag = this.config.get("general", "ownNameTag", false).getBoolean();
-        this.pingOnTab = this.config.get("general", "pingOnTab", false).getBoolean();
-        this.confirmDisconnect = this.config.get("general", "confirmDisconnect", false).getBoolean();
-        this.fullBright = this.config.get("general", "fullBright", false).getBoolean();
+        this.generalSettings.customMenu = this.config.get("general", "customMenu", false).getBoolean();
+        this.generalSettings.ownNameTag = this.config.get("general", "ownNameTag", false).getBoolean();
+        this.generalSettings.pingOnTab = this.config.get("general", "pingOnTab", false).getBoolean();
+        this.generalSettings.confirmDisconnect = this.config.get("general", "confirmDisconnect", false).getBoolean();
+        this.generalSettings.fullBright = this.config.get("general", "fullBright", false).getBoolean();
 
-        this.particleMultiplier = this.config.get("particles", "multiplier", 1.0).getDouble();
-        this.alwaysParticles = this.config.get("particles", "alwaysParticles", false).getBoolean();
-        this.alwaysSharpnessParticles = this.config.get("particles", "alwaysSharpnessParticles", false).getBoolean();
+        this.particleSettings.particleMultiplier = this.config.get("particles", "multiplier", 1.0).getDouble();
+        this.particleSettings.alwaysParticles = this.config.get("particles", "alwaysParticles", false).getBoolean();
+        this.particleSettings.alwaysSharpnessParticles = this.config.get("particles", "alwaysSharpnessParticles", false).getBoolean();
 
-        this.hitbox_advanced = this.config.get("hitbox", "advanced", false).getBoolean();
-        this.hitbox_group = this.config.get("hitbox", "group", 0).getInt();
-        this.hitbox_last = this.config.get("hitbox", "last", 1).getInt();
-        this.hitbox_activated = this.config.get("hitbox", "activated", new boolean[7]).getBooleanList();
-        this.hitbox_r = this.config.get("hitbox", "red", new int[] {255, 255, 255, 255, 255, 255, 255}).getIntList();
-        this.hitbox_g = this.config.get("hitbox", "green", new int[] {255, 255, 255, 255, 255, 255, 255}).getIntList();
-        this.hitbox_b = this.config.get("hitbox", "blue", new int[] {255, 255, 255, 255, 255, 255, 255}).getIntList();
-        this.hitbox_a = this.config.get("hitbox", "alpha", new int[] {255, 255, 255, 255, 255, 255, 255}).getIntList();
-        this.hitbox_chroma = this.config.get("hitbox", "chroma", new boolean[7]).getBooleanList();
-        this.hitbox_speed = this.config.get("hitbox", "speed", new int[] {1, 1, 1, 1, 1, 1, 1}).getIntList();
+        this.hitboxSettings.advanced = this.config.get("hitbox", "advanced", false).getBoolean();
+        this.hitboxSettings.group = this.config.get("hitbox", "group", 0).getInt();
+        this.hitboxSettings.lastGroup = this.config.get("hitbox", "last", 1).getInt();
+        this.hitboxSettings.activated = this.config.get("hitbox", "activated", new boolean[7]).getBooleanList();
+        this.hitboxSettings.red = this.config.get("hitbox", "red", new int[] {255, 255, 255, 255, 255, 255, 255}).getIntList();
+        this.hitboxSettings.green = this.config.get("hitbox", "green", new int[] {255, 255, 255, 255, 255, 255, 255}).getIntList();
+        this.hitboxSettings.blue = this.config.get("hitbox", "blue", new int[] {255, 255, 255, 255, 255, 255, 255}).getIntList();
+        this.hitboxSettings.alpha = this.config.get("hitbox", "alpha", new int[] {255, 255, 255, 255, 255, 255, 255}).getIntList();
+        this.hitboxSettings.chroma = this.config.get("hitbox", "chroma", new boolean[7]).getBooleanList();
+        this.hitboxSettings.speed = this.config.get("hitbox", "speed", new int[] {1, 1, 1, 1, 1, 1, 1}).getIntList();
 
         this.crosshair_custom = this.config.get("crosshair", "custom", false).getBoolean();
         this.crosshair_gap = this.config.get("crosshair", "gap", 0).getInt();
@@ -105,26 +97,26 @@ public class Config {
     }
 
     public void saveConfig() {
-        this.config.get("general", "customMenu", false).set(this.customMenu);
-        this.config.get("general", "ownNameTag", false).set(this.ownNameTag);
-        this.config.get("general", "pingOnTab", false).set(this.pingOnTab);
-        this.config.get("general", "confirmDisconnect", false).set(this.confirmDisconnect);
-        this.config.get("general", "fullBright", false).set(this.fullBright);
+        this.config.get("general", "customMenu", false).set(this.generalSettings.customMenu);
+        this.config.get("general", "ownNameTag", false).set(this.generalSettings.ownNameTag);
+        this.config.get("general", "pingOnTab", false).set(this.generalSettings.pingOnTab);
+        this.config.get("general", "confirmDisconnect", false).set(this.generalSettings.confirmDisconnect);
+        this.config.get("general", "fullBright", false).set(this.generalSettings.fullBright);
 
-        this.config.get("particles", "multiplier", 1.0).set(this.particleMultiplier);
-        this.config.get("particles", "alwaysParticles", false).set(this.alwaysParticles);
-        this.config.get("particles", "alwaysSharpnessParticles", false).set(this.alwaysSharpnessParticles);
+        this.config.get("particles", "multiplier", 1.0).set(this.particleSettings.particleMultiplier);
+        this.config.get("particles", "alwaysParticles", false).set(this.particleSettings.alwaysParticles);
+        this.config.get("particles", "alwaysSharpnessParticles", false).set(this.particleSettings.alwaysSharpnessParticles);
 
-        this.config.get("hitbox", "advanced", false).set(this.hitbox_advanced);
-        this.config.get("hitbox", "group", 0).set(this.hitbox_group);
-        this.config.get("hitbox", "last", 1).set(this.hitbox_last);
-        this.config.get("hitbox", "activated", new boolean[7]).set(this.hitbox_activated);
-        this.config.get("hitbox", "red", new int[] {255, 255, 255, 255, 255, 255, 255}).set(this.hitbox_r);
-        this.config.get("hitbox", "green", new int[] {255, 255, 255, 255, 255, 255, 255}).set(this.hitbox_g);
-        this.config.get("hitbox", "blue", new int[] {255, 255, 255, 255, 255, 255, 255}).set(this.hitbox_b);
-        this.config.get("hitbox", "alpha", new int[] {255, 255, 255, 255, 255, 255, 255}).set(this.hitbox_a);
-        this.config.get("hitbox", "chroma", new boolean[7]).set(this.hitbox_chroma);
-        this.config.get("hitbox", "speed", new int[] {1, 1, 1, 1, 1, 1, 1}).set(this.hitbox_speed);
+        this.config.get("hitbox", "advanced", false).set(this.hitboxSettings.advanced);
+        this.config.get("hitbox", "group", 0).set(this.hitboxSettings.group);
+        this.config.get("hitbox", "last", 1).set(this.hitboxSettings.lastGroup);
+        this.config.get("hitbox", "activated", new boolean[7]).set(this.hitboxSettings.activated);
+        this.config.get("hitbox", "red", new int[] {255, 255, 255, 255, 255, 255, 255}).set(this.hitboxSettings.red);
+        this.config.get("hitbox", "green", new int[] {255, 255, 255, 255, 255, 255, 255}).set(this.hitboxSettings.green);
+        this.config.get("hitbox", "blue", new int[] {255, 255, 255, 255, 255, 255, 255}).set(this.hitboxSettings.blue);
+        this.config.get("hitbox", "alpha", new int[] {255, 255, 255, 255, 255, 255, 255}).set(this.hitboxSettings.alpha);
+        this.config.get("hitbox", "chroma", new boolean[7]).set(this.hitboxSettings.chroma);
+        this.config.get("hitbox", "speed", new int[] {1, 1, 1, 1, 1, 1, 1}).set(this.hitboxSettings.speed);
 
         this.config.get("crosshair", "custom", false).set(this.crosshair_custom);
         this.config.get("crosshair", "gap", 0).set(this.crosshair_gap);

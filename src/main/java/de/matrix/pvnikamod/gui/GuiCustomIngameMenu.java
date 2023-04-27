@@ -31,7 +31,7 @@ public class GuiCustomIngameMenu extends GuiScreen {
         this.mod = PvnikaMod.getInstance();
         this.config = this.mod.getConfig();
         this.mc = Minecraft.getMinecraft();
-        this.confirmDisconnect = this.config.confirmDisconnect;
+        this.confirmDisconnect = this.config.generalSettings.confirmDisconnect;
     }
 
     @Override

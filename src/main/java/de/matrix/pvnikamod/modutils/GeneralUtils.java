@@ -21,28 +21,28 @@ public class GeneralUtils {
     }
 
     public void toggleCustomMenu() {
-        boolean customMenu = this.config.customMenu;
-        this.config.customMenu = !customMenu;
+        boolean customMenu = this.config.generalSettings.customMenu;
+        this.config.generalSettings.customMenu = !customMenu;
     }
 
     public void toggleOwnNameTag() {
-        boolean ownNameTag = this.config.ownNameTag;
-        this.config.ownNameTag = !ownNameTag;
+        boolean ownNameTag = this.config.generalSettings.ownNameTag;
+        this.config.generalSettings.ownNameTag = !ownNameTag;
     }
 
     public void togglePingOnTab() {
-        boolean pingOnTab = this.config.pingOnTab;
-        this.config.pingOnTab = !pingOnTab;
+        boolean pingOnTab = this.config.generalSettings.pingOnTab;
+        this.config.generalSettings.pingOnTab = !pingOnTab;
     }
 
     public void toggleConfirmDisconnect() {
-        boolean confirmDisconnect = this.config.confirmDisconnect;
-        this.config.confirmDisconnect = !confirmDisconnect;
+        boolean confirmDisconnect = this.config.generalSettings.confirmDisconnect;
+        this.config.generalSettings.confirmDisconnect = !confirmDisconnect;
     }
 
     public void toggleFullBright(){
-        boolean fullBright = this.config.fullBright;
-        this.config.fullBright = !fullBright;
+        boolean fullBright = this.config.generalSettings.fullBright;
+        this.config.generalSettings.fullBright = !fullBright;
         MiscRenderer.toggleFullBright();
     }
 }

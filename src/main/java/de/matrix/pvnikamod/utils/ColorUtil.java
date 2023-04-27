@@ -16,6 +16,14 @@ public class ColorUtil {
         return new int[]{r, g, b};
     }
 
+    public static int hexToARGB(String hex){
+        int a = Integer.valueOf(hex.substring(0,2), 16);
+        int r = Integer.valueOf(hex.substring(2,4), 16);
+        int g = Integer.valueOf(hex.substring(4,6), 16);
+        int b = Integer.valueOf(hex.substring(6,8), 16);
+        return a | r | g | b;
+    }
+
     public static int rgbToDec(int r, int g, int b){
         int dec = r*65536 + g*256 + b;
         return dec;

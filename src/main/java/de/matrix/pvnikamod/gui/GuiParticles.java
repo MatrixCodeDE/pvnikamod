@@ -36,16 +36,16 @@ public class GuiParticles extends GuiScreen {
         super.initGui();
         int i = -2;
         int j = 24;
-        buttonList.add(this.multiplierSlider = new GuiSlider(0, width / 2 - 60, height / 4 + j + i, 120, 20, I18n.format("menu.pvnika.particles.multiplier") + ": ", "", 1.0, 14.0, this.config.particleMultiplier, false, true));
-        buttonList.add(this.alwaysParticles = new GuiButton(1, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, BooleanColor.boolColor(this.config.alwaysParticles, I18n.format("menu.pvnika.particles.alwaysParticles"))));
-        buttonList.add(this.sharpPartButton = new GuiButton(2, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, BooleanColor.boolColor(this.config.alwaysSharpnessParticles, I18n.format("menu.pvnika.particles.alwaysSharpnessParticles"))));
+        buttonList.add(this.multiplierSlider = new GuiSlider(0, width / 2 - 60, height / 4 + j + i, 120, 20, I18n.format("menu.pvnika.particles.multiplier") + ": ", "", 1.0, 14.0, this.config.particleSettings.particleMultiplier, false, true));
+        buttonList.add(this.alwaysParticles = new GuiButton(1, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, BooleanColor.boolColor(this.config.particleSettings.alwaysParticles, I18n.format("menu.pvnika.particles.alwaysParticles"))));
+        buttonList.add(this.sharpPartButton = new GuiButton(2, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, BooleanColor.boolColor(this.config.particleSettings.alwaysSharpnessParticles, I18n.format("menu.pvnika.particles.alwaysSharpnessParticles"))));
         buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 4 * j + i, 60, 20, I18n.format("gui.back")));
         refreshButtons();
     }
 
     public void refreshButtons(){
-        this.alwaysParticles.displayString = BooleanColor.boolColor(this.config.alwaysParticles, I18n.format("menu.pvnika.particles.alwaysParticles"));
-        this.sharpPartButton.displayString = BooleanColor.boolColor(this.config.alwaysSharpnessParticles, I18n.format("menu.pvnika.particles.alwaysSharpnessParticles"));
+        this.alwaysParticles.displayString = BooleanColor.boolColor(this.config.particleSettings.alwaysParticles, I18n.format("menu.pvnika.particles.alwaysParticles"));
+        this.sharpPartButton.displayString = BooleanColor.boolColor(this.config.particleSettings.alwaysSharpnessParticles, I18n.format("menu.pvnika.particles.alwaysSharpnessParticles"));
     }
 
     @Override
@@ -85,7 +85,7 @@ public class GuiParticles extends GuiScreen {
 
     protected void mouseReleased(int mouseX, int mouseY, int releaseButton) {
         super.mouseReleased(mouseX, mouseY, releaseButton);
-        this.config.particleMultiplier = this.multiplierSlider.getValueInt();
+        this.config.particleSettings.particleMultiplier = this.multiplierSlider.getValueInt();
     }
 
 }
