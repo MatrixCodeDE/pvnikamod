@@ -10,6 +10,7 @@ import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiChat;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
@@ -40,7 +41,8 @@ public class IngameRenderer extends Gui {
 
     @SubscribeEvent
     public void onClientTickEvent(TickEvent.RenderTickEvent event) {
-        if (this.mc.currentScreen == null || this.mc.currentScreen instanceof GuiChat || (this.mc.currentScreen instanceof GuiIngameModuleScreen && RuntimeSettings.igModSlided)) {
+        GuiScreen currentScreen = this.mc.currentScreen;
+        if (currentScreen == null || currentScreen instanceof GuiChat || (currentScreen instanceof GuiIngameModuleScreen && RuntimeSettings.igModSlided)) {
             if (this.config.igModules.fpsModule.enabled) {
                 String counter = I18n.format("menu.pvnika.iginfos.fps.name") + ": " + Minecraft.getDebugFPS();
                 RenderManager.drawInfoBoxSoloRect(this.config.igModules.fpsModule.posX, this.config.igModules.fpsModule.posY, 54, counter, true);

@@ -33,13 +33,15 @@ public abstract class GuiIngameModuleScreen extends GuiScreen {
         this.mc = Minecraft.getMinecraft();
         this.lastScreen = lastScreen;
         this.aModule = aModule;
+        System.out.println(this.aModule);
+        System.out.println(this.aModule.enabled);
     }
 
     public void initGui(int i, int j){
         super.initGui();
         buttonList.add(this.enabled = new GuiButton(0, width / 2 - 60, height / 4 + 0 * j + i, 120, 20, BooleanColor.enableText(this.aModule.enabled)));
-        buttonList.add(this.sliderX = new ModulePosSlider(1, width / 2 - 60, height / 4 + 1 * j + i, 120, 20, I18n.format("menu.pvnika.all.posx") + ": ", "", 0, this.mc.displayWidth, RenderManager.translateXFromConfig(this.aModule.posX), false, true));
-        buttonList.add(this.sliderY = new ModulePosSlider(2, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.all.posy") + ": ", "", 0, this.mc.displayHeight, RenderManager.translateYFromConfig(this.aModule.posY), false, true));
+        buttonList.add(this.sliderX = new ModulePosSlider(this.aModule, 1, width / 2 - 60, height / 4 + 1 * j + i, 120, 20, I18n.format("menu.pvnika.all.posx") + ": ", "", 0, this.mc.displayWidth, RenderManager.translateXFromConfig(this.aModule.posX), false, true));
+        buttonList.add(this.sliderY = new ModulePosSlider(this.aModule, 2, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.all.posy") + ": ", "", 0, this.mc.displayHeight, RenderManager.translateYFromConfig(this.aModule.posY), false, true));
         buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 3 * j + i, 60, 20, I18n.format("gui.back")));
         refreshButtons();
     }
@@ -61,10 +63,17 @@ public abstract class GuiIngameModuleScreen extends GuiScreen {
         switch (button.id){
             case 0:
                 ModuleUtils.toggleEnabled(aModule);
+                refreshButtons();
                 break;
             case 10:
                 this.mc.displayGuiScreen(lastScreen);
                 break;
         }
+    }
+
+    protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick){
+        super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
+        this.aModule.posX = RenderManager.translateXToConfig(this.sliderX.getValueInt());
+        this.aModule.posY = RenderManager.translateYToConfig(this.sliderY.getValueInt());
     }
 }
