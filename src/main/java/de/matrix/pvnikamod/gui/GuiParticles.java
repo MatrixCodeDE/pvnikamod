@@ -86,6 +86,13 @@ public class GuiParticles extends GuiScreen {
     protected void mouseReleased(int mouseX, int mouseY, int releaseButton) {
         super.mouseReleased(mouseX, mouseY, releaseButton);
         this.config.particleSettings.particleMultiplier = this.multiplierSlider.getValueInt();
+        refreshButtons();
+    }
+
+    protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick){
+        super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
+        this.config.particleSettings.particleMultiplier = this.multiplierSlider.getValueInt();
+        refreshButtons();
     }
 
 }

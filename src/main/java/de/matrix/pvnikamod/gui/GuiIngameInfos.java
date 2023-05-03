@@ -1,6 +1,9 @@
 package de.matrix.pvnikamod.gui;
 
 import de.matrix.pvnikamod.config.Config;
+import de.matrix.pvnikamod.gui.modules.GuiBreak;
+import de.matrix.pvnikamod.gui.modules.GuiCoords;
+import de.matrix.pvnikamod.gui.modules.GuiFPS;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.Minecraft;
@@ -18,6 +21,7 @@ public class GuiIngameInfos extends GuiScreen {
 
     private GuiButton fpsButton;
     private GuiButton coordButton;
+    private GuiButton breakButton;
     private GuiScreen lastScreen;
 
     public GuiIngameInfos(GuiScreen lastScreen){
@@ -35,7 +39,8 @@ public class GuiIngameInfos extends GuiScreen {
         int j = 24;
         buttonList.add(this.fpsButton = new GuiButton(0, width / 2 - 60, height / 4 + 0 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.fps.name")));
         buttonList.add(this.coordButton = new GuiButton(1, width / 2 - 60, height / 4 + 1 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.coords.name")));
-        buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 2 * j + i, 60, 20, I18n.format("gui.back")));
+        buttonList.add(this.breakButton = new GuiButton(2, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.break.name")));
+        buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 3 * j + i, 60, 20, I18n.format("gui.back")));
     }
 
     @Override
@@ -54,7 +59,10 @@ public class GuiIngameInfos extends GuiScreen {
                 this.mc.displayGuiScreen(new GuiFPS(this));
                 break;
             case 1:
-                // this.mc.displayGuiScreen(new GuiCoords(this));
+                this.mc.displayGuiScreen(new GuiCoords(this));
+                break;
+            case 2:
+                this.mc.displayGuiScreen(new GuiBreak(this));
                 break;
             case 10:
                 this.mc.displayGuiScreen(lastScreen);

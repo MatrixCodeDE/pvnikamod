@@ -54,8 +54,12 @@ public class Implementation {
         this.currentBlockDamage = value;
     }
 
-    public float getBlockBreakPercentage(){
+    public float getFloatBlockBreakPercentage(){
         return ValueUtil.floatToPercentage(this.currentBlockDamage);
+    }
+
+    public int getIntBlockBreakPercentage(){
+        return (int) ValueUtil.floatToPercentage(this.currentBlockDamage);
     }
 
 }

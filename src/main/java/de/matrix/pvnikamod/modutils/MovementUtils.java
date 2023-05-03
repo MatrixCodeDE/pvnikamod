@@ -11,10 +11,10 @@ public class MovementUtils {
     private final Minecraft mc = Minecraft.getMinecraft();
 
     public void toggleSneak(){
-        this.config.movement_toggleSneak = !this.config.movement_toggleSneak;
+        this.config.movementSettings.toggleSneak = !this.config.movementSettings.toggleSneak;
     }
 
     public void toggleSprint(){
-        this.config.movement_toggleSprint = !this.config.movement_toggleSprint;
+        this.config.movementSettings.toggleSprint = !this.config.movementSettings.toggleSprint;
     }
 }

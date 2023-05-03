@@ -17,8 +17,8 @@ public class CrosshairUtils {
     }
 
     public void toggleCrosshair() {
-        boolean custom = this.config.crosshair_custom;
-        this.config.crosshair_custom = !custom;
+        boolean custom = this.config.crosshairSettings.activated;
+        this.config.crosshairSettings.activated = !custom;
     }
 
 }

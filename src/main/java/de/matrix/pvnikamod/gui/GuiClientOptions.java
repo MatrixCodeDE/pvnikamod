@@ -30,7 +30,7 @@ public class GuiClientOptions extends GuiScreen {
     public void initGui() {
         super.initGui();
 
-        int i = -12;
+        int i = -24;
         int j = 24;
 
         buttonList.add(new GuiButton(0, width / 2 - 60, height / 4 + j + i, 120, 20, I18n.format("menu.pvnika.general.name")));

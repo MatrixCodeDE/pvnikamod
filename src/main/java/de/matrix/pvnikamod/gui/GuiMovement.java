@@ -34,15 +34,15 @@ public class GuiMovement extends GuiScreen {
         super.initGui();
         int i = -2;
         int j = 24;
-        buttonList.add(this.toggleSneak = new GuiButton(0, width / 2 - 60, height / 4 + 0 * j + i, 120, 20, BooleanColor.boolColor(this.config.movement_toggleSneak, I18n.format("menu.pvnika.movement.toggleSneak"))));
-        buttonList.add(this.toggleSprint = new GuiButton(1, width / 2 - 60, height / 4 + 1 * j + i, 120, 20, BooleanColor.boolColor(this.config.movement_toggleSneak, I18n.format("menu.pvnika.movement.toggleSprint"))));
+        buttonList.add(this.toggleSneak = new GuiButton(0, width / 2 - 60, height / 4 + 0 * j + i, 120, 20, BooleanColor.boolColor(this.config.movementSettings.toggleSneak, I18n.format("menu.pvnika.movement.toggleSneak"))));
+        buttonList.add(this.toggleSprint = new GuiButton(1, width / 2 - 60, height / 4 + 1 * j + i, 120, 20, BooleanColor.boolColor(this.config.movementSettings.toggleSneak, I18n.format("menu.pvnika.movement.toggleSprint"))));
         buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 2 * j + i, 60, 20, I18n.format("gui.back")));
         refreshButtons();
     }
 
     public void refreshButtons(){
-        this.toggleSneak.displayString = BooleanColor.boolColor(this.config.movement_toggleSneak, "Toggle Sneak");
-        this.toggleSprint.displayString = BooleanColor.boolColor(this.config.movement_toggleSprint, "Toggle Sprint");
+        this.toggleSneak.displayString = BooleanColor.boolColor(this.config.movementSettings.toggleSneak, "Toggle Sneak");
+        this.toggleSprint.displayString = BooleanColor.boolColor(this.config.movementSettings.toggleSprint, "Toggle Sprint");
     }
 
     @Override

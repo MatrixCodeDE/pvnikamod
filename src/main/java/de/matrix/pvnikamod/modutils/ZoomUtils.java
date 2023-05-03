@@ -26,7 +26,7 @@ public class ZoomUtils {
     }
 
     public float changeFOV(float currentFOV){
-        this.zoomDefault = (float) this.config.zoom_default;
+        this.zoomDefault = (float) this.config.zoomSettings.defaultZoom;
         GameSettings gameSettings = this.mc.gameSettings;
         if (this.currentLevel == null) {
             this.currentLevel = zoomDefault;
@@ -39,13 +39,13 @@ public class ZoomUtils {
             if(this.defaultMouseSensitivity == null) {
                 this.defaultMouseSensitivity = gameSettings.mouseSensitivity;
             }
-            if(this.defaultSmooth || this.config.zoom_smooth){
+            if(this.defaultSmooth || this.config.zoomSettings.smooth){
                 gameSettings.smoothCamera = true;
             }
             gameSettings.mouseSensitivity = defaultMouseSensitivity * 0.7f;
             return currentFOV / currentLevel;
         } else {
-            this.currentLevel = (float) this.config.zoom_default;
+            this.currentLevel = (float) this.config.zoomSettings.defaultZoom;
             if (this.defaultMouseSensitivity != null){
                 gameSettings.mouseSensitivity = this.defaultMouseSensitivity;
                 this.defaultMouseSensitivity = null;
@@ -61,10 +61,10 @@ public class ZoomUtils {
     }
 
     public void mouseEvent(int strength){
-        if (PvnikaMod.zoomKey.isKeyDown() && this.config.zoom_scrollable){
+        if (PvnikaMod.zoomKey.isKeyDown() && this.config.zoomSettings.scrollable){
             this.blockItemScrolling = true;
             if (this.currentLevel == null){
-                this.currentLevel = (float) this.config.zoom_default;
+                this.currentLevel = (float) this.config.zoomSettings.defaultZoom;
             }
 
             if (strength > 0){
@@ -81,13 +81,13 @@ public class ZoomUtils {
     }
 
     public void toggleSmoothZoom(){
-        boolean smoothZoom = this.config.zoom_smooth;
-        this.config.zoom_smooth = !smoothZoom;
+        boolean smoothZoom = this.config.zoomSettings.smooth;
+        this.config.zoomSettings.smooth = !smoothZoom;
     }
 
     public void toggleScrollable(){
-        boolean scrollable = this.config.zoom_scrollable;
-        this.config.zoom_scrollable = !scrollable;
+        boolean scrollable = this.config.zoomSettings.scrollable;
+        this.config.zoomSettings.scrollable = !scrollable;
     }
 
 }

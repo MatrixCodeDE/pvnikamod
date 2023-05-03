@@ -174,4 +174,18 @@ public class GuiHitbox extends GuiScreen {
         refreshButtons();
     }
 
+    protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
+        super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
+        this.config.hitboxSettings.red[this.config.hitboxSettings.group] = this.rSlider.getValueInt();
+        this.config.hitboxSettings.green[this.config.hitboxSettings.group] = this.gSlider.getValueInt();
+        this.config.hitboxSettings.blue[this.config.hitboxSettings.group] = this.bSlider.getValueInt();
+        this.config.hitboxSettings.alpha[this.config.hitboxSettings.group] = this.aSlider.getValueInt();
+        this.config.hitboxSettings.speed[this.config.hitboxSettings.group] = this.speedSlider.getValueInt();
+        if (this.config.hitboxSettings.group != 0) {
+            this.config.hitboxSettings.group = this.groupSlider.getValueInt();
+            this.config.hitboxSettings.lastGroup = this.config.hitboxSettings.group;
+        }
+        refreshButtons();
+    }
+
 }

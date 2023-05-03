@@ -48,6 +48,13 @@ menu.pvnika.all.enabled=Enabled
 menu.pvnika.all.disabled=Disabled
 menu.pvnika.all.advanced=Advanced
 
+menu.pvnika.iginfos.fps.name=FPS
+
+menu.pvnika.iginfos.coords.name=Coordinates
+
+menu.pvnika.iginfos.break.name=Break Percentage
+menu.pvnika.iginfos.break.dec=Show Decimal
+
 menu.pvnika.all.posx=Position X
 menu.pvnika.all.posy=Position Y
 

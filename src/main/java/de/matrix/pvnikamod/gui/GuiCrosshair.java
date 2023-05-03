@@ -44,25 +44,25 @@ public class GuiCrosshair extends GuiScreen {
         super.initGui();
         int i = -2;
         int j = 24;
-        buttonList.add(this.toggleButton = new GuiButton(0, width / 2 - 60, height / 4 + 0 + i, 120, 20, BooleanColor.boolColor(this.config.crosshair_custom, I18n.format("menu.pvnika.all.custom"))));
-        buttonList.add(this.sizeSlider = new GuiSlider(1, width / 2 - 60, height / 4 + j + i, 120, 20, I18n.format("menu.pvnika.crosshair.size") + ": ", "", 1, 10, this.config.crosshair_size, false, true));
-        buttonList.add(this.gapSlider = new GuiSlider(2, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.crosshair.gap") + ": ", "", 0, 10, this.config.crosshair_gap, false, true));
-        buttonList.add(this.heightSlider = new GuiSlider(3, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, I18n.format("menu.pvnika.crosshair.height") + ": ", "", 1, 10, this.config.crosshair_height, false, true));
-        buttonList.add(this.widthSlider = new GuiSlider(4, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.crosshair.width") + ": ", "", 1, 10, this.config.crosshair_width, false, true));
-        buttonList.add(this.thickSlider = new GuiSlider(5, width / 2 - 60, height / 4 + 5 * j + i, 120, 20, I18n.format("menu.pvnika.crosshair.thickness") + ": ", "", 1, 10, this.config.crosshair_thickness, false, true));
-        buttonList.add(this.outSlider = new GuiSlider(6, width / 2 - 60, height / 4 + 6 * j + i, 120, 20, I18n.format("menu.pvnika.crosshair.outthick") + ": ", "", 1, 10, this.config.crosshair_outthick, false, true));
+        buttonList.add(this.toggleButton = new GuiButton(0, width / 2 - 60, height / 4 + 0 + i, 120, 20, BooleanColor.boolColor(this.config.crosshairSettings.activated, I18n.format("menu.pvnika.all.custom"))));
+        buttonList.add(this.sizeSlider = new GuiSlider(1, width / 2 - 60, height / 4 + j + i, 120, 20, I18n.format("menu.pvnika.crosshair.size") + ": ", "", 1, 10, this.config.crosshairSettings.size, false, true));
+        buttonList.add(this.gapSlider = new GuiSlider(2, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.crosshair.gap") + ": ", "", 0, 10, this.config.crosshairSettings.gap, false, true));
+        buttonList.add(this.heightSlider = new GuiSlider(3, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, I18n.format("menu.pvnika.crosshair.height") + ": ", "", 1, 10, this.config.crosshairSettings.height, false, true));
+        buttonList.add(this.widthSlider = new GuiSlider(4, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.crosshair.width") + ": ", "", 1, 10, this.config.crosshairSettings.width, false, true));
+        buttonList.add(this.thickSlider = new GuiSlider(5, width / 2 - 60, height / 4 + 5 * j + i, 120, 20, I18n.format("menu.pvnika.crosshair.thickness") + ": ", "", 1, 10, this.config.crosshairSettings.thickness, false, true));
+        buttonList.add(this.outSlider = new GuiSlider(6, width / 2 - 60, height / 4 + 6 * j + i, 120, 20, I18n.format("menu.pvnika.crosshair.outthick") + ": ", "", 1, 10, this.config.crosshairSettings.outthick, false, true));
         buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 7 * j + i, 60, 20, I18n.format("gui.back")));
         refreshButtons();
     }
 
     public void refreshButtons() {
-        this.toggleButton.displayString = BooleanColor.boolColor(this.config.crosshair_custom, I18n.format("menu.pvnika.all.custom"));
-        this.sizeSlider.setValue(this.config.crosshair_size);
-        this.gapSlider.setValue(this.config.crosshair_gap);
-        this.heightSlider.setValue(this.config.crosshair_height);
-        this.widthSlider.setValue(this.config.crosshair_width);
-        this.thickSlider.setValue(this.config.crosshair_thickness);
-        this.outSlider.setValue(this.config.crosshair_outthick);
+        this.toggleButton.displayString = BooleanColor.boolColor(this.config.crosshairSettings.activated, I18n.format("menu.pvnika.all.custom"));
+        this.sizeSlider.setValue(this.config.crosshairSettings.size);
+        this.gapSlider.setValue(this.config.crosshairSettings.gap);
+        this.heightSlider.setValue(this.config.crosshairSettings.height);
+        this.widthSlider.setValue(this.config.crosshairSettings.width);
+        this.thickSlider.setValue(this.config.crosshairSettings.thickness);
+        this.outSlider.setValue(this.config.crosshairSettings.outthick);
     }
 
     @Override
@@ -101,12 +101,23 @@ public class GuiCrosshair extends GuiScreen {
 
     protected void mouseReleased(int mouseX, int mouseY, int releaseButton) {
         super.mouseReleased(mouseX, mouseY, releaseButton);
-        this.config.crosshair_size = this.sizeSlider.getValueInt();
-        this.config.crosshair_gap = this.gapSlider.getValueInt();
-        this.config.crosshair_height = this.heightSlider.getValueInt();
-        this.config.crosshair_width = this.widthSlider.getValueInt();
-        this.config.crosshair_thickness = this.thickSlider.getValueInt();
-        this.config.crosshair_outthick = this.outSlider.getValueInt();
+        this.config.crosshairSettings.size = this.sizeSlider.getValueInt();
+        this.config.crosshairSettings.gap = this.gapSlider.getValueInt();
+        this.config.crosshairSettings.height = this.heightSlider.getValueInt();
+        this.config.crosshairSettings.width = this.widthSlider.getValueInt();
+        this.config.crosshairSettings.thickness = this.thickSlider.getValueInt();
+        this.config.crosshairSettings.outthick = this.outSlider.getValueInt();
+        refreshButtons();
+    }
+
+    protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick){
+        super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
+        this.config.crosshairSettings.size = this.sizeSlider.getValueInt();
+        this.config.crosshairSettings.gap = this.gapSlider.getValueInt();
+        this.config.crosshairSettings.height = this.heightSlider.getValueInt();
+        this.config.crosshairSettings.width = this.widthSlider.getValueInt();
+        this.config.crosshairSettings.thickness = this.thickSlider.getValueInt();
+        this.config.crosshairSettings.outthick = this.outSlider.getValueInt();
         refreshButtons();
     }
 

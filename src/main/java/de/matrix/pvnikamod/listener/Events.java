@@ -11,12 +11,15 @@ import de.matrix.pvnikamod.utils.BooleanColor;
 import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MovementInputFromOptions;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -58,7 +61,7 @@ public class Events {
 
     @SubscribeEvent
     public void onClientTickEvent(TickEvent.RenderTickEvent event) {
-        if (!this.config.crosshair_custom) {
+        if (!this.config.crosshairSettings.activated) {
             GuiIngameForge.renderCrosshairs = true;
             crosshairRenderer.clear();
         } else {
@@ -78,10 +81,10 @@ public class Events {
 
     @SubscribeEvent
     public void onPlayerTickEvent(TickEvent.PlayerTickEvent event){
-        if (this.config.movement_toggleSneak){
+        if (this.config.movementSettings.toggleSneak){
             KeyBinding.setKeyBindState(this.mc.gameSettings.keyBindSneak.getKeyCode(), toggled_sneak);
         }
-        if (this.config.movement_toggleSprint){
+        if (this.config.movementSettings.toggleSprint){
             KeyBinding.setKeyBindState(this.mc.gameSettings.keyBindSprint.getKeyCode(), toggled_sprint);
         }
     }
@@ -92,14 +95,14 @@ public class Events {
             this.mc.displayGuiScreen(new GuiClientOptions(null));
         } else
         if (this.mc.gameSettings.keyBindSneak.isPressed()){
-            if (this.config.movement_toggleSneak){
+            if (this.config.movementSettings.toggleSneak){
                 toggled_sneak = !toggled_sneak;
             } else {
                 toggled_sneak = false;
             }
         }
         if (this.mc.gameSettings.keyBindSprint.isPressed()){
-            if (this.config.movement_toggleSprint){
+            if (this.config.movementSettings.toggleSprint){
                 toggled_sprint = !toggled_sprint;
             } else {
                 toggled_sprint = false;
@@ -111,14 +114,14 @@ public class Events {
     public void trackMouseInputs(InputEvent.MouseInputEvent event){
         this.zoomUtils.mouseEvent(Mouse.getDWheel());
         if (this.mc.gameSettings.keyBindSneak.isPressed()){
-            if (this.config.movement_toggleSneak){
+            if (this.config.movementSettings.toggleSneak){
                 toggled_sneak = !toggled_sneak;
             } else {
                 toggled_sneak = false;
             }
         }
         if (this.mc.gameSettings.keyBindSprint.isPressed()){
-            if (this.config.movement_toggleSprint){
+            if (this.config.movementSettings.toggleSprint){
                 toggled_sprint = !toggled_sprint;
             } else {
                 toggled_sprint = false;
@@ -126,8 +129,4 @@ public class Events {
         }
     }
 
-    @SubscribeEvent
-    public void onBreak(BlockEvent.BreakEvent event){
-        //System.out.println();
-    }
 }

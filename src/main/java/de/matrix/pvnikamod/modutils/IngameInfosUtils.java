@@ -11,21 +11,31 @@ public class IngameInfosUtils {
     private static final Minecraft mc = Minecraft.getMinecraft();
 
     public static void toggleFPS(){
-        config.iginfos_showFPS = !config.iginfos_showFPS;
-    }
-
-    public static void setFPSPos(int x, int y){
-        config.iginfos_PosX[0] = x;
-        config.iginfos_PosY[0] = y;
+        config.igModules.fpsModule.enabled = !config.igModules.fpsModule.enabled;
     }
 
     public static void toggleCoords(){
-        config.iginfos_showCoords = !config.iginfos_showCoords;
+        config.igModules.coordModule.enabled = !config.igModules.coordModule.enabled;
     }
 
-    public static void setCoordsPos(int x, int y){
-        config.iginfos_PosX[1] = x;
-        config.iginfos_PosY[1] = y;
+    public static void toggleBreak(){
+        config.igModules.breakModule.enabled = !config.igModules.breakModule.enabled;
+    }
+
+    public static void toggleDecimal(){
+        config.igModules.breakModule.showDec = !config.igModules.breakModule.showDec;
+    }
+
+    public static void toggleBreakBed(){
+        config.igModules.breakModule.bed = !config.igModules.breakModule.bed;
+    }
+
+    public static void toggleBreakBeacon(){
+        config.igModules.breakModule.beacon = !config.igModules.breakModule.beacon;
+    }
+
+    public static void toggleBreakObsidian(){
+        config.igModules.breakModule.obsidian = !config.igModules.breakModule.obsidian;
     }
 
 }

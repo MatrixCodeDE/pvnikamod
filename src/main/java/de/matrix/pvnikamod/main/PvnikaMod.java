@@ -1,6 +1,7 @@
 package de.matrix.pvnikamod.main;
 
 import de.matrix.pvnikamod.config.Config;
+import de.matrix.pvnikamod.config.RuntimeSettings;
 import de.matrix.pvnikamod.listener.*;
 import de.matrix.pvnikamod.renderer.HitboxRenderer;
 import de.matrix.pvnikamod.modutils.ZoomUtils;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,6 +37,7 @@ public class PvnikaMod {
     public static final String MODID = "Pvnika Mod";
     public static File FOLDER_FILE;
     public static final File CONFIG_FILE;
+    public static final File MODULES_FILE;
     private Config config;
     public static final String PREFIX = "[PvnikaMod] ";
     private boolean loaded;
@@ -69,11 +72,15 @@ public class PvnikaMod {
         PvnikaMod.this.mc = Minecraft.getMinecraft();
 
         sendLog("Loading Config");
-        FOLDER_FILE = new File(Minecraft.getMinecraft().mcDataDir, "pvnika");
-        File configFile = new File(FOLDER_FILE, "pvnikamod.cfg");
-        this.config = new Config(configFile);
+        // FOLDER_FILE = new File(Minecraft.getMinecraft().mcDataDir, "pvnika");
+        // File configFile = new File(FOLDER_FILE, "pvnikamod.cfg");
+        this.config = new Config(CONFIG_FILE, MODULES_FILE);
 
         this.config.loadConfig();
+        this.config.igModules.loadModuleConfig();
+
+        RuntimeSettings.init();
+
         sendLog("Successfully loaded Config");
         sendLog("Loading Mods");
         ClientRegistry.registerKeyBinding(openPvnikaGui);
@@ -100,11 +107,17 @@ public class PvnikaMod {
         sendLog("Initialization complete");
     }
 
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event){
+        //this.mc.fontRendererObj.getStringWidth(" ");
+    }
+
 
 
     static {
-        FOLDER_FILE = new File(Minecraft.getMinecraft().mcDataDir, "config");
+        FOLDER_FILE = new File(Minecraft.getMinecraft().mcDataDir, "pvnika");
         CONFIG_FILE = new File(FOLDER_FILE, "pvnikamod.cfg");
+        MODULES_FILE = new File(FOLDER_FILE, "pvnikamodules.cfg");
     }
 
     public static PvnikaMod getInstance() {

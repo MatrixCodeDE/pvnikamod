@@ -28,12 +28,12 @@ public class CrosshairDraw {
     }
 
     private void updateValues(){
-        this.size = this.config.crosshair_size;
-        this.renderGap = this.config.crosshair_gap;
-        this.height = this.config.crosshair_height;
-        this.width = this.config.crosshair_width;
-        this.thickness = this.config.crosshair_thickness;
-        this.outthick = this.config.crosshair_outthick;
+        this.size = this.config.crosshairSettings.size;
+        this.renderGap = this.config.crosshairSettings.gap;
+        this.height = this.config.crosshairSettings.height;
+        this.width = this.config.crosshairSettings.width;
+        this.thickness = this.config.crosshairSettings.thickness;
+        this.outthick = this.config.crosshairSettings.outthick;
     }
 
     public void drawBase(float x, float y, float size, Color color, Color color2) {
