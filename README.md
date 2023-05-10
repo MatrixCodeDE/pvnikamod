@@ -45,7 +45,17 @@ The mod is still in the first beta, so there may be some bugs. If you find some,
   - ToggleSneak
   - ToggleSprint
 
+
+- Ingame Modules
+  - FPS
+  - Coordinates
+  - Block Break Percentage
+    - Bed
+    - Beacon (Core)
+    - Obsidian
+
 If you miss a feature, feel free to ask!
+(As long as it's no hack)
 
 ---
 
@@ -57,7 +67,9 @@ Problems noticed:
 - ESSENTIAL
   - Menus
   - Tablist
-- Any mod that uses custom buttons in the ingame menu (ESC menu)
+- Feather Client
+  - Crashes on startup
+- Any mod that uses custom buttons in the ingame menu (ESC menu), mixins or coremods
 
 ---
 
