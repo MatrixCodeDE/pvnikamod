@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -49,7 +50,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
     protected boolean canRenderName(T entity) {
 
         EntityPlayerSP entityplayersp = Minecraft.getMinecraft().thePlayer;
-        if(entity == entityplayersp && PvnikaMod.getInstance().getConfig().generalSettings.ownNameTag){
+        if(entity == entityplayersp && PvnikaMod.getInstance().getConfig().generalSettings.ownNameTag && !(Minecraft.getMinecraft().currentScreen instanceof GuiInventory)){
             return true;
         }
         if (entity instanceof EntityPlayer && entity != entityplayersp) {

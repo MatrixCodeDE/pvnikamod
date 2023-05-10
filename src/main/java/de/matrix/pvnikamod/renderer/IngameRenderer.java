@@ -6,16 +6,17 @@ import de.matrix.pvnikamod.config.ingame.modules.BreakModule;
 import de.matrix.pvnikamod.gui.modules.GuiIngameModuleScreen;
 import de.matrix.pvnikamod.listener.Implementation;
 import de.matrix.pvnikamod.main.PvnikaMod;
+import de.matrix.pvnikamod.modutils.DrawUtils;
 import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -29,7 +30,7 @@ public class IngameRenderer extends Gui {
     private final Config config;
     private final Minecraft mc;
     private final Implementation implementation;
-    protected static final ResourceLocation pvnikaLogo = new ResourceLocation("assets/pvnikamod/images/icon.png");
+    private long counter;
 
     public IngameRenderer(){
         this.mod = PvnikaMod.getInstance();
@@ -41,6 +42,15 @@ public class IngameRenderer extends Gui {
 
     @SubscribeEvent
     public void onClientTickEvent(TickEvent.RenderTickEvent event) {
+        /*if (this.mc.currentScreen instanceof GuiContainer && this.mc.theWorld != null){
+            System.out.println("event lol1");
+            DrawUtils drawUtils = new DrawUtils();
+            this.mc.getTextureManager().bindTexture(PvnikaMod.pvnikaLogo);
+            drawUtils.drawTexture(10, 10, 255.0D, 255.0D, 100, 100, 1.0f);
+        }*/
+        if (counter < System.currentTimeMillis() && counter != 0){
+            counter = 0;
+        }
         GuiScreen currentScreen = this.mc.currentScreen;
         if (currentScreen == null || currentScreen instanceof GuiChat || (currentScreen instanceof GuiIngameModuleScreen && RuntimeSettings.igModSlided)) {
             if (this.config.igModules.fpsModule.enabled) {
@@ -48,10 +58,16 @@ public class IngameRenderer extends Gui {
                 RenderManager.drawInfoBoxSoloRect(this.config.igModules.fpsModule.posX, this.config.igModules.fpsModule.posY, 54, counter, true);
             }
             if (this.config.igModules.coordModule.enabled) {
-                int x = MathHelper.floor_double(this.mc.thePlayer.posX);
-                int y = MathHelper.floor_double(this.mc.thePlayer.posY);
-                int z = MathHelper.floor_double(this.mc.thePlayer.posZ);
-                double dir = this.mc.thePlayer.rotationYaw;
+                int x = 0;
+                int y = 0;
+                int z = 0;
+                double dir = 0;
+                if (this.mc.thePlayer != null) {
+                    x = MathHelper.floor_double(this.mc.thePlayer.posX);
+                    y = MathHelper.floor_double(this.mc.thePlayer.posY);
+                    z = MathHelper.floor_double(this.mc.thePlayer.posZ);
+                     dir = this.mc.thePlayer.rotationYaw;
+                }
                 String[] coords = new String[]{"X:", String.valueOf(x), "Y:", String.valueOf(y), "Z:", String.valueOf(z)};
                 int[] cordcolors = new int[]{
                         ColorUtil.colorToDec(new Color(255, 128, 00)), ColorUtil.colorToDec(new Color(0, 255, 255)),
@@ -64,19 +80,42 @@ public class IngameRenderer extends Gui {
                 boolean isBed = targetItem != null && targetItem == Item.getItemById(355);
                 boolean isBeacon = targetItem != null && targetItem == Item.getItemById(138);
                 boolean isObsidian = targetItem != null && targetItem == Item.getItemById(49);
-                float fPercentage = PvnikaMod.getInstance().implementation.getFloatBlockBreakPercentage();
-                int iPercentage = PvnikaMod.getInstance().implementation.getIntBlockBreakPercentage();
+                boolean isBBO = isBed || isBeacon || isObsidian;
+                float fPercentage = this.implementation.getFloatBlockBreakPercentage();
+                int iPercentage = this.implementation.getIntBlockBreakPercentage();
+                if (isBBO && fPercentage != 0.0f){
+                    counter = 0L;
+                }
                 BreakModule breakConfig = this.config.igModules.breakModule;
                 int width = 22;
-                String sPercentage = iPercentage + "%";
-                if (this.config.igModules.breakModule.showDec){
-                    width = 36;
-                    sPercentage = fPercentage + "%";
+                boolean skip = false;
+                if (this.implementation.getBroken()) {
+                    fPercentage = 100.00f;
+                    iPercentage = 100;
+                    this.implementation.setBroken(false);
+                    skip = true;
+                    counter = System.currentTimeMillis() + 3000L;
                 }
-                if ((isBed && breakConfig.bed) || (isBeacon && breakConfig.beacon) || (isObsidian && breakConfig.obsidian)){
-                    if  (fPercentage != 0.0f){
+                String sPercentage = iPercentage + "%";
+                if (this.config.igModules.breakModule.showDec) {
+                    width = 36;
+                    sPercentage = String.format("%.2f", fPercentage) + "%";
+                }
+                if (!skip) {
+                    if (counter >= System.currentTimeMillis()){
+                        sPercentage = "100%";
+                        if (this.config.igModules.breakModule.showDec) {
+                            sPercentage = "100.00%";
+                        }
                         RenderManager.drawInfoBoxSoloRect(breakConfig.posX, breakConfig.posY, width, sPercentage, true);
+                    } else
+                    if ((isBed && breakConfig.bed) || (isBeacon && breakConfig.beacon) || (isObsidian && breakConfig.obsidian) || RuntimeSettings.igModSlided) {
+                        if (fPercentage != 0.0f || RuntimeSettings.igModSlided) {
+                            RenderManager.drawInfoBoxSoloRect(breakConfig.posX, breakConfig.posY, width, sPercentage, true);
+                        }
                     }
+                } else {
+                    RenderManager.drawInfoBoxSoloRect(breakConfig.posX, breakConfig.posY, width, sPercentage, true);
                 }
             }
         }
@@ -84,10 +123,7 @@ public class IngameRenderer extends Gui {
 
     @SubscribeEvent
     public void onGuiOpen(GuiOpenEvent event){
-        if (event.gui instanceof GuiInventory){
-            this.mc.getTextureManager().bindTexture(pvnikaLogo);
-            Gui.drawModalRectWithCustomSizedTexture(0, 0, 0.0F, 0.0F, 100, 100, 100.0f, 100.0f);
-        }
+
     }
 
 }

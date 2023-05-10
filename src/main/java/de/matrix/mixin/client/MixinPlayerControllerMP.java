@@ -1,5 +1,6 @@
 package de.matrix.mixin.client;
 
+import de.matrix.pvnikamod.listener.Implementation;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.util.BlockPos;
@@ -24,7 +25,9 @@ public class MixinPlayerControllerMP {
 
     @Inject(method = "onPlayerDestroyBlock", at = @At("HEAD"))
     public void sresetCurBlockDamageMP(BlockPos pos, EnumFacing side, CallbackInfoReturnable<Boolean> cir){
-        //PvnikaMod.getInstance().implementation.setCurrentBlockDamage(0.0f);
+        Implementation implementation = PvnikaMod.getInstance().implementation;
+        implementation.setCurrentBlockDamage(0.0f);
+        implementation.setBroken(true);
     }
 
     @Inject(method = "resetBlockRemoving()V", at = @At("HEAD"))

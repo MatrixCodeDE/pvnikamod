@@ -25,22 +25,15 @@ public class GuiCoords extends GuiIngameModuleScreen {
 
     @Override
     public void initGui(){
-        super.initGui();
         int i = -2;
         int j = 24;
-        buttonList.add(this.showCoords = new GuiButton(0, width / 2 - 60, height / 4 + 0 * j + i, 120, 20, BooleanColor.enableText(this.config.igModules.coordModule.enabled)));
-        buttonList.add(this.sliderX = new GuiSlider(1, width / 2 - 60, height / 4 + 1 * j + i, 120, 20, I18n.format("menu.pvnika.all.posx") + ": ", "", 0, this.mc.displayWidth, RenderManager.translateXFromConfig(this.config.igModules.coordModule.posX), false, true));
-        buttonList.add(this.sliderY = new GuiSlider(2, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.all.posy") + ": ", "", 0, this.mc.displayHeight, RenderManager.translateYFromConfig(this.config.igModules.coordModule.posY), false, true));
-        buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 3 * j + i, 60, 20, I18n.format("gui.back")));
+        int w = 200;
+        super.initGui(i, j, 0, w);
         refreshButtons();
     }
 
     public void refreshButtons(){
-        this.showCoords.displayString = BooleanColor.enableText(this.config.igModules.coordModule.enabled);
-        this.sliderX.maxValue = this.mc.displayWidth;
-        this.sliderY.maxValue = this.mc.displayHeight;
-        this.sliderX.setValue(RenderManager.translateXFromConfig(this.config.igModules.coordModule.posX));
-        this.sliderY.setValue(RenderManager.translateYFromConfig(this.config.igModules.coordModule.posY));
+        super.refreshButtons();
     }
 
     @Override
@@ -54,27 +47,7 @@ public class GuiCoords extends GuiIngameModuleScreen {
 
     @Override
     public void actionPerformed(GuiButton button) throws IOException {
-        switch (button.id){
-            case 0:
-                IngameInfosUtils.toggleCoords();
-                break;
-            case 10:
-                this.mc.displayGuiScreen(lastScreen);
-        }
-    }
-
-    protected void mouseReleased(int mouseX, int mouseY, int releaseButton) {
-        super.mouseReleased(mouseX, mouseY, releaseButton);
-        this.config.igModules.coordModule.posX = RenderManager.translateXToConfig(this.sliderX.getValueInt());
-        this.config.igModules.coordModule.posY = RenderManager.translateYToConfig(this.sliderY.getValueInt());
-        refreshButtons();
-    }
-
-    protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick){
-        super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
-        this.config.igModules.coordModule.posX = RenderManager.translateXToConfig(this.sliderX.getValueInt());
-        this.config.igModules.coordModule.posY = RenderManager.translateYToConfig(this.sliderY.getValueInt());
-        refreshButtons();
+        super.actionPerformed(button);
     }
 
 }

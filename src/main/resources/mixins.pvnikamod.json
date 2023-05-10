@@ -11,6 +11,8 @@
     "gui.MixinGuiIngameMenu",
     "gui.MixinGuiMainMenu",
     "gui.MixinGuiPlayerTabOverlay",
+    "gui.MixinGuiInventory",
+    "gui.MixinGuiChest",
     "renderer.MixinEntityRenderer",
     "renderer.MixinRendererLivingEntity",
     "renderer.MixinRender",

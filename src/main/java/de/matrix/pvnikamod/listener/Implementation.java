@@ -15,6 +15,7 @@ public class Implementation {
     private Config config;
     private Minecraft mc;
     private float currentBlockDamage;
+    private boolean isBroken;
 
     public Implementation(){
         this.mod = PvnikaMod.getInstance();
@@ -60,6 +61,14 @@ public class Implementation {
 
     public int getIntBlockBreakPercentage(){
         return (int) ValueUtil.floatToPercentage(this.currentBlockDamage);
+    }
+
+    public void setBroken(boolean broken){
+        this.isBroken = broken;
+    }
+
+    public boolean getBroken(){
+        return this.isBroken;
     }
 
 }

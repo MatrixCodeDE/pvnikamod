@@ -5,6 +5,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -291,6 +294,44 @@ public interface RenderManager {
         }
         int stry = positions[1] + 2;
         mc.fontRendererObj.drawStringWithShadow(text, strx, stry, 16777215);
+    }
+
+    static int[] translateInvLogoPosition(int invSize){
+        int width = Minecraft.getMinecraft().currentScreen.width;
+        int height = Minecraft.getMinecraft().currentScreen.height;
+
+        int minSpace = 40;
+        int space = (height - invSize) / 2;
+
+        int x = (width / 2) - (minSpace * 3 / 2);
+        int y = space - minSpace;
+
+        if (space < minSpace){
+            x = width - (minSpace * 3);
+            y = height - minSpace;
+        }
+
+        return new int[] {x, y};
+
+    }
+
+    static int[] translateInvLogoPosition(int invSize, int slots){
+        int width = Minecraft.getMinecraft().currentScreen.width;
+        int height = Minecraft.getMinecraft().currentScreen.height;
+
+        int minSpace = 40;
+        int space = (height - (slots * 18 + 114)) / 2;
+
+        int x = (width / 2) - (minSpace * 3 / 2);
+        int y = space - minSpace;
+
+        if (space < minSpace){
+            x = width - (minSpace * 3);
+            y = height - minSpace;
+        }
+
+        return new int[] {x, y};
+
     }
 
 }

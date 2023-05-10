@@ -34,7 +34,7 @@ import java.io.File;
 )
 public class PvnikaMod {
 
-    public static final String MODID = "Pvnika Mod";
+    public static final String MODID = "pvnikamod";
     public static File FOLDER_FILE;
     public static final File CONFIG_FILE;
     public static final File MODULES_FILE;
@@ -55,7 +55,8 @@ public class PvnikaMod {
 
     public static KeyBinding openPvnikaGui = new KeyBinding("Open Pvnika GUI", 54, "Pvnika Mod");
     public static KeyBinding zoomKey = new KeyBinding("Zoom", 16, "Pvnika Mod");
-    public static final ResourceLocation pvnikaLogo = new ResourceLocation("textures/gui/container/inventory.png");
+    public static final ResourceLocation pvnikaLogo = new ResourceLocation(PvnikaMod.MODID,"images/logo.png");
+    public static final ResourceLocation pvnikaHeader = new ResourceLocation(PvnikaMod.MODID,"images/header.png");
 
 
     @EventHandler
@@ -72,8 +73,6 @@ public class PvnikaMod {
         PvnikaMod.this.mc = Minecraft.getMinecraft();
 
         sendLog("Loading Config");
-        // FOLDER_FILE = new File(Minecraft.getMinecraft().mcDataDir, "pvnika");
-        // File configFile = new File(FOLDER_FILE, "pvnikamod.cfg");
         this.config = new Config(CONFIG_FILE, MODULES_FILE);
 
         this.config.loadConfig();
