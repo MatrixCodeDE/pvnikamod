@@ -14,6 +14,7 @@
 ### Information
 This is a Minecraft mod with focus on PvP features. All features are cosmetical only, so there is no effect on the game like range or similar. Anyways features like FullBright or hitboxes can improve your gameplay.\
 The mod is still in the first beta, so there may be some bugs. If you find some, you can report this in the issues tab in the repository.
+Currently only the languages English and German are supported.
 
 ---
 
@@ -63,7 +64,8 @@ If you miss a feature, feel free to ask!
 This mod used Mixins to modify the minecraft source code, so there can be some incompatibility with other mods which does the same.\
 Problems noticed:
 - OldAnimationMod
-  - Menu buttons not shown
+  - Menu buttons not shown\
+    => Disable 'Custom Menus' in general settings
 - ESSENTIAL
   - Menus
   - Tablist
@@ -74,7 +76,7 @@ Problems noticed:
 ---
 
 ### License and Development
-This mod is licensed under [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html). For more information head to /LICENSE.\
+This mod is licensed under [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html). For more information head to [/LICENSE](LICENSE).\
 This mod is based on [Architectury Loom](https://github.com/romangraef/Forge1.8.9Template).
 
 ---

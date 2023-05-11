@@ -42,6 +42,8 @@ menu.pvnika.movement.toggleSprint=Sprinten umschalten
 menu.pvnika.all.custom=Eigene
 menu.pvnika.all.activated=Aktiviert
 menu.pvnika.all.advanced=Erweitert
+menu.pvnika.all.enabled=Aktiviert
+menu.pvnika.all.disabled=Deaktiviert
 
 menu.pvnika.all.color.red=Rot
 menu.pvnika.all.color.green=Grün
@@ -49,3 +51,11 @@ menu.pvnika.all.color.blue=Blau
 menu.pvnika.all.color.alpha=Alpha
 menu.pvnika.all.chroma.name=Chroma
 menu.pvnika.all.chroma.speed=Chroma Geschwindigkeit
+
+menu.pvnika.iginfos.name=Ingame Infos
+menu.pvnika.iginfos.fps.name=FPS
+menu.pvnika.iginfos.coordinates.name=Koordinaten
+menu.pvnika.iginfos.break.name=Abbau Prozente
+menu.pvnika.iginfos.break.dec=Kommazahlen anzeigen
+menu.pvnika.all.posx=Position X
+menu.pvnika.all.posy=Position Y
