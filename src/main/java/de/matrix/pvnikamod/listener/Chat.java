@@ -30,7 +30,7 @@ public class Chat {
         this.mc = Minecraft.getMinecraft();
     }
 
-    @SubscribeEvent
+    //@SubscribeEvent
     public void onEvent(Event event){
         if (event instanceof TickEvent.RenderTickEvent){
             waiter();
