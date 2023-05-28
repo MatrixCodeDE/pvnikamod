@@ -24,12 +24,7 @@ public class MixinGuiChest extends GuiScreen {
 
     @Inject(method = "drawGuiContainerBackgroundLayer", at = @At("HEAD"))
     private void drawPvnikaLogo(float partialTicks, int mouseX, int mouseY, CallbackInfo ci) {
-        Minecraft.getMinecraft().getTextureManager().bindTexture(PvnikaMod.pvnikaHeader);
-        int tySize = 166;
-        int[] values = RenderManager.translateInvLogoPosition(166, this.inventoryRows);
-        new DrawUtils().drawTexture(values[0], values[1], 1, 1, 120, 40, 1.0f);
-        GlStateManager.enableAlpha();
-        GlStateManager.enableBlend();
+        RenderManager.renderPvnikaLogo(this.inventoryRows);
     }
 
 }

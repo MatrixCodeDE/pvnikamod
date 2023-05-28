@@ -33,6 +33,7 @@ public class Config {
         this.config.load();
 
         this.generalSettings.customMenu = this.config.get("general", "customMenu", false).getBoolean();
+        this.generalSettings.logoInMenu = this.config.get("general", "logoInMenu", false).getBoolean();
         this.generalSettings.ownNameTag = this.config.get("general", "ownNameTag", false).getBoolean();
         this.generalSettings.pingOnTab = this.config.get("general", "pingOnTab", false).getBoolean();
         this.generalSettings.confirmDisconnect = this.config.get("general", "confirmDisconnect", false).getBoolean();
@@ -73,6 +74,7 @@ public class Config {
 
     public void saveConfig() {
         this.config.get("general", "customMenu", false).set(this.generalSettings.customMenu);
+        this.config.get("general", "logoInMenu", false).set(this.generalSettings.logoInMenu);
         this.config.get("general", "ownNameTag", false).set(this.generalSettings.ownNameTag);
         this.config.get("general", "pingOnTab", false).set(this.generalSettings.pingOnTab);
         this.config.get("general", "confirmDisconnect", false).set(this.generalSettings.confirmDisconnect);

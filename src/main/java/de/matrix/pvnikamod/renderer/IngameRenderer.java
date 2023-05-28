@@ -8,6 +8,7 @@ import de.matrix.pvnikamod.listener.Implementation;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.modutils.DrawUtils;
 import de.matrix.pvnikamod.utils.ColorUtil;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiChat;
@@ -81,6 +82,7 @@ public class IngameRenderer extends Gui {
                 boolean isBeacon = targetItem != null && targetItem == Item.getItemById(138);
                 boolean isObsidian = targetItem != null && targetItem == Item.getItemById(49);
                 boolean isBBO = isBed || isBeacon || isObsidian;
+                boolean wasBBO = this.implementation.brokenBlock == Block.getBlockFromName("bed") || this.implementation.brokenBlock == Block.getBlockFromName("beacon") || this.implementation.brokenBlock == Block.getBlockFromName("obsidian");
                 float fPercentage = this.implementation.getFloatBlockBreakPercentage();
                 int iPercentage = this.implementation.getIntBlockBreakPercentage();
                 if (isBBO && fPercentage != 0.0f){
@@ -89,7 +91,7 @@ public class IngameRenderer extends Gui {
                 BreakModule breakConfig = this.config.igModules.breakModule;
                 int width = 22;
                 boolean skip = false;
-                if (this.implementation.getBroken()) {
+                if (this.implementation.getBroken() && wasBBO) {
                     fPercentage = 100.00f;
                     iPercentage = 100;
                     this.implementation.setBroken(false);

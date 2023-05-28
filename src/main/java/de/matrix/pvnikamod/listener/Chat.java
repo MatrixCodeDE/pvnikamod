@@ -17,8 +17,8 @@ public class Chat {
     private final Config config;
     private final Minecraft mc;
 
-    private final String[] triggers = new String[]{"1st Killer - ", "1st Place - ", "Winner: ", " - Damage Dealt - ", "Winning Team -", "1st - ", "Winners: ", "Winner: ", "Winning Team: ", " won the game!", "Top Seeker: ", "1st Place: ", "Last team standing!", "Winner #1 (", "Top Survivors", "Winners - "};
-    private final String[] winTriggers = new String[]{" (Win)"};
+    private final String[] triggers = new String[]{"1st Killer - ", "1st Place - ", "Winner: ", " - Damage Dealt - ", "Winning Team -", "1st - ", "Winners: ", "Winner: ", "Winning Team: ", " won the game!", "Top Seeker: ", "1st Place: ", "Last team standing!", "Winner #1 (", "Top Survivors", "Winners - ", "Your team won!", "Your team lost!", "Most Kills:"};
+    private final String[] winTriggers = new String[]{" (Win)", "Your team won!"};
     private boolean end;
     private boolean win;
     private int delay = -1;
@@ -57,6 +57,7 @@ public class Chat {
                 if (str.contains(trig)) {
                     PvnikaMod.sendLog("Pvnika Wingame");
                     this.win = true;
+                    this.delay = 10;
                     break;
                 }
             }
@@ -69,9 +70,9 @@ public class Chat {
             PvnikaMod.sendLog("Pvnika GG: "+win);
             if (win){
                 sendMessage("gg");
-                PvnikaMod.sendLog("Pvnika GG should be triggered");
+                sendMessage("Du hast verloren +");
             } else {
-                PvnikaMod.sendLog("Pvnika GG should not be triggered");
+                sendMessage("L");
             }
             win = false;
             end = false;
@@ -82,7 +83,7 @@ public class Chat {
     }
 
     public void sendMessage(String message){
-        if(message != null)
+        if(message != null && message != "")
             this.mc.thePlayer.sendChatMessage(message);
     }
 

@@ -2,6 +2,7 @@ menu.pvnika.name=Pvnika Mod
 
 menu.pvnika.general.name=General
 menu.pvnika.general.customMenu=Custom Menu
+menu.pvnika.general.logoInMenu=Logo in Menu
 menu.pvnika.general.ownNameTag=Own Nametag
 menu.pvnika.general.pingOnTab=Ping on Tablist
 menu.pvnika.general.confirmDisconnect=Confirm Disconnect

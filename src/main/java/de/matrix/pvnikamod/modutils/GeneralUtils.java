@@ -25,6 +25,11 @@ public class GeneralUtils {
         this.config.generalSettings.customMenu = !customMenu;
     }
 
+    public void toggleLogoInMenu() {
+        boolean logo = this.config.generalSettings.logoInMenu;
+        this.config.generalSettings.logoInMenu = !logo;
+    }
+
     public void toggleOwnNameTag() {
         boolean ownNameTag = this.config.generalSettings.ownNameTag;
         this.config.generalSettings.ownNameTag = !ownNameTag;

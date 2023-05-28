@@ -15,10 +15,7 @@ public class MixinGuiCrafting {
 
     @Inject(method = "drawGuiContainerBackgroundLayer", at = @At("TAIL"))
     private void drawPvnikaLogo(float partialTicks, int mouseX, int mouseY, CallbackInfo ci) {
-        Minecraft.getMinecraft().getTextureManager().bindTexture(PvnikaMod.pvnikaHeader);
-        int tySize = 166;
-        int[] values = RenderManager.translateInvLogoPosition(tySize);
-        new DrawUtils().drawTexture(values[0], values[1], 1, 1, 120, 40, 1.0f);
+        RenderManager.renderPvnikaLogo();
     }
 
 }

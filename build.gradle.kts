@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "de.matrix.archloomtemplate"
-version = "b0.9.3"
+version = "b0.9.4"
 
 // Toolchains:
 java {

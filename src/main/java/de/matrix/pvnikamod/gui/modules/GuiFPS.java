@@ -35,18 +35,6 @@ public class GuiFPS extends GuiIngameModuleScreen {
 
         this.drawCenteredString(fontRendererObj, I18n.format("menu.pvnika.iginfos.fps.name"), width / 2, 40, ColorUtil.rgbToDec(85, 255, 255));
 
-        this.mc.getTextureManager().bindTexture(PvnikaMod.pvnikaLogo);
-        GlStateManager.pushMatrix();
-        {
-            GlStateManager.enableAlpha();
-            GlStateManager.enableBlend();
-            GlStateManager.color(1, 1, 1, 1.0f);
-            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-            drawTexturedModalRect(0, 0, 0, 0, 1024, 1024);
-            GlStateManager.disableBlend();
-        }
-        GlStateManager.popMatrix();
-
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 

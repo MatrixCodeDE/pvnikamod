@@ -6,6 +6,7 @@ menu.pvnika.general.pingOnTab=Ping in der Tabliste
 menu.pvnika.general.confirmDisconnect=Verlassen bestätigen
 menu.pvnika.general.customMenu=Eigenes Menü
 menu.pvnika.general.fullBright=Volle Helligkeit
+menu.pvnika.general.logoInMenu=Logo Im Menu
 
 menu.pvnika.particles.name=Partikel
 menu.pvnika.particles.multiplier=Faktor
@@ -58,4 +59,5 @@ menu.pvnika.iginfos.coordinates.name=Koordinaten
 menu.pvnika.iginfos.break.name=Abbau Prozente
 menu.pvnika.iginfos.break.dec=Kommazahlen anzeigen
 menu.pvnika.all.posx=Position X
-menu.pvnika.all.posy=Position Y
+menu.pvnika.all.posy=Position Ymenu.pvnika.general.logoInMenu=Logo In Menu
+menu.pvnika.iginfos.coords.name=Coordinates

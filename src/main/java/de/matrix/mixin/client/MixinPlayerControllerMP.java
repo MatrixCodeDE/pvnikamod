@@ -2,6 +2,8 @@ package de.matrix.mixin.client;
 
 import de.matrix.pvnikamod.listener.Implementation;
 import de.matrix.pvnikamod.main.PvnikaMod;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -20,19 +22,25 @@ public class MixinPlayerControllerMP {
 
     @Inject(method = "onPlayerDamageBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;getPlayerRelativeBlockHardness(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)F", shift = At.Shift.AFTER))
     public void setCurBlockDamageMP(BlockPos posBlock, EnumFacing directionFacing, CallbackInfoReturnable<Boolean> cir){
-        PvnikaMod.getInstance().implementation.setCurrentBlockDamage(this.curBlockDamageMP);
+        Implementation implementation = PvnikaMod.getInstance().implementation;
+        implementation.brokenBlock = null;
+        implementation.setCurrentBlockDamage(this.curBlockDamageMP);
     }
 
     @Inject(method = "onPlayerDestroyBlock", at = @At("HEAD"))
-    public void sresetCurBlockDamageMP(BlockPos pos, EnumFacing side, CallbackInfoReturnable<Boolean> cir){
+    public void destroyCurBlockDamageMP(BlockPos pos, EnumFacing side, CallbackInfoReturnable<Boolean> cir){
+        Block block = Minecraft.getMinecraft().theWorld.getBlockState(pos).getBlock();
         Implementation implementation = PvnikaMod.getInstance().implementation;
+        implementation.brokenBlock = block;
         implementation.setCurrentBlockDamage(0.0f);
         implementation.setBroken(true);
     }
 
     @Inject(method = "resetBlockRemoving()V", at = @At("HEAD"))
     public void resetCurBlockDamageMP(CallbackInfo ci){
-        PvnikaMod.getInstance().implementation.setCurrentBlockDamage(0.0f);
+        Implementation implementation = PvnikaMod.getInstance().implementation;
+        implementation.brokenBlock = null;
+        implementation.setCurrentBlockDamage(0.0f);
     }
 
 }

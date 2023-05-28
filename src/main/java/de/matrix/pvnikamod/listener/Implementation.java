@@ -3,6 +3,7 @@ package de.matrix.pvnikamod.listener;
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.utils.ValueUtil;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -16,6 +17,7 @@ public class Implementation {
     private Minecraft mc;
     private float currentBlockDamage;
     private boolean isBroken;
+    public Block brokenBlock;
 
     public Implementation(){
         this.mod = PvnikaMod.getInstance();

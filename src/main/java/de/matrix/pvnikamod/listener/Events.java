@@ -38,6 +38,7 @@ public class Events {
     private final Minecraft mc;
     public final CrosshairRenderer crosshairRenderer;
     private final ZoomUtils zoomUtils;
+    private final ParticlesUtils particlesUtils;
     private Implementation implementation;
     private float playerHealth;
 
@@ -51,12 +52,14 @@ public class Events {
         this.crosshairRenderer = new CrosshairRenderer();
         this.zoomUtils = this.mod.zoomUtils;
         this.implementation = new Implementation();
+        this.particlesUtils = new ParticlesUtils();
     }
 
     @SubscribeEvent
     public void onAttack(AttackEntityEvent event){
-        ParticlesUtils particlesUtils = new ParticlesUtils();
-        particlesUtils.onAttack(event);
+        if (!event.target.isInvisible()) {
+            particlesUtils.onAttack(event);
+        }
     }
 
     @SubscribeEvent

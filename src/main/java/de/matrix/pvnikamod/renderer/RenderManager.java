@@ -1,5 +1,7 @@
 package de.matrix.pvnikamod.renderer;
 
+import de.matrix.pvnikamod.main.PvnikaMod;
+import de.matrix.pvnikamod.modutils.DrawUtils;
 import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
@@ -332,6 +334,26 @@ public interface RenderManager {
 
         return new int[] {x, y};
 
+    }
+
+    static void renderPvnikaLogo(){
+        GlStateManager.enableAlpha();
+        GlStateManager.enableBlend();
+        if (PvnikaMod.getInstance().getConfig().generalSettings.logoInMenu)
+            return;
+        Minecraft.getMinecraft().getTextureManager().bindTexture(PvnikaMod.pvnikaHeader);
+        int[] values = translateInvLogoPosition(166);
+        new DrawUtils().drawTexture(values[0], values[1], 1, 1, 120, 40, 1.0f);
+    }
+
+    static void renderPvnikaLogo(int rows){
+        GlStateManager.enableAlpha();
+        GlStateManager.enableBlend();
+        if (PvnikaMod.getInstance().getConfig().generalSettings.logoInMenu)
+            return;
+        Minecraft.getMinecraft().getTextureManager().bindTexture(PvnikaMod.pvnikaHeader);
+        int[] values = translateInvLogoPosition(166, rows);
+        new DrawUtils().drawTexture(values[0], values[1], 1, 1, 120, 40, 1.0f);
     }
 
 }
