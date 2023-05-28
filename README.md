@@ -78,7 +78,7 @@ Problems noticed:
 ### License and Development
 This mod is licensed under [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html). For more information head to [/LICENSE](LICENSE).\
 This mod is based on [Architectury Loom](https://github.com/romangraef/Forge1.8.9Template).
-
+For tips with installation and development head to [/GUIDE](GUIDE.md)
 ---
 
 > **Disclaimer:** I'm not responsible for any bans/mutes whatever. Use on your own risk!

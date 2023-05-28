@@ -8,14 +8,15 @@
   "client": [
     "client.MixinInventoryPlayer",
     "client.MixinPlayerControllerMP",
+    "gui.MixinGuiChest",
+    "gui.MixinGuiCrafting",
     "gui.MixinGuiIngameMenu",
+    "gui.MixinGuiInventory",
     "gui.MixinGuiMainMenu",
     "gui.MixinGuiPlayerTabOverlay",
-    "gui.MixinGuiInventory",
-    "gui.MixinGuiChest",
     "renderer.MixinEntityRenderer",
-    "renderer.MixinRendererLivingEntity",
     "renderer.MixinRender",
+    "renderer.MixinRendererLivingEntity",
     "renderer.MixinRenderManager"
   ]
 }
