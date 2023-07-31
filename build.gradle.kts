@@ -6,7 +6,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
-group = "de.matrix.archloomtemplate"
+group = "de.matrix.pvnikamod"
 version = "b0.9.4"
 
 // Toolchains:

@@ -30,7 +30,7 @@ public class Chat {
         this.mc = Minecraft.getMinecraft();
     }
 
-    //@SubscribeEvent
+    @SubscribeEvent
     public void onEvent(Event event){
         if (event instanceof TickEvent.RenderTickEvent){
             waiter();
@@ -46,7 +46,6 @@ public class Chat {
             if (!this.end) {
                 for (String trig : this.triggers){
                     if (str.contains(trig)) {
-                        PvnikaMod.sendLog("Pvnika Endgame");
                         this.end = true;
                         this.delay = 5;
                         break;
@@ -55,7 +54,6 @@ public class Chat {
             }
             for (String trig : this.winTriggers){
                 if (str.contains(trig)) {
-                    PvnikaMod.sendLog("Pvnika Wingame");
                     this.win = true;
                     this.delay = 10;
                     break;

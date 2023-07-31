@@ -56,6 +56,16 @@ menu.pvnika.iginfos.coords.name=Coordinates
 menu.pvnika.iginfos.break.name=Break Percentage
 menu.pvnika.iginfos.break.dec=Show Decimal
 
+menu.pvnika.iginfos.mlg.name=MLG
+menu.pvnika.iginfos.mlg.walk=Walk
+menu.pvnika.iginfos.mlg.jump=Jump
+menu.pvnika.iginfos.mlg.both=Both
+menu.pvnika.iginfos.mlg.impossible=Impossible
+menu.pvnika.iginfos.mlg.damage=Damage
+menu.pvnika.iginfos.mlg.dead=Dead
+
+menu.pvnika.visuals.name=Visuals
+
 menu.pvnika.all.posx=Position X
 menu.pvnika.all.posy=Position Y
 

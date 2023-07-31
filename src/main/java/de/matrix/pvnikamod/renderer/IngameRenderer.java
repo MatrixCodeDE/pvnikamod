@@ -3,10 +3,12 @@ package de.matrix.pvnikamod.renderer;
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.config.RuntimeSettings;
 import de.matrix.pvnikamod.config.ingame.modules.BreakModule;
+import de.matrix.pvnikamod.config.ingame.modules.MLGModule;
 import de.matrix.pvnikamod.gui.modules.GuiIngameModuleScreen;
 import de.matrix.pvnikamod.listener.Implementation;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.modutils.DrawUtils;
+import de.matrix.pvnikamod.modutils.modules.MLGUtils;
 import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -31,6 +33,7 @@ public class IngameRenderer extends Gui {
     private final Config config;
     private final Minecraft mc;
     private final Implementation implementation;
+    private final MLGUtils mlgUtils;
     private long counter;
 
     public IngameRenderer(){
@@ -38,6 +41,7 @@ public class IngameRenderer extends Gui {
         this.config = this.mod.getConfig();
         this.mc = Minecraft.getMinecraft();
         this.implementation = PvnikaMod.getInstance().implementation;
+        this.mlgUtils = new MLGUtils();
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -119,7 +123,44 @@ public class IngameRenderer extends Gui {
                 } else {
                     RenderManager.drawInfoBoxSoloRect(breakConfig.posX, breakConfig.posY, width, sPercentage, true);
                 }
+                if (RuntimeSettings.renderEnderPearl){
+                    RenderManager.drawInfoBoxSoloRect(breakConfig.posX + 36, breakConfig.posY, 36, "Pearl", true);
+                }
             }
+            if (this.config.igModules.mlgModule.enabled){
+                MLGModule mlgModule = this.config.igModules.mlgModule;
+                int mlgOption = this.mlgUtils.getOption();
+                int[] tcol = new int[]{ColorUtil.colorToDec(new Color(255, 128, 0)), ColorUtil.colorToDec(new Color(255, 0, 0)), ColorUtil.colorToDec(new Color(0, 128, 255))};
+                String mlgText = "";
+                switch (mlgOption){
+                    case 1:
+                        mlgText = I18n.format("menu.pvnika.iginfos.mlg.walk");
+                        break;
+                    case 2:
+                        mlgText = I18n.format("menu.pvnika.iginfos.mlg.jump");
+                        break;
+                    case 3:
+                        mlgText = I18n.format("menu.pvnika.iginfos.mlg.both");
+                        tcol[0] = ColorUtil.colorToDec(new Color(0, 160, 0));
+                        break;
+                    default:
+                        mlgText = I18n.format("menu.pvnika.iginfos.mlg.impossible");
+                        tcol[0] = ColorUtil.colorToDec(new Color(160, 0, 0));
+                        break;
+                }
+                float damage = this.mlgUtils.getDamage();
+                int distance = this.mlgUtils.getDistance();
+                String dmgString = String.format("%.1f", this.mlgUtils.getDamage()) + " ❤";
+                if (damage * 2 >= this.mc.thePlayer.getHealth()){
+                    dmgString = I18n.format("menu.pvnika.iginfos.mlg.dead");
+                }
+                String[] text = new String[]{mlgText, dmgString, distance + " ⇩"};
+                RenderManager.drawInfoBoxRect(mlgModule.posX, mlgModule.posY, 56, text, true, tcol);
+
+
+
+            }
+
         }
     }
 

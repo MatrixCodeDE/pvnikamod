@@ -40,7 +40,8 @@ public class GuiClientOptions extends GuiScreen {
         buttonList.add(new GuiButton(4, width / 2 - 60, height / 4 + 5 * j + i, 120, 20, I18n.format("menu.pvnika.zoom.name")));
         buttonList.add(new GuiButton(5, width / 2 - 60, height / 4 + 6 * j + i, 120, 20, I18n.format("menu.pvnika.movement.name")));
         buttonList.add(new GuiButton(6, width / 2 - 60, height / 4 + 7 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.name")));
-        buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 8 * j + i, 60, 20, I18n.format("gui.back")));
+        buttonList.add(new GuiButton(7, width / 2 - 60, height / 4 + 8 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.name")));
+        buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 9 * j + i, 120, 20, I18n.format("gui.back")));
     }
 
     @Override

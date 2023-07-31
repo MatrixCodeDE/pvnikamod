@@ -1,6 +1,7 @@
 package de.matrix.pvnikamod.listener;
 
 import de.matrix.pvnikamod.config.Config;
+import de.matrix.pvnikamod.config.RuntimeSettings;
 import de.matrix.pvnikamod.gui.GuiClientOptions;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.renderer.CrosshairRenderer;
@@ -14,12 +15,14 @@ import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.item.EntityEnderPearl;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MovementInputFromOptions;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -81,6 +84,24 @@ public class Events {
         }
 
     }
+
+    /*@SubscribeEvent
+    public void renderEntity(RenderLivingEvent.Specials.Pre event){
+        if (event.entity != null) {
+            if (event.entity.getHeldItem() != null) {
+                if (event.entity instanceof EntityPlayer) {
+                    if (event.entity.getHeldItem().getItem() == Item.getItemById(368)) {
+                        RuntimeSettings.renderEnderPearl = true;
+                    } else {
+                        RuntimeSettings.renderEnderPearl = false;
+
+                    }
+                }
+            } else {
+                RuntimeSettings.renderEnderPearl = false;
+            }
+        }
+    }*/
 
     @SubscribeEvent
     public void onPlayerTickEvent(TickEvent.PlayerTickEvent event){

@@ -237,6 +237,23 @@ public interface RenderManager {
         }
     }
 
+    static void drawInfoBoxRect(double x, double y, int width, String[] text, boolean centered, int[] colors){
+        Minecraft mc = Minecraft.getMinecraft();
+        int[] positions = translateScreenPercentage(x, y);
+        int height = text.length * 10 + 1 ;
+        drawRectangle(positions[0], positions[1], width, height, ColorUtil.colorToDec(new Color(44, 44, 44)), 128);
+        int i = 0;
+        for (String s : text) {
+            int strx = positions[0] + 2;
+            if (centered){
+                strx += (width - mc.fontRendererObj.getStringWidth(s)) / 2;
+            }
+            int stry = positions[1] + (i * 10) + 2;
+            mc.fontRendererObj.drawStringWithShadow(s, strx, stry, colors[i]);
+            i++;
+        }
+    }
+
     static void drawCoordBoxRect(double x, double y, int width, String[] text, int[] colors){
         Minecraft mc = Minecraft.getMinecraft();
         int[] positions = translateScreenPercentage(x, y);

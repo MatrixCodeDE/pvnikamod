@@ -1,4 +1,4 @@
-package de.matrix.mixin.gui;
+package de.matrix.mixin.gui.container;
 
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.modutils.DrawUtils;
