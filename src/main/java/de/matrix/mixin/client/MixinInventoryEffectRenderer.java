@@ -1,5 +1,6 @@
 package de.matrix.mixin.client;
 
+import de.matrix.pvnikamod.main.PvnikaMod;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.inventory.Container;
@@ -16,7 +17,8 @@ public abstract class MixinInventoryEffectRenderer extends GuiContainer{
 
     @Inject(method = "updateActivePotionEffects", at = @At("TAIL"))
     private void onUpdateActivePotionEffects(CallbackInfo ci){
-        this.guiLeft = (this.width - this.xSize) / 2;
+        if (PvnikaMod.getInstance().getConfig().visualsSettings.disableShift)
+            this.guiLeft = (this.width - this.xSize) / 2;
     }
 
 

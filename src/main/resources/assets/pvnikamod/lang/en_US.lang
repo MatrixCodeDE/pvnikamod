@@ -65,6 +65,10 @@ menu.pvnika.iginfos.mlg.damage=Damage
 menu.pvnika.iginfos.mlg.dead=Dead
 
 menu.pvnika.visuals.name=Visuals
+menu.pvnika.visuals.customMenu=Custom Menu
+menu.pvnika.visuals.disableShift=Disable Shift
+menu.pvnika.visuals.pingOnTab=Ping on Tab
+menu.pvnika.visuals.fullBright=Full Bright
 
 menu.pvnika.all.posx=Position X
 menu.pvnika.all.posy=Position Y

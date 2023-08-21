@@ -257,7 +257,7 @@ public class TabList extends GuiPlayerTabOverlay {
         }
 
         this.zLevel += 100.0F;
-        if(PvnikaMod.getInstance().getConfig().generalSettings.pingOnTab){
+        if(PvnikaMod.getInstance().getConfig().visualsSettings.pingOnTab){
             this.mc.fontRendererObj.drawStringWithShadow(pingStr, j + i - strWidth, k, pingColor);
         } else {
             this.drawTexturedModalRect(j + i - 11, k, l * 10, 176 + m * 8, 10, 8);

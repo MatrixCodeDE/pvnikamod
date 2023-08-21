@@ -14,6 +14,7 @@ public class Config {
     public CrosshairSettings crosshairSettings;
     public ZoomSettings zoomSettings;
     public MovementSettings movementSettings;
+    public VisualsSettings visualsSettings;
     public IGModules igModules;
 
     public Configuration config;
@@ -27,6 +28,7 @@ public class Config {
         this.crosshairSettings = new CrosshairSettings();
         this.zoomSettings = new ZoomSettings();
         this.movementSettings = new MovementSettings();
+        this.visualsSettings = new VisualsSettings();
     }
 
     public void loadConfig() {
@@ -69,6 +71,11 @@ public class Config {
         this.movementSettings.toggleSneak = this.config.get("movement", "toggleSneak", false).getBoolean();
         this.movementSettings.toggleSprint = this.config.get("movement", "toggleSprint", false).getBoolean();
 
+        this.visualsSettings.customMenu = this.config.get("visuals", "customMenu", false).getBoolean();
+        this.visualsSettings.disableShift = this.config.get("visuals", "disableShift", false).getBoolean();
+        this.visualsSettings.pingOnTab = this.config.get("visuals", "pingOnTab", false).getBoolean();
+        this.visualsSettings.fullBright = this.config.get("visuals", "fullBright", false).getBoolean();
+
         this.config.save();
     }
 
@@ -109,6 +116,11 @@ public class Config {
 
         this.config.get("movement", "toggleSneak", false).set(this.movementSettings.toggleSneak);
         this.config.get("movement", "toggleSprint", false).set(this.movementSettings.toggleSprint);
+
+        this.config.get("visuals", "customMenu", false).set(this.visualsSettings.customMenu);
+        this.config.get("visuals", "disableShift", false).set(this.visualsSettings.disableShift);
+        this.config.get("visuals", "pingOnTab", false).set(this.visualsSettings.pingOnTab);
+        this.config.get("visuals", "fullBright", false).set(this.visualsSettings.fullBright);
 
         this.config.save();
     }
