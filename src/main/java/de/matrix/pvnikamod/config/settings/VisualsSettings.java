@@ -7,6 +7,8 @@ public class VisualsSettings {
     public boolean pingOnTab;
     public boolean fullBright;
 
+    public int guiSizeHotbar;
+
     public VisualsSettings(){
 
     }

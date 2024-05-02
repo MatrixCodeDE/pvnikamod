@@ -44,10 +44,14 @@ menu.pvnika.iginfos.name=Ingame Infos
 menu.pvnika.iginfos.fps.name=FPS
 menu.pvnika.iginfos.coordinates.name=Coordinates
 
+menu.pvnika.chat.name=Chat
+menu.pvnika.chat.placeholder=-
+
 menu.pvnika.all.custom=Custom
 menu.pvnika.all.enabled=Enabled
 menu.pvnika.all.disabled=Disabled
 menu.pvnika.all.advanced=Advanced
+menu.pvnika.all.default=Default
 
 menu.pvnika.iginfos.fps.name=FPS
 
@@ -55,6 +59,10 @@ menu.pvnika.iginfos.coords.name=Coordinates
 
 menu.pvnika.iginfos.break.name=Break Percentage
 menu.pvnika.iginfos.break.dec=Show Decimal
+
+menu.pvnika.iginfos.reach.name=Reach
+menu.pvnika.iginfos.reach.hasnt=Hasn't Attacked
+menu.pvnika.iginfos.reach.showOther=Show Other
 
 menu.pvnika.iginfos.mlg.name=MLG
 menu.pvnika.iginfos.mlg.walk=Walk
@@ -69,6 +77,7 @@ menu.pvnika.visuals.customMenu=Custom Menu
 menu.pvnika.visuals.disableShift=Disable Shift
 menu.pvnika.visuals.pingOnTab=Ping on Tab
 menu.pvnika.visuals.fullBright=Full Bright
+menu.pvnika.visuals.guiSize=Gui Size
 
 menu.pvnika.all.posx=Position X
 menu.pvnika.all.posy=Position Y

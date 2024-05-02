@@ -10,6 +10,7 @@ import de.matrix.pvnikamod.modutils.ZoomUtils;
 import de.matrix.pvnikamod.renderer.RenderManager;
 import de.matrix.pvnikamod.utils.BooleanColor;
 import de.matrix.pvnikamod.utils.ColorUtil;
+import de.matrix.pvnikamod.utils.Pinger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -26,12 +27,15 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.fml.client.GuiModList;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import org.lwjgl.input.Mouse;
 
 public class Events {
@@ -83,6 +87,15 @@ public class Events {
             }
         }
 
+    }
+
+    @SubscribeEvent
+    public void onClientTickEvent(TickEvent.ClientTickEvent event){
+        if ( this.mc.thePlayer != null && !this.mc.isIntegratedServerRunning() ){
+            RuntimeSettings.connectedToServer = true;
+        } else {
+            RuntimeSettings.connectedToServer = false;
+        }
     }
 
     /*@SubscribeEvent
@@ -151,6 +164,17 @@ public class Events {
                 toggled_sprint = false;
             }
         }
+    }
+
+    @SubscribeEvent
+    public void onConnect(PlayerEvent.PlayerLoggedInEvent event){
+
+        RuntimeSettings.connectedToServer = true;
+    }
+
+    @SubscribeEvent
+    public void onDisconnect(PlayerEvent.PlayerLoggedOutEvent event){
+        RuntimeSettings.connectedToServer = false;
     }
 
 }

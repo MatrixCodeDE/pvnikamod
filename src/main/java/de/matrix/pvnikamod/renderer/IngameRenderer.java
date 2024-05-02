@@ -4,24 +4,24 @@ import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.config.RuntimeSettings;
 import de.matrix.pvnikamod.config.ingame.modules.BreakModule;
 import de.matrix.pvnikamod.config.ingame.modules.MLGModule;
+import de.matrix.pvnikamod.config.ingame.modules.ReachModule;
 import de.matrix.pvnikamod.gui.modules.GuiIngameModuleScreen;
 import de.matrix.pvnikamod.listener.Implementation;
 import de.matrix.pvnikamod.main.PvnikaMod;
-import de.matrix.pvnikamod.modutils.DrawUtils;
 import de.matrix.pvnikamod.modutils.modules.MLGUtils;
 import de.matrix.pvnikamod.utils.ColorUtil;
+import de.matrix.pvnikamod.utils.ValueUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.*;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -35,6 +35,10 @@ public class IngameRenderer extends Gui {
     private final Implementation implementation;
     private final MLGUtils mlgUtils;
     private long counter;
+    private long lastOwn;
+    private double ownRange = 0.0;
+    private long lastOther;
+    private double otherRange = 0.0;
 
     public IngameRenderer(){
         this.mod = PvnikaMod.getInstance();
@@ -48,7 +52,6 @@ public class IngameRenderer extends Gui {
     @SubscribeEvent
     public void onClientTickEvent(TickEvent.RenderTickEvent event) {
         /*if (this.mc.currentScreen instanceof GuiContainer && this.mc.theWorld != null){
-            System.out.println("event lol1");
             DrawUtils drawUtils = new DrawUtils();
             this.mc.getTextureManager().bindTexture(PvnikaMod.pvnikaLogo);
             drawUtils.drawTexture(10, 10, 255.0D, 255.0D, 100, 100, 1.0f);
@@ -57,29 +60,45 @@ public class IngameRenderer extends Gui {
             counter = 0;
         }
         GuiScreen currentScreen = this.mc.currentScreen;
+        if (currentScreen == null)
+            RuntimeSettings.igModSlided = false;
         if (currentScreen == null || currentScreen instanceof GuiChat || (currentScreen instanceof GuiIngameModuleScreen && RuntimeSettings.igModSlided)) {
+
+
+            /*FPS Module*/
             if (this.config.igModules.fpsModule.enabled) {
                 String counter = I18n.format("menu.pvnika.iginfos.fps.name") + ": " + Minecraft.getDebugFPS();
                 RenderManager.drawInfoBoxSoloRect(this.config.igModules.fpsModule.posX, this.config.igModules.fpsModule.posY, 54, counter, true);
             }
+
+
+            /*Coords Module*/
             if (this.config.igModules.coordModule.enabled) {
                 int x = 0;
                 int y = 0;
                 int z = 0;
-                double dir = 0;
+                String sDir = "";
                 if (this.mc.thePlayer != null) {
                     x = MathHelper.floor_double(this.mc.thePlayer.posX);
                     y = MathHelper.floor_double(this.mc.thePlayer.posY);
                     z = MathHelper.floor_double(this.mc.thePlayer.posZ);
-                     dir = this.mc.thePlayer.rotationYaw;
+                    sDir = ValueUtil.rotationToDirection(this.mc.thePlayer.rotationYaw);
                 }
-                String[] coords = new String[]{"X:", String.valueOf(x), "Y:", String.valueOf(y), "Z:", String.valueOf(z)};
+                String[] coords = new String[]{"X:", String.valueOf(x), "Y:", String.valueOf(y), "Z:", String.valueOf(z), "D:", sDir};
                 int[] cordcolors = new int[]{
-                        ColorUtil.colorToDec(new Color(255, 128, 00)), ColorUtil.colorToDec(new Color(0, 255, 255)),
-                        ColorUtil.colorToDec(new Color(255, 128, 00)), ColorUtil.colorToDec(new Color(0, 255, 255)),
-                        ColorUtil.colorToDec(new Color(255, 128, 00)), ColorUtil.colorToDec(new Color(0, 255, 255)),};
+                        ColorUtil.colorToDec(new Color(255, 64, 64)),
+                        ColorUtil.colorToDec(new Color(255, 96, 96)),
+                        ColorUtil.colorToDec(new Color(128, 255, 0)),
+                        ColorUtil.colorToDec(new Color(128, 255, 32)),
+                        ColorUtil.colorToDec(new Color(0, 128, 255)),
+                        ColorUtil.colorToDec(new Color(32, 128, 255)),
+                        ColorUtil.colorToDec(new Color(255, 128, 0)),
+                        ColorUtil.colorToDec(new Color(255, 128, 64))};
                 RenderManager.drawCoordBoxRect(this.config.igModules.coordModule.posX, this.config.igModules.coordModule.posY, 54, coords, cordcolors);
             }
+
+
+            /*Break Module*/
             if (this.config.igModules.breakModule.enabled){
                 Item targetItem = this.implementation.getTargetBlockItem();
                 boolean isBed = targetItem != null && targetItem == Item.getItemById(355);
@@ -117,6 +136,7 @@ public class IngameRenderer extends Gui {
                     } else
                     if ((isBed && breakConfig.bed) || (isBeacon && breakConfig.beacon) || (isObsidian && breakConfig.obsidian) || RuntimeSettings.igModSlided) {
                         if (fPercentage != 0.0f || RuntimeSettings.igModSlided) {
+                            boolean test = RuntimeSettings.igModSlided;
                             RenderManager.drawInfoBoxSoloRect(breakConfig.posX, breakConfig.posY, width, sPercentage, true);
                         }
                     }
@@ -127,6 +147,9 @@ public class IngameRenderer extends Gui {
                     RenderManager.drawInfoBoxSoloRect(breakConfig.posX + 36, breakConfig.posY, 36, "Pearl", true);
                 }
             }
+
+
+            /*MLG Module*/
             if (this.config.igModules.mlgModule.enabled){
                 MLGModule mlgModule = this.config.igModules.mlgModule;
                 int mlgOption = this.mlgUtils.getOption();
@@ -157,10 +180,29 @@ public class IngameRenderer extends Gui {
                 String[] text = new String[]{mlgText, dmgString, distance + " ⇩"};
                 RenderManager.drawInfoBoxRect(mlgModule.posX, mlgModule.posY, 56, text, true, tcol);
 
-
-
             }
 
+
+            /*Coords Module*/
+            if (this.config.igModules.reachModule.enabled){
+                ReachModule reachModule = this.config.igModules.reachModule;
+                String ownText = "Hasn't attacked";
+                if (lastOwn + 2000L > System.currentTimeMillis()){
+                    ownText = String.format("%.2f", ownRange);
+                }
+                RenderManager.drawInfoBoxSoloRect(reachModule.posX, reachModule.posY, 80, ownText, true);
+            }
+
+        }
+    }
+
+    @SubscribeEvent
+    public void onAttack(AttackEntityEvent event) {
+        // Own Reach
+        if (this.mc.objectMouseOver != null && this.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY && this.mc.objectMouseOver.entityHit.getEntityId() == event.target.getEntityId()){
+            Vec3 vector = this.mc.getRenderViewEntity().getPositionEyes(1.0f);
+            ownRange = this.mc.objectMouseOver.hitVec.distanceTo(vector);
+            lastOwn = System.currentTimeMillis();
         }
     }
 

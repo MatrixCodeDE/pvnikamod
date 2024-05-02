@@ -1,6 +1,5 @@
 package de.matrix.pvnikamod.gui;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.modutils.VisualsUtils;
@@ -24,6 +23,7 @@ public class GuiVisuals extends GuiScreen {
     private GuiButton disableShift;
     private GuiButton pingOnTab;
     private GuiButton fullBright;
+    private GuiButton guiSize;
 
 
 
@@ -41,11 +41,12 @@ public class GuiVisuals extends GuiScreen {
         int i = -24;
         int j = 24;
 
-        buttonList.add(this.customMenu = new GuiButton(0, width / 2 - 60, height / 4 + j + i, 120, 20, I18n.format("menu.pvnika.general.name")));
-        buttonList.add(this.disableShift = new GuiButton(1, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.particles.name")));
-        buttonList.add(this.pingOnTab = new GuiButton(2, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, I18n.format("menu.pvnika.hitbox.name")));
-        buttonList.add(this.fullBright = new GuiButton(3, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.crosshair.name")));
-        buttonList.add(new GuiButton(10, width / 2 - 60, height / 4 + 5 * j + i, 120, 20, I18n.format("gui.back")));
+        buttonList.add(this.customMenu = new GuiButton(0, width / 2 - 60, height / 4 + j + i, 120, 20, I18n.format("menu.pvnika.visuals.customMenu")));
+        buttonList.add(this.disableShift = new GuiButton(1, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.disableShift")));
+        buttonList.add(this.pingOnTab = new GuiButton(2, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.pingOnTab")));
+        buttonList.add(this.fullBright = new GuiButton(3, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.fullBright")));
+        buttonList.add(this.guiSize = new GuiButton(4, width / 2 - 60, height / 4 + 5 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.guiSize")));
+        buttonList.add(new GuiButton(10, width / 2 - 60, height / 4 + 6 * j + i, 120, 20, I18n.format("gui.back")));
         refreshButtons();
     }
 

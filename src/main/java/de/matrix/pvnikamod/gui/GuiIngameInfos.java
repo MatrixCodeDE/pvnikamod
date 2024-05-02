@@ -1,10 +1,7 @@
 package de.matrix.pvnikamod.gui;
 
 import de.matrix.pvnikamod.config.Config;
-import de.matrix.pvnikamod.gui.modules.GuiBreak;
-import de.matrix.pvnikamod.gui.modules.GuiCoords;
-import de.matrix.pvnikamod.gui.modules.GuiFPS;
-import de.matrix.pvnikamod.gui.modules.GuiMLG;
+import de.matrix.pvnikamod.gui.modules.*;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.Minecraft;
@@ -24,6 +21,7 @@ public class GuiIngameInfos extends GuiScreen {
     private GuiButton coordButton;
     private GuiButton breakButton;
     private GuiButton mlgButton;
+    private GuiButton reachButton;
     private GuiScreen lastScreen;
 
     public GuiIngameInfos(GuiScreen lastScreen){
@@ -43,7 +41,8 @@ public class GuiIngameInfos extends GuiScreen {
         buttonList.add(this.coordButton = new GuiButton(1, width / 2 - 60, height / 4 + 1 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.coords.name")));
         buttonList.add(this.breakButton = new GuiButton(2, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.break.name")));
         buttonList.add(this.mlgButton = new GuiButton(3, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.mlg.name")));
-        buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 4 * j + i, 60, 20, I18n.format("gui.back")));
+        buttonList.add(this.reachButton = new GuiButton(4, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.reach.name")));
+        buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 5 * j + i, 60, 20, I18n.format("gui.back")));
     }
 
     @Override
@@ -69,6 +68,9 @@ public class GuiIngameInfos extends GuiScreen {
                 break;
             case 3:
                 this.mc.displayGuiScreen(new GuiMLG(this));
+                break;
+            case 4:
+                this.mc.displayGuiScreen(new GuiReach(this));
                 break;
             case 10:
                 this.mc.displayGuiScreen(lastScreen);

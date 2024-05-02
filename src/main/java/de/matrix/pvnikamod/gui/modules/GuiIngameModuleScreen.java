@@ -14,6 +14,8 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.client.config.GuiSlider;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.io.IOException;
 import java.sql.SQLOutput;
@@ -74,11 +76,11 @@ public abstract class GuiIngameModuleScreen extends GuiScreen {
     }
 
     public void actionPerformed(GuiButton button) throws IOException{
-        System.out.println(this.aModule.posX + " " + this.aModule.posY);
-        System.out.println(this.aModule.posX + RenderManager.translateXToConfig(2) + " " + (this.aModule.posY + RenderManager.translateYToConfig(2)));
+        //System.out.println(this.aModule.posX + " " + this.aModule.posY);
+        //System.out.println(this.aModule.posX + RenderManager.translateXToConfig(2) + " " + (this.aModule.posY + RenderManager.translateYToConfig(2)));
         int slX = RenderManager.translateXFromConfig(this.aModule.posX);
         int slY = RenderManager.translateYFromConfig(this.aModule.posY);
-        System.out.println("B: " + slX + " " + slY);
+        //System.out.println("B: " + slX + " " + slY);
         boolean update = false;
         switch (button.id){
             case 0:
@@ -114,22 +116,22 @@ public abstract class GuiIngameModuleScreen extends GuiScreen {
                 slY += 1;
                 break;
         }
-        System.out.println("A1: " + slX + " " + slY);
+        //System.out.println("A1: " + slX + " " + slY);
         slX = MathHelper.clamp_int(slX, 0, this.mc.displayWidth);
         slY = MathHelper.clamp_int(slY, 0, this.mc.displayHeight);
-        System.out.println("A2: " + slX + " " + slY);
+        //System.out.println("A2: " + slX + " " + slY);
         if (button.id >= 100 && button.id <= 103) {
             this.sliderX.setValue(slX);
         }
         if (button.id >= 110 && button.id <= 113) {
             this.sliderY.setValue(slY);
         }
-        System.out.println("A3: " + slX + " " + slY);
+        //System.out.println("A3: " + slX + " " + slY);
         this.sliderX.updateSlider();
         this.sliderY.updateSlider();
         this.aModule.posX = RenderManager.translateXToConfig(this.sliderX.getValueInt());
         this.aModule.posY = RenderManager.translateYToConfig(this.sliderY.getValueInt());
-        System.out.println("A4: " + slX + " " + slY + "\n");
+        //System.out.println("A4: " + slX + " " + slY + "\n");
         refreshButtons();
     }
 

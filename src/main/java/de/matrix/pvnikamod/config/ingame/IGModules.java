@@ -12,6 +12,7 @@ public class IGModules {
     public CoordModule coordModule;
     public BreakModule breakModule;
     public MLGModule mlgModule;
+    public ReachModule reachModule;
 
 
     public IGModules(File modulesFile){
@@ -20,52 +21,61 @@ public class IGModules {
         this.coordModule = new CoordModule();
         this.breakModule = new BreakModule();
         this.mlgModule = new MLGModule();
+        this.reachModule = new ReachModule();
     }
 
     public void loadModuleConfig(){
         this.moduleConfig.load();
 
-        this.loadDefaults(this.fpsModule, "fps");
+        this.loadDefaults(this.fpsModule);
 
-        this.loadDefaults(this.coordModule, "coordinates");
+        this.loadDefaults(this.coordModule);
 
-        this.loadDefaults(this.breakModule, "break");
+        this.loadDefaults(this.breakModule);
         this.breakModule.showDec = this.getBoolean(this.breakModule, "showDec");
         this.breakModule.bed = this.getBoolean(this.breakModule, "bed");
         this.breakModule.beacon = this.getBoolean(this.breakModule, "beacon");
         this.breakModule.obsidian = this.getBoolean(this.breakModule, "obsidian");
 
-        this.loadDefaults(this.mlgModule, "mlg");
+        this.loadDefaults(this.mlgModule);
         this.mlgModule.showDamage = this.getBoolean(this.mlgModule, "showDamage");
+
+        this.loadDefaults(this.reachModule);
+        this.reachModule.showOwn = this.getBoolean(this.reachModule, "own");
+        this.reachModule.showOther = this.getBoolean(this.reachModule, "other");
 
         this.moduleConfig.save();
     }
 
     public void saveModuleConfig(){
 
-        this.saveDefaults(this.fpsModule, "fps");
+        this.saveDefaults(this.fpsModule);
 
-        this.saveDefaults(this.coordModule, "coordinates");
+        this.saveDefaults(this.coordModule);
 
-        this.saveDefaults(this.breakModule, "break");
+        this.saveDefaults(this.breakModule);
         this.setBoolean(this.breakModule, "showDec", this.breakModule.showDec);
         this.setBoolean(this.breakModule, "bed", this.breakModule.bed);
         this.setBoolean(this.breakModule, "beacon", this.breakModule.beacon);
         this.setBoolean(this.breakModule, "obsidian", this.breakModule.obsidian);
 
-        this.saveDefaults(this.mlgModule, "mlg");
+        this.saveDefaults(this.mlgModule);
         this.setBoolean(this.mlgModule, "showDamage", this.mlgModule.showDamage);
+
+        this.saveDefaults(this.reachModule);
+        this.setBoolean(this.reachModule, "own", this.reachModule.showOwn);
+        this.setBoolean(this.reachModule, "other", this.reachModule.showOther);
 
         this.moduleConfig.save();
     }
 
-    public void loadDefaults(AModule module, String name){
+    public void loadDefaults(AModule module){
         module.enabled = this.getBoolean(module, "enabled");
         module.posX = this.getDouble(module, "posX");
         module.posY = this.getDouble(module, "posY");
     }
 
-    public void saveDefaults(AModule module, String name){
+    public void saveDefaults(AModule module){
         this.setBoolean(module, "enabled", module.enabled);
         this.setDouble(module, "posX", module.posX);
         this.setDouble(module, "posY", module.posY);

@@ -76,6 +76,8 @@ public class Config {
         this.visualsSettings.pingOnTab = this.config.get("visuals", "pingOnTab", false).getBoolean();
         this.visualsSettings.fullBright = this.config.get("visuals", "fullBright", false).getBoolean();
 
+        this.visualsSettings.guiSizeHotbar = this.config.get("guiSize", "hotbar", -1).getInt();
+
         this.config.save();
     }
 

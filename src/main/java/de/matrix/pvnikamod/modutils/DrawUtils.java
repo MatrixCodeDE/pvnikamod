@@ -62,6 +62,43 @@ public class DrawUtils extends Gui {
         GL11.glPopMatrix();
     }
 
+    /*
+     *  x:      Pos x
+     *  y:      Pos y
+     *  sx:     Size x
+     *  sy:     Size y
+     *  tsx:    Texture Size x
+     *  tsy:    Texture Size y
+     *  offx:   Offset x
+     *  offy:   Offset y
+     *  osx:    Size x of Rendered Texture
+     *  osy:    Size y of Rendered Texture
+     */
+    public void drawPartedTexture(double x, double y, double sx, double sy, int tsx, int tsy, int offx, int offy, int osx, int osy){
+        GL11.glPushMatrix();
+        double scx = 1.0d; //fix glScaled x -> ( x / ( scx * sx ) )
+        double scy = 1.0d; //fix glScaled y -> ( y / ( scy * sy ) )
+        if (tsx < tsy){
+            scx *= (double) tsx / (double) tsy;
+        } else {
+            scy *= (double) tsy / (double) tsx;
+        }
+        double skx = sx * scx;
+        double sky = sy * scy;
+        int maxx = (int) ((double) osx / (double) tsx * 256.0);
+        int maxy = (int) ((double) osy / (double) tsy * 256.0);
+        int fox = (int) ((double) offx / (double) tsx * 256.0);
+        int foy = (int) ((double) offy / (double) tsy * 256.0);
+        GL11.glScaled(skx, sky, 0.0d);
+        GlStateManager.enableBlend();
+        GlStateManager.enableAlpha();
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        super.drawTexturedModalRect((float) (x/(scx * sx)), (float) (y/(scy * sy)), fox, foy, maxx, maxy);
+        GlStateManager.disableAlpha();
+        GlStateManager.disableBlend();
+        GL11.glPopMatrix();
+    }
+
     void drawTexturedModalRect(double left, double top, double right, double bottom)
     {
         double d0 = 0.0D;

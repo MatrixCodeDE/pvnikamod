@@ -5,8 +5,10 @@ import com.mojang.authlib.GameProfile;
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.utils.ColorUtil;
+import de.matrix.pvnikamod.utils.Pinger;
 import de.matrix.pvnikamod.utils.PlayerComparator;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.GuiPlayerTabOverlay;
@@ -30,6 +32,7 @@ import net.minecraft.scoreboard.IScoreObjectiveCriteria;
 import java.awt.*;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 public class TabList extends GuiPlayerTabOverlay {
 
@@ -76,8 +79,8 @@ public class TabList extends GuiPlayerTabOverlay {
         while(iterator.hasNext()) {
             NetworkPlayerInfo networkPlayerInfo = (NetworkPlayerInfo)iterator.next();
             columns = this.mc.fontRendererObj.getStringWidth(this.getPlayerName(networkPlayerInfo));
-            if (PvnikaMod.getInstance().getConfig().generalSettings.pingOnTab){
-                pingSize = this.mc.fontRendererObj.getStringWidth(String.valueOf(networkPlayerInfo.getResponseTime()));
+            if (PvnikaMod.getInstance().getConfig().visualsSettings.pingOnTab){
+                pingSize = this.mc.fontRendererObj.getStringWidth(String.valueOf(this.mod.pinger.getPlayerPing(networkPlayerInfo)));
                 maxPing = Math.max(maxPing, pingSize);
             }
             i = Math.max(i, columns);
@@ -216,7 +219,8 @@ public class TabList extends GuiPlayerTabOverlay {
         int l = 0;
         byte m;
         int pingColor;
-        int ping = networkPlayerInfoIn.getResponseTime();
+        int ping = this.mod.pinger.getPlayerPing(networkPlayerInfoIn);
+
         String pingStr = ping + "ms";
         int strWidth = this.mc.fontRendererObj.getStringWidth(pingStr);
         if (ping < 0) {
@@ -233,7 +237,9 @@ public class TabList extends GuiPlayerTabOverlay {
             m = 4;
         }
 
-        if (ping < 50){
+        if (ping < 1){
+            pingColor = ColorUtil.colorToDec(new Color(10, 235, 255));
+        } else if (ping < 50){
             // 0-49
             pingColor = ColorUtil.colorToDec(new Color(0, 255, 0));
         } else if (ping < 100) {

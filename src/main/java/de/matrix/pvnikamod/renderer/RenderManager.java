@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -257,35 +258,31 @@ public interface RenderManager {
     static void drawCoordBoxRect(double x, double y, int width, String[] text, int[] colors){
         Minecraft mc = Minecraft.getMinecraft();
         int[] positions = translateScreenPercentage(x, y);
-        int height = (text.length / 2) * 10 + 1 ;
+        int height = 3 * 10 + 1 ;
 
-        int i = 0;
-        int j = 0;
-        int k = 0;
-        boolean flag = false;
-        for (int l=0; l<text.length; l++){
+        int longest = 0;
+        for (int l=1; l<6; l+=2){
             String bare = text[l].replace("-","");
             int barelen = mc.fontRendererObj.getStringWidth(bare);
-            if (l % 2 == 1 && j < barelen){
-                k = l;
-                j = barelen;
-            }
-            flag = text[l].contains("-") || flag;
+            if (barelen > longest)
+                longest = barelen;
         }
-        int w2 = 20 + j;
-        if (flag){
-            w2 += 6;
-        }
-        drawRectangle(positions[0], positions[1], w2, height, ColorUtil.colorToDec(new Color(44, 44, 44)), 128);
-        for (String s : text) {
-            String s2 = s.replace("-", "");
+        int minshift = 3; // minimum number shift
+        int cOff = Math.max(minshift * 6, longest) + 24;
+
+        int wd = positions[0] + cOff + 22 + 14;
+
+        drawRectangle(positions[0], positions[1], wd, height, ColorUtil.colorToDec(new Color(44, 44, 44)), 128);
+        for (int i = 0; i < 6; i++) {
+            if (i > 5)
+                break;
             int strx = 0;
             if (i % 2 == 1){
-                int dif = 0;
-                if (s.contains("-")){
-                    dif = -6;
+                int dif = 20;
+                if (text[i].contains("-")){
+                    dif -= 6;
                 }
-                strx = (positions[0] + w2) - j + dif - 2;
+                strx = positions[0] + dif;
 
             } else {
                 strx = positions[0] + 2;
@@ -297,9 +294,41 @@ public interface RenderManager {
             } catch (ArrayIndexOutOfBoundsException e){
                 col = 16777215;
             }
-            mc.fontRendererObj.drawStringWithShadow(s, strx, stry, col);
-            i++;
+            mc.fontRendererObj.drawStringWithShadow(text[i], strx, stry, col);
         }
+        int[] compos = {0, 0};
+        switch (text[7]){
+            case "NW":
+                compos = new int[] {0, 12};
+                break;
+            case "W":
+                compos = new int[] {0, 24};
+                break;
+            case "SW":
+                compos = new int[] {0, 36};
+                break;
+            case "S":
+                compos = new int[] {15, 0};
+                break;
+            case "SE":
+                compos = new int[] {15, 12};
+                break;
+            case "E":
+                compos = new int[] {15, 24};
+                break;
+            case "NE":
+                compos = new int[] {15, 36};
+                break;
+            default:
+                compos = new int[] {0, 0};
+                break;
+        }
+        ResourceLocation comp = new ResourceLocation(PvnikaMod.MODID,"images/compass.png");
+        DrawUtils drawUtils = new DrawUtils();
+        mc.getTextureManager().bindTexture(comp);
+        drawUtils.drawPartedTexture(positions[0] + cOff, positions[1] + 12, 0.125, 0.125, 30, 48, compos[0], compos[1], 15, 12);
+        mc.fontRendererObj.drawStringWithShadow(text[6], positions[0] + cOff + 12, positions[1] + 12, colors[6]);
+        mc.fontRendererObj.drawStringWithShadow(text[7], positions[0] + cOff + 12 + 22 - mc.fontRendererObj.getStringWidth(text[7]), positions[1] + 12, colors[7]);
     }
 
     static void drawInfoBoxSoloRect(double x, double y, int width, String text, boolean centered){

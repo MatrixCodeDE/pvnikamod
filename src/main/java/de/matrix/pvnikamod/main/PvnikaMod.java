@@ -6,6 +6,7 @@ import de.matrix.pvnikamod.listener.*;
 import de.matrix.pvnikamod.renderer.HitboxRenderer;
 import de.matrix.pvnikamod.modutils.ZoomUtils;
 import de.matrix.pvnikamod.renderer.IngameRenderer;
+import de.matrix.pvnikamod.utils.Pinger;
 import de.matrix.pvnikamod.utils.ValueUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -52,11 +53,13 @@ public class PvnikaMod {
     public Implementation implementation;
     public HitboxRenderer hitboxRenderer;
     public IngameRenderer ingameRenderer;
+    public Pinger pinger;
 
     public static KeyBinding openPvnikaGui = new KeyBinding("Open Pvnika GUI", 54, "Pvnika Mod");
     public static KeyBinding zoomKey = new KeyBinding("Zoom", 16, "Pvnika Mod");
     public static final ResourceLocation pvnikaLogo = new ResourceLocation(PvnikaMod.MODID,"images/logo.png");
     public static final ResourceLocation pvnikaHeader = new ResourceLocation(PvnikaMod.MODID,"images/header.png");
+
 
 
     @EventHandler
@@ -86,6 +89,7 @@ public class PvnikaMod {
         ClientRegistry.registerKeyBinding(zoomKey);
         this.zoomUtils = new ZoomUtils();
         this.hitboxRenderer = new HitboxRenderer();
+        this.pinger = new Pinger();
         sendLog("Successfully loaded Mods");
         sendLog("Loading mixins");
     }
@@ -108,7 +112,6 @@ public class PvnikaMod {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event){
-        //this.mc.fontRendererObj.getStringWidth(" ");
     }
 
 
