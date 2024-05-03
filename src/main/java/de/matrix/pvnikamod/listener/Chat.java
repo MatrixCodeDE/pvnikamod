@@ -65,12 +65,26 @@ public class Chat {
     public void waiter(){
         if(delay <= 0 && delay != -1){
             delay = -1;
-            PvnikaMod.sendLog("Pvnika GG: "+win);
-            if (win){
-                sendMessage("gg");
-                sendMessage("Du hast verloren +");
-            } else {
-                sendMessage("L");
+            String[] texts = this.config.chatSettings.texts;
+            int[] modes = this.config.chatSettings.modes;
+            for (int cnt = 0; cnt < texts.length; cnt++) {
+                switch (modes[cnt]){
+                    case 0: // Off
+                        break;
+                    case 1: // Always
+                        sendMessage(texts[cnt]);
+                        break;
+                    case 2: // Win
+                        if (win){
+                            sendMessage(texts[cnt]);
+                        }
+                        break;
+                    case 3: // Lose
+                        if (!win){
+                            sendMessage(texts[cnt]);
+                        }
+                        break;
+                }
             }
             win = false;
             end = false;
@@ -81,7 +95,7 @@ public class Chat {
     }
 
     public void sendMessage(String message){
-        if(message != null && message != "")
+        if(message != null && !message.isEmpty())
             this.mc.thePlayer.sendChatMessage(message);
     }
 

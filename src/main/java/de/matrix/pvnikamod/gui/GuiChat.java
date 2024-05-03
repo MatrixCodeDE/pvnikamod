@@ -1,11 +1,13 @@
 package de.matrix.pvnikamod.gui;
 
 import de.matrix.pvnikamod.modutils.ChatUtils;
+import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class GuiChat extends GuiBase {
@@ -35,8 +37,10 @@ public class GuiChat extends GuiBase {
     public void refresh() {
         for (int cnt = 0; cnt < texts.length; cnt++) {
             String text = this.config.chatSettings.texts[cnt];
+            int mode = this.config.chatSettings.modes[cnt];
+            this.modes[cnt].displayString = chatUtils.translateMode[mode];
             this.texts[cnt].setText(this.config.chatSettings.texts[cnt]);
-            this.modes[cnt].displayString = chatUtils.translateMode[this.config.chatSettings.modes[cnt]];
+            this.texts[cnt].setEnabled(mode != 0);
         }
         super.refresh();
     }
@@ -47,6 +51,7 @@ public class GuiChat extends GuiBase {
         for (GuiTextField tF : texts) {
             tF.drawTextBox();
         }
+        this.drawCenteredString(fontRendererObj, I18n.format("menu.pvnika.autochat.name"), width / 2, 40, ColorUtil.colorToDec(new Color(0, 160, 0)));
     }
 
     @Override

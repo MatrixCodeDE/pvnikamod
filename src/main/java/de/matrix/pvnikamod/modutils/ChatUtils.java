@@ -12,10 +12,10 @@ public class ChatUtils extends ModUtil{
     }
 
     public final String[] translateMode = {
-            I18n.format("menu.pvnika.chat.off"),
-            I18n.format("menu.pvnika.chat.always"),
-            I18n.format("menu.pvnika.chat.win"),
-            I18n.format("menu.pvnika.chat.lose")
+            "§c" + I18n.format("menu.pvnika.autochat.off"),
+            "§a" + I18n.format("menu.pvnika.autochat.always"),
+            "§6" + I18n.format("menu.pvnika.autochat.win"),
+            "§e" + I18n.format("menu.pvnika.autochat.lose")
     };
 
     public void toggleMode(int key){

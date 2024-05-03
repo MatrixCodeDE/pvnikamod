@@ -43,11 +43,11 @@ menu.pvnika.movement.toggleSprint=Toggle Sprint
 menu.pvnika.iginfos.name=Ingame Infos
 menu.pvnika.iginfos.coordinates.name=Coordinates
 
-menu.pvnika.chat.name=Chat
-menu.pvnika.chat.off=Off
-menu.pvnika.chat.always=Always
-menu.pvnika.chat.win=Win
-menu.pvnika.chat.lose=Lose
+menu.pvnika.autochat.name=AutoChat
+menu.pvnika.autochat.off=Off
+menu.pvnika.autochat.always=Always
+menu.pvnika.autochat.win=Win
+menu.pvnika.autochat.lose=Lose
 
 menu.pvnika.all.custom=Custom
 menu.pvnika.all.enabled=Enabled
