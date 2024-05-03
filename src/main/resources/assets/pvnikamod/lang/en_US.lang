@@ -45,7 +45,10 @@ menu.pvnika.iginfos.fps.name=FPS
 menu.pvnika.iginfos.coordinates.name=Coordinates
 
 menu.pvnika.chat.name=Chat
-menu.pvnika.chat.placeholder=-
+menu.pvnika.chat.off=Off
+menu.pvnika.chat.always=Always
+menu.pvnika.chat.win=Win
+menu.pvnika.chat.lose=Lose
 
 menu.pvnika.all.custom=Custom
 menu.pvnika.all.enabled=Enabled
