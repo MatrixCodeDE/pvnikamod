@@ -50,7 +50,7 @@ public abstract class GuiBase extends GuiScreen {
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
-    public void refreshButtons() {
+    public void refresh() {
 
     }
 

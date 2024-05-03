@@ -15,6 +15,7 @@ public class Config {
     public ZoomSettings zoomSettings;
     public MovementSettings movementSettings;
     public VisualsSettings visualsSettings;
+    public ChatSettings chatSettings;
     public IGModules igModules;
 
     public Configuration config;
@@ -29,6 +30,7 @@ public class Config {
         this.zoomSettings = new ZoomSettings();
         this.movementSettings = new MovementSettings();
         this.visualsSettings = new VisualsSettings();
+        this.chatSettings = new ChatSettings();
     }
 
     public void loadConfig() {
@@ -78,6 +80,9 @@ public class Config {
 
         this.visualsSettings.guiSizeHotbar = this.config.get("guiSize", "hotbar", -1).getInt();
 
+        this.chatSettings.texts = this.config.get("chat", "texts", new String[] {"", "", "", "", ""}).getStringList();
+        this.chatSettings.modes = this.config.get("chat", "modes", new int[] {0, 0, 0, 0, 0}).getIntList();
+
         this.config.save();
     }
 
@@ -123,6 +128,9 @@ public class Config {
         this.config.get("visuals", "disableShift", false).set(this.visualsSettings.disableShift);
         this.config.get("visuals", "pingOnTab", false).set(this.visualsSettings.pingOnTab);
         this.config.get("visuals", "fullBright", false).set(this.visualsSettings.fullBright);
+
+        this.config.get("chat", "texts", new String[] {"", "", "", "", ""}).set(this.chatSettings.texts);
+        this.config.get("chat", "modes", new int[] {0, 0, 0, 0, 0}).set(this.chatSettings.modes);
 
         this.config.save();
     }

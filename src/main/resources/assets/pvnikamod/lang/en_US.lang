@@ -41,7 +41,6 @@ menu.pvnika.movement.toggleSneak=Toggle Sneak
 menu.pvnika.movement.toggleSprint=Toggle Sprint
 
 menu.pvnika.iginfos.name=Ingame Infos
-menu.pvnika.iginfos.fps.name=FPS
 menu.pvnika.iginfos.coordinates.name=Coordinates
 
 menu.pvnika.chat.name=Chat
@@ -82,6 +81,7 @@ menu.pvnika.visuals.pingOnTab=Ping on Tab
 menu.pvnika.visuals.fullBright=Full Bright
 menu.pvnika.visuals.guiSize=Gui Size
 
+menu.pvnika.all.activated=Activated
 menu.pvnika.all.posx=Position X
 menu.pvnika.all.posy=Position Y
 
