@@ -79,7 +79,7 @@ public class TabList extends GuiPlayerTabOverlay {
         while(iterator.hasNext()) {
             NetworkPlayerInfo networkPlayerInfo = (NetworkPlayerInfo)iterator.next();
             columns = this.mc.fontRendererObj.getStringWidth(this.getPlayerName(networkPlayerInfo));
-            if (PvnikaMod.getInstance().getConfig().visualsSettings.pingOnTab){
+            if (PvnikaMod.getInstance().getConfig().generalSettings.pingOnTab){
                 pingSize = this.mc.fontRendererObj.getStringWidth(String.valueOf(this.mod.pinger.getPlayerPing(networkPlayerInfo)));
                 maxPing = Math.max(maxPing, pingSize);
             }

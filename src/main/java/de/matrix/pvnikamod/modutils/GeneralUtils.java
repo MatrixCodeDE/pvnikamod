@@ -44,10 +44,4 @@ public class GeneralUtils {
         boolean confirmDisconnect = this.config.generalSettings.confirmDisconnect;
         this.config.generalSettings.confirmDisconnect = !confirmDisconnect;
     }
-
-    public void toggleFullBright(){
-        boolean fullBright = this.config.generalSettings.fullBright;
-        this.config.generalSettings.fullBright = !fullBright;
-        MiscRenderer.toggleFullBright();
-    }
 }

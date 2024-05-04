@@ -17,7 +17,7 @@ public abstract class MixinGuiIngameMenu extends GuiScreen {
      */
     @Inject( method = "initGui()V", at = @At( "HEAD" ), cancellable = true )
     public void initGui(CallbackInfo ci) {
-        if (PvnikaMod.getInstance().getConfig().visualsSettings.customMenu){
+        if (PvnikaMod.getInstance().getConfig().generalSettings.customMenu){
             this.mc.displayGuiScreen(new GuiCustomIngameMenu(null));
             ci.cancel();
         }

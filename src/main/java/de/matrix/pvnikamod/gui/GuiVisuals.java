@@ -19,9 +19,7 @@ public class GuiVisuals extends GuiScreen {
     private final Minecraft mc;
     private final GuiScreen lastScreen;
 
-    private GuiButton customMenu;
     private GuiButton disableShift;
-    private GuiButton pingOnTab;
     private GuiButton fullBright;
     private GuiButton guiSize;
 
@@ -41,19 +39,15 @@ public class GuiVisuals extends GuiScreen {
         int i = -24;
         int j = 24;
 
-        buttonList.add(this.customMenu = new GuiButton(0, width / 2 - 60, height / 4 + j + i, 120, 20, I18n.format("menu.pvnika.visuals.customMenu")));
-        buttonList.add(this.disableShift = new GuiButton(1, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.disableShift")));
-        buttonList.add(this.pingOnTab = new GuiButton(2, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.pingOnTab")));
-        buttonList.add(this.fullBright = new GuiButton(3, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.fullBright")));
-        buttonList.add(this.guiSize = new GuiButton(4, width / 2 - 60, height / 4 + 5 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.guiSize")));
+        buttonList.add(this.disableShift = new GuiButton(0, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.disableShift")));
+        buttonList.add(this.fullBright = new GuiButton(1, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.fullBright")));
+        buttonList.add(this.guiSize = new GuiButton(2, width / 2 - 60, height / 4 + 5 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.guiSize")));
         buttonList.add(new GuiButton(10, width / 2 - 60, height / 4 + 6 * j + i, 120, 20, I18n.format("gui.back")));
         refreshButtons();
     }
 
     public void refreshButtons(){
-        this.customMenu.displayString = BooleanColor.boolColor(this.config.visualsSettings.customMenu, I18n.format("menu.pvnika.visuals.customMenu"));
         this.disableShift.displayString = BooleanColor.boolColor(this.config.visualsSettings.disableShift, I18n.format("menu.pvnika.visuals.disableShift"));
-        this.pingOnTab.displayString = BooleanColor.boolColor(this.config.visualsSettings.pingOnTab, I18n.format("menu.pvnika.visuals.pingOnTab"));
         this.fullBright.displayString = BooleanColor.boolColor(this.config.visualsSettings.fullBright, I18n.format("menu.pvnika.visuals.fullBright"));
     }
 
@@ -70,15 +64,9 @@ public class GuiVisuals extends GuiScreen {
     public void actionPerformed(GuiButton button) throws IOException{
         switch (button.id){
             case 0:
-                VisualsUtils.toggleCustomMenu();
-                break;
-            case 1:
                 VisualsUtils.toggleDisableShift();
                 break;
-            case 2:
-                VisualsUtils.togglePingOnTab();
-                break;
-            case 3:
+            case 1:
                 VisualsUtils.toggleFullBright();
                 break;
             case 10:
