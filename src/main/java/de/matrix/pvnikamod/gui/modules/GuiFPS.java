@@ -1,13 +1,9 @@
 package de.matrix.pvnikamod.gui.modules;
 
-import de.matrix.pvnikamod.gui.modules.GuiIngameModuleScreen;
 import de.matrix.pvnikamod.main.PvnikaMod;
-import de.matrix.pvnikamod.modutils.IngameInfosUtils;
-import de.matrix.pvnikamod.renderer.RenderManager;
 import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 
 import java.io.IOException;

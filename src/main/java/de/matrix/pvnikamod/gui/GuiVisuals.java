@@ -39,10 +39,10 @@ public class GuiVisuals extends GuiScreen {
         int i = -24;
         int j = 24;
 
-        buttonList.add(this.disableShift = new GuiButton(0, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.disableShift")));
-        buttonList.add(this.fullBright = new GuiButton(1, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.fullBright")));
-        buttonList.add(this.guiSize = new GuiButton(2, width / 2 - 60, height / 4 + 5 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.guiSize")));
-        buttonList.add(new GuiButton(10, width / 2 - 60, height / 4 + 6 * j + i, 120, 20, I18n.format("gui.back")));
+        buttonList.add(this.disableShift = new GuiButton(0, width / 2 - 60, height / 4 + 1 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.disableShift")));
+        buttonList.add(this.fullBright = new GuiButton(1, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.fullBright")));
+        buttonList.add(this.guiSize = new GuiButton(2, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, I18n.format("menu.pvnika.visuals.guiSize")));
+        buttonList.add(new GuiButton(10, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("gui.back")));
         refreshButtons();
     }
 

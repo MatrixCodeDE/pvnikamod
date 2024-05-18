@@ -2,6 +2,7 @@ package de.matrix.pvnikamod.renderer;
 
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
+import de.matrix.pvnikamod.utils.IngameUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -32,12 +33,34 @@ public class HitboxRenderer {
     private Entity entity;
     private int renderGroup;
     private boolean storeDebugBoundingBox;
+    public Entity primaryTarget;
 
     public HitboxRenderer() {
         this.mod = PvnikaMod.getInstance();
         this.config = this.mod.getConfig();
         this.mc = Minecraft.getMinecraft();
         this.renderManager = this.mc.getRenderManager();
+        this.resetPrimaryTarget();
+    }
+
+    public void assignPrimaryTarget(){
+        Entity target = IngameUtils.getRTLock();
+        setPrimaryTarget(target);
+        System.out.println(target);
+    }
+
+    public void setPrimaryTarget(Entity entity){
+        this.primaryTarget = entity;
+    }
+
+    public void resetPrimaryTarget(){
+        this.primaryTarget = null;
+    }
+
+    public void checkForPrimaryTarget(){
+        boolean exists = IngameUtils.isEntityExisting(primaryTarget);
+        if (!exists)
+            this.primaryTarget = null;
     }
 
     public void renderHitboxes(Entity entity, double x, double y, double z)
@@ -45,7 +68,16 @@ public class HitboxRenderer {
         if (this.renderManager == null){
             this.renderManager = this.mc.getRenderManager();
         }
-        if (entity != null && !entity.isInvisible() && this.renderManager != null){
+        if (entity == null)
+            return;
+        if (primaryTarget != null && !entity.isInvisible()){
+            checkForPrimaryTarget();
+            if (entity == primaryTarget){
+                this.renderBoundingBox(entity, x, y, z, 255, 0, 0, 255, 5.0f);
+            }
+            return;
+        }
+        if (!entity.isInvisible() && this.renderManager != null){
             this.storeDebugBoundingBox = this.renderManager.isDebugBoundingBox();
             this.renderManager.setDebugBoundingBox(false);
             if (!this.config.hitboxSettings.advanced) {
@@ -54,7 +86,7 @@ public class HitboxRenderer {
             if (entity instanceof EntityPlayer){
                 renderGroup = 1;
             } else
-            if (entity instanceof EntityAnimal || entity instanceof EntityAmbientCreature || entity instanceof EntityAgeable){
+            if (entity instanceof EntityAmbientCreature || entity instanceof EntityAgeable){
                 renderGroup = 2;
             } else
             if (entity instanceof EntityMob){
@@ -63,10 +95,10 @@ public class HitboxRenderer {
             if (entity instanceof EntityItem){
                 renderGroup = 4;
             } else
-            if (entity instanceof EntityArrow || entity instanceof EntityThrowable || entity instanceof EntityFireball || entity instanceof EntityFishHook || entity instanceof EntityFireball || entity instanceof EntityArrow || entity instanceof EntityEnderEye || entity instanceof EntityFireworkRocket){
+            if (entity instanceof EntityThrowable || entity instanceof EntityFishHook || entity instanceof EntityFireball || entity instanceof EntityArrow || entity instanceof EntityEnderEye || entity instanceof EntityFireworkRocket){
                 renderGroup = 5;
             } else
-            if (!(entity instanceof EntityPainting || entity instanceof EntityHanging)){
+            if (!(entity instanceof EntityHanging)){
                 renderGroup = 6;
             } else {
                 this.renderManager.setDebugBoundingBox(storeDebugBoundingBox);
@@ -91,7 +123,11 @@ public class HitboxRenderer {
         return color;
     }
 
-    private void renderBoundingBox(Entity entity, double x, double y, double z, int red, int green, int blue, int alpha) {
+    private void renderBoundingBox(Entity entity, double x, double y, double z, int red, int green, int blue, int alpha){
+        this.renderBoundingBox(entity, x, y, z, red, green, blue, alpha, 1.0f);
+    }
+
+    private void renderBoundingBox(Entity entity, double x, double y, double z, int red, int green, int blue, int alpha, float size) {
         GlStateManager.pushMatrix();
         GlStateManager.depthMask(false);
         GlStateManager.disableTexture2D();
@@ -103,10 +139,7 @@ public class HitboxRenderer {
         double width = boundingBox.maxX - boundingBox.minX;
         double height = boundingBox.maxY - boundingBox.minY;
         double length = boundingBox.maxZ - boundingBox.minZ;
-        //System.out.println(boundingBox.minX + " " + boundingBox.minY + " " + boundingBox.minZ);
-        //System.out.println(boundingBox.maxX + " " + boundingBox.maxY + " " + boundingBox.maxZ);
-        //this.drawOutlinedBoundingBox((new AxisAlignedBB(x, y, z, x + width, y + height, z + length)).offset(-width / 2.0, 0.0, -length / 2.0), red, green, blue, alpha);
-        RenderGlobal.drawOutlinedBoundingBox((new AxisAlignedBB(x, y, z, x + width, y + height, z + length)).offset(-width / 2.0, 0.0, -length / 2.0), red, green, blue, alpha);
+        this.drawOutlinedBoundingBox((new AxisAlignedBB(x, y, z, x + width, y + height, z + length)).offset(-width / 2.0, 0.0, -length / 2.0), red, green, blue, alpha, size);
         GlStateManager.disableBlend();
         GlStateManager.enableCull();
         GlStateManager.enableLighting();
@@ -115,11 +148,17 @@ public class HitboxRenderer {
         GlStateManager.popMatrix();
     }
 
-    private void drawOutlinedBoundingBox(AxisAlignedBB axisalign, int red, int green, int blue, int alpha)
+
+    private void drawOutlinedBoundingBox(AxisAlignedBB axisalign, int red, int green, int blue, int alpha){
+        this.drawOutlinedBoundingBox(axisalign, red, green, blue, alpha, 1.0f);
+    }
+
+    private void drawOutlinedBoundingBox(AxisAlignedBB axisalign, int red, int green, int blue, int alpha, float width)
     {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(3, DefaultVertexFormats.POSITION_COLOR);
+        GL11.glLineWidth(width);
         worldrenderer.pos(axisalign.minX, axisalign.minY, axisalign.minZ).color(red, green, blue, alpha).endVertex();
         worldrenderer.pos(axisalign.maxX, axisalign.minY, axisalign.minZ).color(red, green, blue, alpha).endVertex();
         worldrenderer.pos(axisalign.maxX, axisalign.minY, axisalign.maxZ).color(red, green, blue, alpha).endVertex();
@@ -143,6 +182,7 @@ public class HitboxRenderer {
         worldrenderer.pos(axisalign.minX, axisalign.minY, axisalign.maxZ).color(red, green, blue, alpha).endVertex();
         worldrenderer.pos(axisalign.minX, axisalign.maxY, axisalign.maxZ).color(red, green, blue, alpha).endVertex();
         tessellator.draw();
+        GL11.glLineWidth(1.0f);
     }
 
 }

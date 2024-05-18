@@ -68,7 +68,7 @@ public class IngameRenderer extends Gui {
             /*FPS Module*/
             if (this.config.igModules.fpsModule.enabled) {
                 String counter = I18n.format("menu.pvnika.iginfos.fps.name") + ": " + Minecraft.getDebugFPS();
-                RenderManager.drawInfoBoxSoloRect(this.config.igModules.fpsModule.posX, this.config.igModules.fpsModule.posY, 54, counter, true);
+                CustomRenderManager.drawInfoBoxSoloRect(this.config.igModules.fpsModule.posX, this.config.igModules.fpsModule.posY, 54, counter, true);
             }
 
 
@@ -94,7 +94,7 @@ public class IngameRenderer extends Gui {
                         ColorUtil.colorToDec(new Color(32, 128, 255)),
                         ColorUtil.colorToDec(new Color(255, 128, 0)),
                         ColorUtil.colorToDec(new Color(255, 128, 64))};
-                RenderManager.drawCoordBoxRect(this.config.igModules.coordModule.posX, this.config.igModules.coordModule.posY, 54, coords, cordcolors);
+                CustomRenderManager.drawCoordBoxRect(this.config.igModules.coordModule.posX, this.config.igModules.coordModule.posY, 54, coords, cordcolors);
             }
 
 
@@ -132,19 +132,19 @@ public class IngameRenderer extends Gui {
                         if (this.config.igModules.breakModule.showDec) {
                             sPercentage = "100.00%";
                         }
-                        RenderManager.drawInfoBoxSoloRect(breakConfig.posX, breakConfig.posY, width, sPercentage, true);
+                        CustomRenderManager.drawInfoBoxSoloRect(breakConfig.posX, breakConfig.posY, width, sPercentage, true);
                     } else
                     if ((isBed && breakConfig.bed) || (isBeacon && breakConfig.beacon) || (isObsidian && breakConfig.obsidian) || RuntimeSettings.igModSlided) {
                         if (fPercentage != 0.0f || RuntimeSettings.igModSlided) {
                             boolean test = RuntimeSettings.igModSlided;
-                            RenderManager.drawInfoBoxSoloRect(breakConfig.posX, breakConfig.posY, width, sPercentage, true);
+                            CustomRenderManager.drawInfoBoxSoloRect(breakConfig.posX, breakConfig.posY, width, sPercentage, true);
                         }
                     }
                 } else {
-                    RenderManager.drawInfoBoxSoloRect(breakConfig.posX, breakConfig.posY, width, sPercentage, true);
+                    CustomRenderManager.drawInfoBoxSoloRect(breakConfig.posX, breakConfig.posY, width, sPercentage, true);
                 }
                 if (RuntimeSettings.renderEnderPearl){
-                    RenderManager.drawInfoBoxSoloRect(breakConfig.posX + 36, breakConfig.posY, 36, "Pearl", true);
+                    CustomRenderManager.drawInfoBoxSoloRect(breakConfig.posX + 36, breakConfig.posY, 36, "Pearl", true);
                 }
             }
 
@@ -178,7 +178,7 @@ public class IngameRenderer extends Gui {
                     dmgString = I18n.format("menu.pvnika.iginfos.mlg.dead");
                 }
                 String[] text = new String[]{mlgText, dmgString, distance + " ⇩"};
-                RenderManager.drawInfoBoxRect(mlgModule.posX, mlgModule.posY, 56, text, true, tcol);
+                CustomRenderManager.drawInfoBoxRect(mlgModule.posX, mlgModule.posY, 56, text, true, tcol);
 
             }
 
@@ -190,7 +190,7 @@ public class IngameRenderer extends Gui {
                 if (lastOwn + 2000L > System.currentTimeMillis()){
                     ownText = String.format("%.2f", ownRange);
                 }
-                RenderManager.drawInfoBoxSoloRect(reachModule.posX, reachModule.posY, 80, ownText, true);
+                CustomRenderManager.drawInfoBoxSoloRect(reachModule.posX, reachModule.posY, 80, ownText, true);
             }
 
         }

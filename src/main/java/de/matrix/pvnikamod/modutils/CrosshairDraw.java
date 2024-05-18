@@ -2,7 +2,7 @@ package de.matrix.pvnikamod.modutils;
 
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
-import de.matrix.pvnikamod.renderer.RenderManager;
+import de.matrix.pvnikamod.renderer.CustomRenderManager;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
@@ -41,10 +41,10 @@ public class CrosshairDraw {
         int screenHeight = (int) y - 1;
         int i = thickness / 2;
 
-        RenderManager.displayFilledRectangle(screenWidth, screenHeight - 2, screenWidth + 1 , screenHeight - 5, color);
-        RenderManager.displayFilledRectangle(screenWidth + 3, screenHeight, screenWidth + 6, screenHeight + 1, color);
-        RenderManager.displayFilledRectangle(screenWidth, screenHeight + 3, screenWidth + 1, screenHeight + 6, color);
-        RenderManager.displayFilledRectangle(screenWidth - 2, screenHeight, screenWidth - 5, screenHeight + 1, color);
+        CustomRenderManager.displayFilledRectangle(screenWidth, screenHeight - 2, screenWidth + 1 , screenHeight - 5, color);
+        CustomRenderManager.displayFilledRectangle(screenWidth + 3, screenHeight, screenWidth + 6, screenHeight + 1, color);
+        CustomRenderManager.displayFilledRectangle(screenWidth, screenHeight + 3, screenWidth + 1, screenHeight + 6, color);
+        CustomRenderManager.displayFilledRectangle(screenWidth - 2, screenHeight, screenWidth - 5, screenHeight + 1, color);
         GL11.glLineWidth(2.0F);
     }
 
@@ -52,8 +52,8 @@ public class CrosshairDraw {
         updateValues();
         CrosshairSquare chsOutDot = new CrosshairSquare();
         chsOutDot.setValues((float) x - thickness*factor - outthick*factor, (float) y - thickness*factor - outthick*factor, (float) x + thickness*factor + outthick*factor, (float) y + thickness*factor + outthick*factor);
-        RenderManager.displayFilledRectangle(chsOutDot.minX, chsOutDot.minY, chsOutDot.maxX, chsOutDot.maxY, outlineColor);
-        RenderManager.displayFilledRectangle((float) x - thickness*factor, (float) y - thickness*factor, (float) x + thickness*factor, (float) y + thickness*factor, color);
+        CustomRenderManager.displayFilledRectangle(chsOutDot.minX, chsOutDot.minY, chsOutDot.maxX, chsOutDot.maxY, outlineColor);
+        CustomRenderManager.displayFilledRectangle((float) x - thickness*factor, (float) y - thickness*factor, (float) x + thickness*factor, (float) y + thickness*factor, color);
     }
 
     public void displayCrossCrosshair(int x, int y, Color color, Color outlineColor) {
@@ -80,15 +80,15 @@ public class CrosshairDraw {
         chsOutRight.setValues(chsRight.minX - outthick*factor, chsRight.minY - outthick*factor, chsRight.maxX + outthick*factor, chsRight.maxY + outthick*factor);
 
 
-        RenderManager.displayFilledRectangle(chsOutTop.minX, chsOutTop.minY, chsOutTop.maxX, chsOutTop.maxY, outlineColor);
-        RenderManager.displayFilledRectangle(chsOutBottom.minX, chsOutBottom.minY, chsOutBottom.maxX, chsOutBottom.maxY, outlineColor);
-        RenderManager.displayFilledRectangle(chsOutLeft.minX, chsOutLeft.minY, chsOutLeft.maxX, chsOutLeft.maxY, outlineColor);
-        RenderManager.displayFilledRectangle(chsOutRight.minX, chsOutRight.minY, chsOutRight.maxX, chsOutRight.maxY, outlineColor);
+        CustomRenderManager.displayFilledRectangle(chsOutTop.minX, chsOutTop.minY, chsOutTop.maxX, chsOutTop.maxY, outlineColor);
+        CustomRenderManager.displayFilledRectangle(chsOutBottom.minX, chsOutBottom.minY, chsOutBottom.maxX, chsOutBottom.maxY, outlineColor);
+        CustomRenderManager.displayFilledRectangle(chsOutLeft.minX, chsOutLeft.minY, chsOutLeft.maxX, chsOutLeft.maxY, outlineColor);
+        CustomRenderManager.displayFilledRectangle(chsOutRight.minX, chsOutRight.minY, chsOutRight.maxX, chsOutRight.maxY, outlineColor);
 
-        RenderManager.displayFilledRectangle(chsTop.minX, chsTop.minY, chsTop.maxX, chsTop.maxY, color);
-        RenderManager.displayFilledRectangle(chsBottom.minX, chsBottom.minY, chsBottom.maxX, chsBottom.maxY, color);
-        RenderManager.displayFilledRectangle(chsLeft.minX, chsLeft.minY, chsLeft.maxX, chsLeft.maxY, color);
-        RenderManager.displayFilledRectangle(chsRight.minX, chsRight.minY, chsRight.maxX, chsRight.maxY, color);
+        CustomRenderManager.displayFilledRectangle(chsTop.minX, chsTop.minY, chsTop.maxX, chsTop.maxY, color);
+        CustomRenderManager.displayFilledRectangle(chsBottom.minX, chsBottom.minY, chsBottom.maxX, chsBottom.maxY, color);
+        CustomRenderManager.displayFilledRectangle(chsLeft.minX, chsLeft.minY, chsLeft.maxX, chsLeft.maxY, color);
+        CustomRenderManager.displayFilledRectangle(chsRight.minX, chsRight.minY, chsRight.maxX, chsRight.maxY, color);
 
         GL11.glLineWidth(2.0F);
     }

@@ -1,6 +1,6 @@
 # Pvnika Mod for Forge
 
-## Multifuctional Minecraft PvP Mod for Forge 1.8.9
+## Multifunctional Minecraft PvP Mod for Forge 1.8.9
 
 ### Contents
 
@@ -34,10 +34,11 @@ Currently only the languages English and German are supported.
   - All/Individual
   - Colors
   - Chroma
+  - set Primary Target (PvP)
 - Crosshair
   - Custom Ingame Crosshair
   - Size
-  - Colors (coming soon)
+  - Colors (coming if someone needs it, open an issue)
 - Zoom
   - Smooth/Hard Zoom
   - Scrollable

@@ -3,12 +3,10 @@ package de.matrix.pvnikamod.renderer;
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.modutils.CrosshairDraw;
-import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
 
 import java.awt.*;
 
@@ -28,7 +26,7 @@ public class CrosshairRenderer {
 
     public void render(int x, int y, float health){
         if (!this.mc.gameSettings.showDebugInfo && !this.mc.gameSettings.hideGUI) {
-            RenderManager.pre();
+            CustomRenderManager.pre();
             ScaledResolution scaledResolution = new ScaledResolution(this.mc);
             GlStateManager.clear(256);
             GlStateManager.matrixMode(5889);
@@ -55,7 +53,7 @@ public class CrosshairRenderer {
                 crosshairDraw.drawDot(x, y, red, black);
                 crosshairDraw.displayCrossCrosshair(x, y, red, black);
             }
-            RenderManager.post();
+            CustomRenderManager.post();
         }
     }
 

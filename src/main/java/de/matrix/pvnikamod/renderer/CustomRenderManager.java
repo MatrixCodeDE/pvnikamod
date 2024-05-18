@@ -7,15 +7,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public interface RenderManager {
+public interface CustomRenderManager {
 
     static void pre() {
         GL11.glPushMatrix();
@@ -393,13 +390,15 @@ public interface RenderManager {
     }
 
     static void renderPvnikaLogo(int rows){
-        GlStateManager.enableAlpha();
-        GlStateManager.enableBlend();
         if (PvnikaMod.getInstance().getConfig().generalSettings.logoInMenu)
             return;
+        GlStateManager.enableAlpha();
+        GlStateManager.enableBlend();
         Minecraft.getMinecraft().getTextureManager().bindTexture(PvnikaMod.pvnikaHeader);
         int[] values = translateInvLogoPosition(166, rows);
         new DrawUtils().drawTexture(values[0], values[1], 1, 1, 120, 40, 1.0f);
+        GlStateManager.disableAlpha();
+        GlStateManager.disableBlend();
     }
 
 }

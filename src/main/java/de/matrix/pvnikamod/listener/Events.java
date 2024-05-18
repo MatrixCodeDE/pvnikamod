@@ -4,38 +4,21 @@ import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.config.RuntimeSettings;
 import de.matrix.pvnikamod.gui.GuiClientOptions;
 import de.matrix.pvnikamod.main.PvnikaMod;
+import de.matrix.pvnikamod.renderer.CosmeticsRenderer;
 import de.matrix.pvnikamod.renderer.CrosshairRenderer;
 import de.matrix.pvnikamod.modutils.ParticlesUtils;
 import de.matrix.pvnikamod.modutils.ZoomUtils;
-import de.matrix.pvnikamod.renderer.RenderManager;
-import de.matrix.pvnikamod.utils.BooleanColor;
-import de.matrix.pvnikamod.utils.ColorUtil;
-import de.matrix.pvnikamod.utils.Pinger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.MovementInputFromOptions;
 import net.minecraftforge.client.GuiIngameForge;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.event.world.NoteBlockEvent;
-import net.minecraftforge.fml.client.GuiModList;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import org.lwjgl.input.Mouse;
 
 public class Events {
@@ -46,6 +29,7 @@ public class Events {
     public final CrosshairRenderer crosshairRenderer;
     private final ZoomUtils zoomUtils;
     private final ParticlesUtils particlesUtils;
+    private final CosmeticsRenderer cosmeticsRenderer;
     private Implementation implementation;
     private float playerHealth;
 
@@ -60,6 +44,7 @@ public class Events {
         this.zoomUtils = this.mod.zoomUtils;
         this.implementation = new Implementation();
         this.particlesUtils = new ParticlesUtils();
+        this.cosmeticsRenderer = new CosmeticsRenderer();
     }
 
     @SubscribeEvent
@@ -145,6 +130,9 @@ public class Events {
                 toggled_sprint = false;
             }
         }
+        if (PvnikaMod.primaryTargetKey.isPressed()){
+            this.mod.hitboxRenderer.assignPrimaryTarget();
+        }
     }
 
     @SubscribeEvent
@@ -175,6 +163,12 @@ public class Events {
     @SubscribeEvent
     public void onDisconnect(PlayerEvent.PlayerLoggedOutEvent event){
         RuntimeSettings.connectedToServer = false;
+    }
+
+    @SubscribeEvent
+    public void onRenderPlayer(RenderPlayerEvent.Pre event) {
+        EntityPlayer player = event.entityPlayer;
+        cosmeticsRenderer.addCosmetics(player);
     }
 
 }

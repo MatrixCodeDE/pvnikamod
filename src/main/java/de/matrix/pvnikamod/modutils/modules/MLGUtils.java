@@ -2,6 +2,7 @@ package de.matrix.pvnikamod.modutils.modules;
 
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
+import de.matrix.pvnikamod.utils.IngameUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -12,6 +13,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraftforge.common.ISpecialArmor;
 
 import java.util.Arrays;
@@ -35,10 +37,19 @@ public class MLGUtils extends ModuleUtils {
         config.igModules.mlgModule.showDamage = !config.igModules.mlgModule.showDamage;
     }
 
-    public int getDistance(){
-        EntityPlayerSP player = mc.thePlayer;
-        MovingObjectPosition obj = player.rayTrace(200.0, 1.0F);
-        if (player != null && obj.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK){
+    public MovingObjectPosition customRayTrace(double blockReachDistance, float partialTicks) {
+        Vec3 vec3 = mc.thePlayer.getPositionEyes(partialTicks);
+        Vec3 vec31 = mc.thePlayer.getLook(partialTicks);
+        Vec3 vec32 = vec3.addVector(vec31.xCoord * blockReachDistance, vec31.yCoord * blockReachDistance, vec31.zCoord * blockReachDistance);
+        return mc.thePlayer.worldObj.rayTraceBlocks(vec3, vec32, false, true, false);
+    }
+
+    public static int getDistance(){
+        EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+        if (player == null)
+            return 0;
+        MovingObjectPosition obj = IngameUtils.customRayTrace( 200.0, 1.0F, true);
+        if (obj != null && obj.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK){
             int target = obj.getBlockPos().getY() + 1;
             int current = player.getPosition().getY();
             int diff = current - target;
