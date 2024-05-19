@@ -10,7 +10,7 @@ public class CosmeticsRenderer {
     public CosmeticsRenderer() {
     }
 
-    public void addCosmetics(EntityPlayer player){
-        //mdWings.render(player, 0.0625F);
+    public void addCosmetics(EntityPlayer player, float partialTicks){
+        //mdWings.render(player, 0.0625F, partialTicks);
     }
 }

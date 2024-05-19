@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "de.matrix.pvnikamod"
-version = "b0.9.5"
+version = "b0.9.6"
 
 // Toolchains:
 java {
@@ -24,10 +24,9 @@ loom {
             property("asmhelper.verbose", "true")
             arg("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
             arg("--mixin", "mixins.pvnikamod.json")
-            arg("--username", "asd7asd9")
             arg("--width", "1920")
             arg("--height", "1080")
-            property("devauth.enabled", "false")
+            property("devauth.enabled", "true")
             property("devauth.account", "alt")
         }
     }
