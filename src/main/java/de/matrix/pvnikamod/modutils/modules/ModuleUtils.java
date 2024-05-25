@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 public abstract class ModuleUtils {
 
     private static final PvnikaMod mod = PvnikaMod.getInstance();
-    private static final Config config = mod.getConfig();
+    protected static final Config config = mod.getConfig();
     private static final Minecraft mc = Minecraft.getMinecraft();
 
     public static void toggleEnabled(AModule aModule){

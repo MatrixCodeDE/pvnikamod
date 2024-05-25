@@ -66,6 +66,12 @@ menu.pvnika.iginfos.reach.name=Reach
 menu.pvnika.iginfos.reach.hasnt=Hasn't Attacked
 menu.pvnika.iginfos.reach.showOther=Show Other
 
+menu.pvnika.iginfos.cps.name=CPS
+menu.pvnika.iginfos.cps.split=Split Buttons
+
+menu.pvnika.iginfos.clock.name=Clock
+menu.pvnika.iginfos.clock.twoperiods=24h
+
 menu.pvnika.iginfos.mlg.name=MLG
 menu.pvnika.iginfos.mlg.walk=Walk
 menu.pvnika.iginfos.mlg.jump=Jump

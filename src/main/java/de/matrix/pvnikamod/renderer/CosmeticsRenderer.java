@@ -4,7 +4,7 @@ package de.matrix.pvnikamod.renderer;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class CosmeticsRenderer {
-
+    //MurderDrones Wings coming soon :3
     //private final MDWings mdWings = new MDWings();
 
     public CosmeticsRenderer() {

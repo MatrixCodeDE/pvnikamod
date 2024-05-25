@@ -2,6 +2,7 @@ package de.matrix.pvnikamod.modutils;
 
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
+import de.matrix.pvnikamod.modutils.modules.ClockUtils;
 import net.minecraft.client.Minecraft;
 
 public class IngameInfosUtils {

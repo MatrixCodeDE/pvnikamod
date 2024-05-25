@@ -13,6 +13,8 @@ public class IGModules {
     public BreakModule breakModule;
     public MLGModule mlgModule;
     public ReachModule reachModule;
+    public CPSModule cpsModule;
+    public ClockModule clockModule;
 
 
     public IGModules(File modulesFile){
@@ -22,6 +24,8 @@ public class IGModules {
         this.breakModule = new BreakModule();
         this.mlgModule = new MLGModule();
         this.reachModule = new ReachModule();
+        this.cpsModule = new CPSModule();
+        this.clockModule = new ClockModule();
     }
 
     public void loadModuleConfig(){
@@ -44,6 +48,12 @@ public class IGModules {
         this.reachModule.showOwn = this.getBoolean(this.reachModule, "own");
         this.reachModule.showOther = this.getBoolean(this.reachModule, "other");
 
+        this.loadDefaults(this.cpsModule);
+        this.cpsModule.split = this.getBoolean(this.cpsModule, "split");
+
+        this.loadDefaults(this.clockModule);
+        this.clockModule.twoperiods = this.getBoolean(this.clockModule, "twoperiods");
+
         this.moduleConfig.save();
     }
 
@@ -65,6 +75,12 @@ public class IGModules {
         this.saveDefaults(this.reachModule);
         this.setBoolean(this.reachModule, "own", this.reachModule.showOwn);
         this.setBoolean(this.reachModule, "other", this.reachModule.showOther);
+
+        this.loadDefaults(this.cpsModule);
+        this.setBoolean(this.cpsModule, "split", this.cpsModule.split);
+
+        this.saveDefaults(this.clockModule);
+        this.setBoolean(this.clockModule, "twoperiods", this.clockModule.twoperiods);
 
         this.moduleConfig.save();
     }

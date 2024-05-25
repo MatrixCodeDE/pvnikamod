@@ -16,12 +16,6 @@ public class GuiIngameInfos extends GuiScreen {
     private final PvnikaMod mod;
     private final Config config;
     private final Minecraft mc;
-
-    private GuiButton fpsButton;
-    private GuiButton coordButton;
-    private GuiButton breakButton;
-    private GuiButton mlgButton;
-    private GuiButton reachButton;
     private GuiScreen lastScreen;
 
     public GuiIngameInfos(GuiScreen lastScreen){
@@ -37,12 +31,14 @@ public class GuiIngameInfos extends GuiScreen {
         super.initGui();
         int i = -2;
         int j = 24;
-        buttonList.add(this.fpsButton = new GuiButton(0, width / 2 - 60, height / 4 + 0 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.fps.name")));
-        buttonList.add(this.coordButton = new GuiButton(1, width / 2 - 60, height / 4 + 1 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.coords.name")));
-        buttonList.add(this.breakButton = new GuiButton(2, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.break.name")));
-        buttonList.add(this.mlgButton = new GuiButton(3, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.mlg.name")));
-        buttonList.add(this.reachButton = new GuiButton(4, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.reach.name")));
-        buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 5 * j + i, 60, 20, I18n.format("gui.back")));
+        buttonList.add(new GuiButton(0, width / 2 - 60, height / 4 + 0 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.fps.name")));
+        buttonList.add(new GuiButton(1, width / 2 - 60, height / 4 + 1 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.coords.name")));
+        buttonList.add(new GuiButton(2, width / 2 - 60, height / 4 + 2 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.break.name")));
+        buttonList.add(new GuiButton(3, width / 2 - 60, height / 4 + 3 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.mlg.name")));
+        buttonList.add(new GuiButton(4, width / 2 - 60, height / 4 + 4 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.reach.name")));
+        buttonList.add(new GuiButton(5, width / 2 - 60, height / 4 + 5 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.clock.name")));
+        buttonList.add(new GuiButton(6, width / 2 - 60, height / 4 + 6 * j + i, 120, 20, I18n.format("menu.pvnika.iginfos.cps.name")));
+        buttonList.add(new GuiButton(10, width / 2 - 30, height / 4 + 7 * j + i, 60, 20, I18n.format("gui.back")));
     }
 
     @Override
@@ -71,6 +67,12 @@ public class GuiIngameInfos extends GuiScreen {
                 break;
             case 4:
                 this.mc.displayGuiScreen(new GuiReach(this));
+                break;
+            case 5:
+                this.mc.displayGuiScreen(new GuiClock(this));
+                break;
+            case 6:
+                this.mc.displayGuiScreen(new GuiCPS(this));
                 break;
             case 10:
                 this.mc.displayGuiScreen(lastScreen);

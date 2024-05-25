@@ -3,7 +3,7 @@ package de.matrix.pvnikamod.modutils.modules;
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.main.PvnikaMod;
 
-public class BreakUtils {
+public class BreakUtils extends ModuleUtils{
 
     private static final Config config = PvnikaMod.getInstance().getConfig();
 
