@@ -4,15 +4,20 @@ import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.config.RuntimeSettings;
 import de.matrix.pvnikamod.gui.GuiClientOptions;
 import de.matrix.pvnikamod.main.PvnikaMod;
-import de.matrix.pvnikamod.renderer.CosmeticsRenderer;
+import de.matrix.pvnikamod.cosmetics.CosmeticsManager;
 import de.matrix.pvnikamod.renderer.CrosshairRenderer;
 import de.matrix.pvnikamod.modutils.ParticlesUtils;
 import de.matrix.pvnikamod.modutils.ZoomUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
+import net.minecraft.client.model.ModelPlayer;
+import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.GuiIngameForge;
+import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -29,7 +34,7 @@ public class Events {
     public final CrosshairRenderer crosshairRenderer;
     private final ZoomUtils zoomUtils;
     private final ParticlesUtils particlesUtils;
-    private final CosmeticsRenderer cosmeticsRenderer;
+    private final CosmeticsManager cosmeticsRenderer;
     private Implementation implementation;
     private float playerHealth;
 
@@ -44,7 +49,7 @@ public class Events {
         this.zoomUtils = this.mod.zoomUtils;
         this.implementation = new Implementation();
         this.particlesUtils = new ParticlesUtils();
-        this.cosmeticsRenderer = new CosmeticsRenderer();
+        this.cosmeticsRenderer = new CosmeticsManager();
     }
 
     @SubscribeEvent
@@ -82,24 +87,6 @@ public class Events {
             RuntimeSettings.connectedToServer = false;
         }
     }
-
-    /*@SubscribeEvent
-    public void renderEntity(RenderLivingEvent.Specials.Pre event){
-        if (event.entity != null) {
-            if (event.entity.getHeldItem() != null) {
-                if (event.entity instanceof EntityPlayer) {
-                    if (event.entity.getHeldItem().getItem() == Item.getItemById(368)) {
-                        RuntimeSettings.renderEnderPearl = true;
-                    } else {
-                        RuntimeSettings.renderEnderPearl = false;
-
-                    }
-                }
-            } else {
-                RuntimeSettings.renderEnderPearl = false;
-            }
-        }
-    }*/
 
     @SubscribeEvent
     public void onPlayerTickEvent(TickEvent.PlayerTickEvent event){
@@ -168,7 +155,7 @@ public class Events {
     @SubscribeEvent
     public void onRenderPlayer(RenderPlayerEvent.Pre event) {
         EntityPlayer player = event.entityPlayer;
-        cosmeticsRenderer.addCosmetics(player, event.partialRenderTick);
+        cosmeticsRenderer.renderCosmetics(player, event.partialRenderTick);
     }
 
 }
