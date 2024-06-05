@@ -39,6 +39,10 @@ public class IngameInfosUtils {
         config.igModules.breakModule.obsidian = !config.igModules.breakModule.obsidian;
     }
 
+    public static void toggleOwnReach(){
+        config.igModules.reachModule.showOwn = !config.igModules.reachModule.showOwn;
+    }
+
     public static void toggleOtherReach(){
         config.igModules.reachModule.showOther = !config.igModules.reachModule.showOther;
     }

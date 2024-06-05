@@ -26,13 +26,15 @@ public class GuiReach extends GuiIngameModuleScreen{
         int i = -2;
         int j = 24;
         int w = 200;
-        super.initGui(i, j, 1, w);
-        buttonList.add(this.showOther = new GuiButton(1, width / 2 - (w/2), height / 4 + 3 * j + i, w, 20, BooleanColor.boolColor(this.config.igModules.reachModule.showOther, I18n.format("menu.pvnika.iginfos.reach.showOther"))));
+        super.initGui(i, j, 2, w);
+        buttonList.add(this.showOwn = new GuiButton(1, width / 2 - (w/2), height / 4 + 3 * j + i, w, 20, BooleanColor.boolColor(this.config.igModules.reachModule.showOwn, I18n.format("menu.pvnika.iginfos.reach.showOwn"))));
+        buttonList.add(this.showOther = new GuiButton(2, width / 2 - (w/2), height / 4 + 4 * j + i, w, 20, BooleanColor.boolColor(this.config.igModules.reachModule.showOther, I18n.format("menu.pvnika.iginfos.reach.showOther"))));
         refreshButtons();
     }
 
     public void refreshButtons(){
         super.refreshButtons();
+        this.showOwn.displayString = BooleanColor.boolColor(this.config.igModules.reachModule.showOwn, I18n.format("menu.pvnika.iginfos.reach.showOther"));
         this.showOther.displayString = BooleanColor.boolColor(this.config.igModules.reachModule.showOther, I18n.format("menu.pvnika.iginfos.reach.showOther"));
     }
 
@@ -49,6 +51,9 @@ public class GuiReach extends GuiIngameModuleScreen{
         super.actionPerformed(button);
         switch (button.id){
             case 1:
+                IngameInfosUtils.toggleOwnReach();
+                break;
+            case 2:
                 IngameInfosUtils.toggleOtherReach();
                 break;
         }

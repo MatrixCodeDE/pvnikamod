@@ -71,7 +71,10 @@ public class MLGUtils extends ModuleUtils {
     }
 
     public float getDamage(){
-        int distance = this.getDistance();
+        if (mc.thePlayer == null){
+            return 0.0F;
+        }
+        int distance = getDistance();
         float damageMultiplier = 1.0f;
         PotionEffect potioneffect = mc.thePlayer.getActivePotionEffect(Potion.jump);
         float f = potioneffect != null ? (float)(potioneffect.getAmplifier() + 1) : 0.0f;
@@ -88,21 +91,22 @@ public class MLGUtils extends ModuleUtils {
         return fDamage;
     }
 
-    public int getOption(){
+    public enum mlgOptions {
+        IMPOSSIBLE,
+        WALK,
+        JUMP,
+        BOTH
+    }
+
+    public mlgOptions getOption(){
         int distance = getDistance();
-        /*
-         * Walk = 1
-         * Jump = 2
-         * Both = 3
-         * Impossible = 0
-         */
         if (distance < 10 || both.contains(distance))
-            return 3;
+            return mlgOptions.BOTH;
         if (walk.contains(distance))
-            return 1;
+            return mlgOptions.WALK;
         if (jump.contains(distance))
-            return 2;
-        return 0;
+            return mlgOptions.JUMP;
+        return mlgOptions.IMPOSSIBLE;
     }
 
     private float applyPotionDamageCalculations(float damage) {

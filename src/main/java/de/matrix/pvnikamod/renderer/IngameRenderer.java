@@ -10,6 +10,7 @@ import de.matrix.pvnikamod.listener.Implementation;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.modutils.modules.MLGUtils;
 import de.matrix.pvnikamod.utils.ColorUtil;
+import de.matrix.pvnikamod.utils.IngameUtils;
 import de.matrix.pvnikamod.utils.ValueUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -17,10 +18,14 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.*;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -35,6 +40,7 @@ public class IngameRenderer extends Gui {
     private final Implementation implementation;
     private final MLGUtils mlgUtils;
     private long counter;
+    private int lastHealth;
     private long lastOwn;
     private double ownRange = 0.0;
     private long lastOther;
@@ -152,17 +158,17 @@ public class IngameRenderer extends Gui {
             /*MLG Module*/
             if (this.config.igModules.mlgModule.enabled){
                 MLGModule mlgModule = this.config.igModules.mlgModule;
-                int mlgOption = this.mlgUtils.getOption();
+                MLGUtils.mlgOptions mlgOption = this.mlgUtils.getOption();
                 int[] tcol = new int[]{ColorUtil.colorToDec(new Color(255, 128, 0)), ColorUtil.colorToDec(new Color(255, 0, 0)), ColorUtil.colorToDec(new Color(0, 128, 255))};
                 String mlgText = "";
                 switch (mlgOption){
-                    case 1:
+                    case WALK:
                         mlgText = I18n.format("menu.pvnika.iginfos.mlg.walk");
                         break;
-                    case 2:
+                    case JUMP:
                         mlgText = I18n.format("menu.pvnika.iginfos.mlg.jump");
                         break;
-                    case 3:
+                    case BOTH:
                         mlgText = I18n.format("menu.pvnika.iginfos.mlg.both");
                         tcol[0] = ColorUtil.colorToDec(new Color(0, 160, 0));
                         break;
@@ -172,9 +178,9 @@ public class IngameRenderer extends Gui {
                         break;
                 }
                 float damage = this.mlgUtils.getDamage();
-                int distance = this.mlgUtils.getDistance();
+                int distance = MLGUtils.getDistance();
                 String dmgString = String.format("%.1f", this.mlgUtils.getDamage()) + " ❤";
-                if (damage * 2 >= this.mc.thePlayer.getHealth()){
+                if (this.mc.thePlayer != null &&damage * 2 >= this.mc.thePlayer.getHealth()){
                     dmgString = I18n.format("menu.pvnika.iginfos.mlg.dead");
                 }
                 String[] text = new String[]{mlgText, dmgString, distance + " ⇩"};
@@ -187,12 +193,22 @@ public class IngameRenderer extends Gui {
             if (this.config.igModules.reachModule.enabled){
                 ReachModule reachModule = this.config.igModules.reachModule;
                 String ownText = "Hasn't attacked";
-                if (lastOwn + 2000L > System.currentTimeMillis()){
+                String otherText = "Hasn't attacked";
+                long currTime = System.currentTimeMillis();
+                if (lastOwn + 2000L > currTime){
                     ownText = String.format("%.2f", ownRange);
                 }
-                CustomRenderManager.drawInfoBoxSoloRect(reachModule.posX, reachModule.posY, 80, ownText, true);
+                if (lastOther + 2000L > currTime){
+                    otherText = String.format("%.2f", otherRange);
+                }
+                if (reachModule.showOwn && reachModule.showOther){
+                    CustomRenderManager.drawInfoBoxRect(reachModule.posX, reachModule.posY, 80, new String[]{ownText, otherText}, true, new int[]{ColorUtil.colorToDec(new Color(0, 160, 0)), ColorUtil.colorToDec(new Color(160, 0, 0))});
+                } else if (reachModule.showOwn) {
+                    CustomRenderManager.drawInfoBoxSoloRect(reachModule.posX, reachModule.posY, 80, ownText, true, ColorUtil.colorToDec(new Color(0, 160, 0)));
+                } else if (reachModule.showOther) {
+                    CustomRenderManager.drawInfoBoxSoloRect(reachModule.posX, reachModule.posY, 80, otherText, true, ColorUtil.colorToDec(new Color(160, 0, 0)));
+                }
             }
-
         }
     }
 
@@ -203,6 +219,38 @@ public class IngameRenderer extends Gui {
             Vec3 vector = this.mc.getRenderViewEntity().getPositionEyes(1.0f);
             ownRange = this.mc.objectMouseOver.hitVec.distanceTo(vector);
             lastOwn = System.currentTimeMillis();
+        }
+    }
+
+    @SubscribeEvent
+    public void onClientTick(TickEvent.ClientTickEvent event) {
+        if(mc.theWorld == null){
+            return;
+        }
+        if (event.phase == TickEvent.Phase.START) {
+            for (EntityPlayer player : mc.theWorld.playerEntities) {
+                if (player == mc.thePlayer){
+                    continue;
+                }
+                if (IngameUtils.isPlayerAttack(player)){
+                    otherRange = IngameUtils.playerHitDistance(player);
+                    lastOther = System.currentTimeMillis();
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onRenderGameOverlay(RenderGameOverlayEvent.Pre event) {
+        if (event.type == RenderGameOverlayEvent.ElementType.HEALTH) {
+            EntityPlayer player = mc.thePlayer;
+            if (player != null) {
+                int currentHealth = (int) player.getHealth();
+                if (currentHealth < lastHealth) {
+                    IngameUtils.updateLastDamageTime();
+                }
+                lastHealth = currentHealth;
+            }
         }
     }
 

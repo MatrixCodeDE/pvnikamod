@@ -42,13 +42,13 @@ public abstract class GuiIngameModuleScreen extends GuiScreen {
         super.initGui();
         buttonList.add(this.enabled = new GuiButton(0, width / 2 - (w/2), height / 4 + 0 * j + i, w, 20, BooleanColor.enableText(this.aModule.enabled)));
 
-        buttonList.add(this.sliderX = new ModulePosSlider(this.aModule, 1, width / 2 - (w/2), height / 4 + 1 * j + i, w, 20, I18n.format("menu.pvnika.all.posx") + ": ", "", 0, this.mc.displayWidth, CustomRenderManager.translateXFromConfig(this.aModule.posX), false, true));
+        buttonList.add(this.sliderX = new ModulePosSlider(this.aModule, 201, width / 2 - (w/2), height / 4 + 1 * j + i, w, 20, I18n.format("menu.pvnika.all.posx") + ": ", "", 0, this.mc.displayWidth, CustomRenderManager.translateXFromConfig(this.aModule.posX), false, true));
         buttonList.add(new ModulePosButton(100, (width / 2 - (w/2)) - 48, height / 4 + 1 * j + i, 20, 20, "-"));
         buttonList.add(new ModulePosButton(101, (width / 2 - (w/2)) - 24, height / 4 + 1 * j + i, 20, 20, "--"));
         buttonList.add(new ModulePosButton(102, (width / 2 + (w/2)) + 4, height / 4 + 1 * j + i, 20, 20, "++"));
         buttonList.add(new ModulePosButton(103, (width / 2 + (w/2)) + 28, height / 4 + 1 * j + i, 20, 20, "+"));
 
-        buttonList.add(this.sliderY = new ModulePosSlider(this.aModule, 2, width / 2 - (w/2), height / 4 + 2 * j + i, w, 20, I18n.format("menu.pvnika.all.posy") + ": ", "", 0, this.mc.displayHeight, CustomRenderManager.translateYFromConfig(this.aModule.posY), false, true));
+        buttonList.add(this.sliderY = new ModulePosSlider(this.aModule, 202, width / 2 - (w/2), height / 4 + 2 * j + i, w, 20, I18n.format("menu.pvnika.all.posy") + ": ", "", 0, this.mc.displayHeight, CustomRenderManager.translateYFromConfig(this.aModule.posY), false, true));
         buttonList.add(new ModulePosButton(110, (width / 2 - (w/2)) - 48, height / 4 + 2 * j + i, 20, 20, "-"));
         buttonList.add(new ModulePosButton(111, (width / 2 - (w/2)) - 24, height / 4 + 2 * j + i, 20, 20, "--"));
         buttonList.add(new ModulePosButton(112, (width / 2 + (w/2)) + 4, height / 4 + 2 * j + i, 20, 20, "++"));

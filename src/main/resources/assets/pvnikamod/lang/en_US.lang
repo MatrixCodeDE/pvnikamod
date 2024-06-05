@@ -64,6 +64,7 @@ menu.pvnika.iginfos.break.dec=Show Decimal
 
 menu.pvnika.iginfos.reach.name=Reach
 menu.pvnika.iginfos.reach.hasnt=Hasn't Attacked
+menu.pvnika.iginfos.reach.showOwn=Show Own
 menu.pvnika.iginfos.reach.showOther=Show Other
 
 menu.pvnika.iginfos.cps.name=CPS

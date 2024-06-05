@@ -329,6 +329,10 @@ public interface CustomRenderManager {
     }
 
     static void drawInfoBoxSoloRect(double x, double y, int width, String text, boolean centered){
+        drawInfoBoxSoloRect(x, y, width, text, centered, 16777215);
+    }
+
+    static void drawInfoBoxSoloRect(double x, double y, int width, String text, boolean centered, int color){
         Minecraft mc = Minecraft.getMinecraft();
         int[] positions = translateScreenPercentage(x, y);
         int height = 8 + 4;
@@ -338,7 +342,7 @@ public interface CustomRenderManager {
             strx += (width - mc.fontRendererObj.getStringWidth(text)) / 2;
         }
         int stry = positions[1] + 2;
-        mc.fontRendererObj.drawStringWithShadow(text, strx, stry, 16777215);
+        mc.fontRendererObj.drawStringWithShadow(text, strx, stry, color);
     }
 
     static int[] translateInvLogoPosition(int invSize){

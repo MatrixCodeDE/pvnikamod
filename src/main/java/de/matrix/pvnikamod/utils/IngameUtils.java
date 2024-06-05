@@ -3,24 +3,29 @@ package de.matrix.pvnikamod.utils;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.b3d.B3DModel;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SideOnly(Side.CLIENT)
 public class IngameUtils {
+
+    private static Minecraft mc = Minecraft.getMinecraft();
+    private static final Map<EntityPlayer, Float> previousSwingProgress = new HashMap<>();
+    private static Map<EntityPlayer, Long> lastHitTime = new HashMap<>();
+    private static Long lastDamageTime = 0L;
+
 
     public static MovingObjectPosition customRayTrace(double blockReachDistance, float partialTicks){
         return customRayTrace(blockReachDistance, partialTicks, false);
@@ -36,11 +41,16 @@ public class IngameUtils {
         return player.worldObj.rayTraceBlocks(vec3, vec32, false, true, false);
     }
 
-    // Thanks to https://gist.github.com/Dalethium/bc650696960c53c86e1137beec7280b1?permalink_comment_id=2110247#file-getlookedatentity-java
     public static Entity getLookedAtEntity(double blockReachDistance) {
         EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-        if (player == null)
+        return getLookedAtEntity(player, blockReachDistance);
+    }
+
+    // Thanks to https://gist.github.com/Dalethium/bc650696960c53c86e1137beec7280b1?permalink_comment_id=2110247#file-getlookedatentity-java
+    public static Entity getLookedAtEntity(Entity player, double blockReachDistance) {
+        if (player == null){
             return null;
+        }
         Vec3 eyeVec = player.getPositionEyes(1.0f);
         Vec3 lookVec = player.getLook(1.0f);
         Vec3 diffVec = eyeVec.addVector(lookVec.xCoord * blockReachDistance, lookVec.yCoord * blockReachDistance, lookVec.zCoord * blockReachDistance);
@@ -100,6 +110,72 @@ public class IngameUtils {
             if (entity == wEntity){
                 return true;
             }
+        }
+        return false;
+    }
+
+    public static boolean isPlayerAttack(EntityPlayer player){
+        float currentSwingProgress = player.swingProgress;
+        boolean trigger = false;
+
+        if (currentSwingProgress == 0){
+            previousSwingProgress.remove(player);
+        } else {
+            float lastSwingProgress = previousSwingProgress.getOrDefault(player, 10.0F);
+            if (currentSwingProgress < lastSwingProgress){
+                lastHitTime.put(player, System.currentTimeMillis());
+                if (isRecentlyHit(player)) {
+                    trigger = true;
+                }
+                previousSwingProgress.put(player, currentSwingProgress);
+            }
+        }
+
+        return trigger;
+    }
+
+    public static boolean isPlayeraAttack(EntityPlayer player){
+        boolean trigger = false;
+        float sp = player.swingProgress;
+        if (sp == (float) 1 / 6){
+            lastHitTime.put(player, System.currentTimeMillis());
+            if (isRecentlyHit(player)) {
+                trigger = true;
+            }
+        }
+        return trigger;
+    }
+
+    public static void updateLastDamageTime(){
+        lastDamageTime = System.currentTimeMillis();
+    }
+
+    public static float playerHitDistance(EntityPlayer player){
+        Vec3 playerPos = player.getPositionEyes(1.0f);
+        Vec3 mcPlayerPos = mc.thePlayer.getPositionEyes(1.0f);
+
+        double deltaX = playerPos.xCoord - mcPlayerPos.xCoord;
+        double deltaY = playerPos.yCoord - mcPlayerPos.yCoord;
+        double deltaZ = playerPos.zCoord - mcPlayerPos.zCoord;
+
+        float dist = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+        return dist;
+        /* Maybe for the future to detect if player maybe cheats
+        if (isHitTrace(player)){
+            return dist;
+        } else {
+            return dist;
+        }*/
+    }
+
+    public static boolean isHitTrace(EntityPlayer player){
+        return (getLookedAtEntity(player, 5.0F) == mc.thePlayer);
+    }
+
+    private static boolean isRecentlyHit(EntityPlayer player) {
+        Long lastHit = lastHitTime.get(player);
+        if (lastHit != null){
+            return (Math.abs(lastHit - lastDamageTime) < 100);
         }
         return false;
     }
