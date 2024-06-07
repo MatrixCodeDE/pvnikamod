@@ -80,8 +80,11 @@ public class Config {
 
         this.visualsSettings.guiSizeHotbar = this.config.get("guiSize", "hotbar", -1).getInt();
 
-        this.chatSettings.texts = this.config.get("chat", "texts", new String[] {"", "", "", "", ""}).getStringList();
-        this.chatSettings.modes = this.config.get("chat", "modes", new int[] {0, 0, 0, 0, 0}).getIntList();
+        this.chatSettings.maxLen = this.config.get("chat", "maxLen", 100).getInt();
+        this.chatSettings.noSpam = this.config.get("chat", "noSpam", false).getBoolean();
+        this.chatSettings.keepRestart = this.config.get("chat", "keepRestart", false).getBoolean();
+        this.chatSettings.autoTexts = this.config.get("chat", "autoTexts", new String[] {"", "", "", "", ""}).getStringList();
+        this.chatSettings.autoModes = this.config.get("chat", "autoModes", new int[] {0, 0, 0, 0, 0}).getIntList();
 
         this.config.save();
     }
@@ -129,8 +132,11 @@ public class Config {
         this.config.get("visuals", "pingOnTab", false).set(this.visualsSettings.pingOnTab);
         this.config.get("visuals", "fullBright", false).set(this.visualsSettings.fullBright);
 
-        this.config.get("chat", "texts", new String[] {"", "", "", "", ""}).set(this.chatSettings.texts);
-        this.config.get("chat", "modes", new int[] {0, 0, 0, 0, 0}).set(this.chatSettings.modes);
+        this.config.get("chat", "maxLen", 100).set(this.chatSettings.maxLen);
+        this.config.get("chat", "noSpam", false).set(this.chatSettings.noSpam);
+        this.config.get("chat", "keepRestart", false).set(this.chatSettings.keepRestart);
+        this.config.get("chat", "autoTexts", new String[] {"", "", "", "", ""}).set(this.chatSettings.autoTexts);
+        this.config.get("chat", "autoModes", new int[] {0, 0, 0, 0, 0}).set(this.chatSettings.autoModes);
 
         this.config.save();
     }

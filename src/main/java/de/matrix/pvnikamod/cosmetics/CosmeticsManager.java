@@ -22,9 +22,7 @@ public class CosmeticsManager {
     public CosmeticsManager() {
         ArrayList<CosmeticBase> c5q6 = new ArrayList<>();
         c5q6.add(mdWings);
-        c5q6.add(middleFinger);
         ArrayList<CosmeticBase> cRoiyarvu = new ArrayList<>();
-        cRoiyarvu.add(middleFinger);
         usercosmetics.put(UUID.fromString("bf0374f4-3401-45ba-85f8-0d5e1715825e"), c5q6);
         usercosmetics.put(UUID.fromString("97f23a35-eae9-4b49-ba59-5cf25d840fbd"), cRoiyarvu);
     }

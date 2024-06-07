@@ -18,8 +18,12 @@ public class ChatUtils extends ModUtil{
             "§e" + I18n.format("menu.pvnika.autochat.lose")
     };
 
-    public void toggleMode(int key){
-        this.config.chatSettings.modes[key] = (this.config.chatSettings.modes[key] + 1) % 4;
+    public void toggleNoSpam(){
+        this.config.chatSettings.noSpam = !this.config.chatSettings.noSpam;
+    }
+
+    public void toggleAutoMode(int key){
+        this.config.chatSettings.autoModes[key] = (this.config.chatSettings.autoModes[key] + 1) % 4;
     }
 
 }

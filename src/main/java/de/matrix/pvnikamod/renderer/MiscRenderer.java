@@ -11,7 +11,7 @@ public class MiscRenderer {
 
     public static void toggleFullBright(){
         if (PvnikaMod.getInstance().getConfig().visualsSettings.fullBright){
-            PvnikaMod.getInstance().mc.gameSettings.gammaSetting = 15.0f;
+            PvnikaMod.getInstance().mc.gameSettings.gammaSetting = 10.0f;
         } else {
             PvnikaMod.getInstance().mc.gameSettings.gammaSetting = 1.0f;
         }

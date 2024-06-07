@@ -43,6 +43,11 @@ menu.pvnika.movement.toggleSprint=Toggle Sprint
 menu.pvnika.iginfos.name=Ingame Infos
 menu.pvnika.iginfos.coordinates.name=Coordinates
 
+menu.pvnika.chat.name=Chat
+menu.pvnika.chat.maxlen=max Length
+menu.pvnika.chat.maxlen.description=maximum messages stored, 0 for infinite messages
+menu.pvnika.chat.nospam=No Spam
+
 menu.pvnika.autochat.name=AutoChat
 menu.pvnika.autochat.off=Off
 menu.pvnika.autochat.always=Always

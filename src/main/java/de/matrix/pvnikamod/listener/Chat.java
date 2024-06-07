@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -65,8 +64,8 @@ public class Chat {
     public void waiter(){
         if(delay <= 0 && delay != -1){
             delay = -1;
-            String[] texts = this.config.chatSettings.texts;
-            int[] modes = this.config.chatSettings.modes;
+            String[] texts = this.config.chatSettings.autoTexts;
+            int[] modes = this.config.chatSettings.autoModes;
             for (int cnt = 0; cnt < texts.length; cnt++) {
                 switch (modes[cnt]){
                     case 0: // Off
