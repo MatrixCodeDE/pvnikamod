@@ -1,6 +1,5 @@
 package de.matrix.mixin.gui;
 
-import com.google.common.collect.Lists;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ChatLine;
@@ -16,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 

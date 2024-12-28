@@ -1,6 +1,5 @@
 package de.matrix.pvnikamod.gui.modules;
 
-import de.matrix.pvnikamod.config.RuntimeSettings;
 import de.matrix.pvnikamod.main.PvnikaMod;
 import de.matrix.pvnikamod.modutils.IngameInfosUtils;
 import de.matrix.pvnikamod.utils.BooleanColor;
@@ -8,7 +7,6 @@ import de.matrix.pvnikamod.utils.ColorUtil;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.io.IOException;
 
@@ -34,7 +32,7 @@ public class GuiReach extends GuiIngameModuleScreen{
 
     public void refreshButtons(){
         super.refreshButtons();
-        this.showOwn.displayString = BooleanColor.boolColor(this.config.igModules.reachModule.showOwn, I18n.format("menu.pvnika.iginfos.reach.showOther"));
+        this.showOwn.displayString = BooleanColor.boolColor(this.config.igModules.reachModule.showOwn, I18n.format("menu.pvnika.iginfos.reach.showOwn"));
         this.showOther.displayString = BooleanColor.boolColor(this.config.igModules.reachModule.showOther, I18n.format("menu.pvnika.iginfos.reach.showOther"));
     }
 

@@ -153,9 +153,9 @@ public class Events {
     }
 
     @SubscribeEvent
-    public void onRenderPlayer(RenderPlayerEvent.Pre event) {
+    public void onRenderPlayer(RenderPlayerEvent.Post event) {
         EntityPlayer player = event.entityPlayer;
-        cosmeticsRenderer.renderCosmetics(player, event.partialRenderTick);
+        cosmeticsRenderer.renderCosmetics(player, event.renderer,event.partialRenderTick);
     }
 
 }

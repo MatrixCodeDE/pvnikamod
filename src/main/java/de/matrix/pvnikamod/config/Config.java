@@ -82,6 +82,7 @@ public class Config {
 
         this.chatSettings.maxLen = this.config.get("chat", "maxLen", 100).getInt();
         this.chatSettings.noSpam = this.config.get("chat", "noSpam", false).getBoolean();
+        this.chatSettings.delay = this.config.get("chat", "delay", 0).getInt();
         this.chatSettings.keepRestart = this.config.get("chat", "keepRestart", false).getBoolean();
         this.chatSettings.autoTexts = this.config.get("chat", "autoTexts", new String[] {"", "", "", "", ""}).getStringList();
         this.chatSettings.autoModes = this.config.get("chat", "autoModes", new int[] {0, 0, 0, 0, 0}).getIntList();
@@ -134,6 +135,7 @@ public class Config {
 
         this.config.get("chat", "maxLen", 100).set(this.chatSettings.maxLen);
         this.config.get("chat", "noSpam", false).set(this.chatSettings.noSpam);
+        this.config.get("chat", "delay", 0).set(this.chatSettings.delay);
         this.config.get("chat", "keepRestart", false).set(this.chatSettings.keepRestart);
         this.config.get("chat", "autoTexts", new String[] {"", "", "", "", ""}).set(this.chatSettings.autoTexts);
         this.config.get("chat", "autoModes", new int[] {0, 0, 0, 0, 0}).set(this.chatSettings.autoModes);

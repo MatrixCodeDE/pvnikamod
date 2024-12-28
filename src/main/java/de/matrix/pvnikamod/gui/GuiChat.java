@@ -52,7 +52,7 @@ public class GuiChat extends GuiBase {
 
     @Override
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        if (Character.isDigit(typedChar) || keyCode == 14 || keyCode == 28) {
+        if (isNumericKey(typedChar, keyCode)) {
             this.maxLen.textboxKeyTyped(typedChar, keyCode);
         }
 

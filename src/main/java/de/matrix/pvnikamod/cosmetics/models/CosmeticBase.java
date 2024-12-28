@@ -2,7 +2,9 @@ package de.matrix.pvnikamod.cosmetics.models;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -11,7 +13,9 @@ public abstract class CosmeticBase extends ModelBase {
 
     public Minecraft mc;
     public TextureManager textureManager;
-    public float ticks;
+    public RenderPlayer renderPlayer;
+    public ModelPlayer model;
+
 
     public CosmeticBase(){
         this.mc = Minecraft.getMinecraft();

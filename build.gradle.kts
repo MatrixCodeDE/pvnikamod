@@ -70,6 +70,11 @@ dependencies {
     }
     annotationProcessor("org.spongepowered:mixin:0.8.4-SNAPSHOT")
 
+    //MixinExtras
+    shadowImpl("io.github.llamalad7:mixinextras-common:0.3.6"){
+        isTransitive = false
+    }
+
     // If you don't want to log in with your real minecraft account, remove this line
     runtimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.1.0")
 
@@ -107,10 +112,13 @@ tasks.shadowJar {
         configurations.forEach {
             println("Config: ${it.files}")
         }
+        mergeServiceFiles()
     }
 
     // If you want to include other dependencies and shadow them, you can relocate them in here
     fun relocate(name: String) = relocate(name, "com.pvnikamod.deps.$name")
+
+    relocate("com.llamalad7.mixinextras", "com.pvnikamod.deps.mixinextras")
 }
 
 tasks.assemble.get().dependsOn(tasks.remapJar)

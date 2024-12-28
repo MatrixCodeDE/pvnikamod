@@ -180,4 +180,21 @@ public class IngameUtils {
         return false;
     }
 
+    public static double[] transformRelativeCoordinates(EntityPlayerSP player, float partialTicks, double relativeX, double relativeY, double relativeZ){
+        float yaw = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * partialTicks;
+        float pitch = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * partialTicks;
+
+        // Umwandlung von Grad in Radiant
+        float yawRadians = (float) Math.toRadians(-yaw);
+        float pitchRadians = (float) Math.toRadians(-pitch);
+
+        // Berechnung der relativen Richtungsvektoren basierend auf yaw und pitch
+        double xzLen = Math.cos(pitchRadians);
+        double offsetX = relativeX * Math.cos(yawRadians) - relativeZ * Math.sin(yawRadians) * xzLen;
+        double offsetY = relativeY + relativeZ * Math.sin(pitchRadians);
+        double offsetZ = relativeX * Math.sin(yawRadians) + relativeZ * Math.cos(yawRadians) * xzLen;
+
+        return new double[]{offsetX, offsetY, offsetZ};
+    }
+
 }

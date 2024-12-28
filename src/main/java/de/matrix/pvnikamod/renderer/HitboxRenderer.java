@@ -46,7 +46,6 @@ public class HitboxRenderer {
     public void assignPrimaryTarget(){
         Entity target = IngameUtils.getRTLock();
         setPrimaryTarget(target);
-        System.out.println(target);
     }
 
     public void setPrimaryTarget(Entity entity){

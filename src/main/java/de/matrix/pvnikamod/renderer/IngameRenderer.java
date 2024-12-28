@@ -3,6 +3,7 @@ package de.matrix.pvnikamod.renderer;
 import de.matrix.pvnikamod.config.Config;
 import de.matrix.pvnikamod.config.RuntimeSettings;
 import de.matrix.pvnikamod.config.ingame.modules.BreakModule;
+import de.matrix.pvnikamod.config.ingame.modules.ClockModule;
 import de.matrix.pvnikamod.config.ingame.modules.MLGModule;
 import de.matrix.pvnikamod.config.ingame.modules.ReachModule;
 import de.matrix.pvnikamod.gui.modules.GuiIngameModuleScreen;
@@ -24,13 +25,13 @@ import net.minecraft.util.*;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.awt.*;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class IngameRenderer extends Gui {
 
@@ -188,8 +189,27 @@ public class IngameRenderer extends Gui {
 
             }
 
+            /*Clock Module*/
+            if (this.config.igModules.clockModule.enabled){
+                ClockModule clockModule = this.config.igModules.clockModule;
+                LocalTime now = LocalTime.now();
 
-            /*Coords Module*/
+                DateTimeFormatter normal = DateTimeFormatter.ofPattern("HH:mm:ss");
+                DateTimeFormatter ampm = DateTimeFormatter.ofPattern("hh:mm:ss a");
+
+                String formattedTime = "";
+
+                if (clockModule.twoperiods){
+                    formattedTime = now.format(ampm);
+                } else {
+                    formattedTime = now.format(normal);
+                }
+
+                CustomRenderManager.drawInfoBoxSoloRect(clockModule.posX, clockModule.posY, 60, formattedTime, true, ColorUtil.colorToDec(new Color(255, 255, 255)));
+
+            }
+
+            /*Reach Module*/
             if (this.config.igModules.reachModule.enabled){
                 ReachModule reachModule = this.config.igModules.reachModule;
                 String ownText = "Hasn't attacked";

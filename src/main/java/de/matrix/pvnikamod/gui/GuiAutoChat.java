@@ -15,6 +15,7 @@ public class GuiAutoChat extends GuiBase {
     private ChatUtils chatUtils = new ChatUtils();
     private final GuiTextField[] texts = new GuiTextField[5];
     private final GuiButton[] modes = new GuiButton[5];
+    private GuiTextField delay;
 
 
     public GuiAutoChat(GuiScreen lastScreen) {
@@ -30,7 +31,8 @@ public class GuiAutoChat extends GuiBase {
             this.texts[cnt] = new GuiTextField(0, fontRendererObj, width / 2 - 115, height / 4 + cnt * j + i, 160, 20);
             buttonList.add(this.modes[cnt] = new GuiButton(cnt, width / 2 + 50, height / 4 + cnt * j + i, 60, 20, I18n.format("menu.pvnika.autochat.off")));
         }
-        setBackButton(height / 4 + texts.length * j + i);
+        this.delay = new GuiTextField(texts.length+1, fontRendererObj, width / 2 - 50, height / 4 + texts.length * j + i, 100, 20);
+        setBackButton(height / 4 + (texts.length + 1) * j + i);
         refresh();
     }
 
@@ -51,6 +53,7 @@ public class GuiAutoChat extends GuiBase {
         for (GuiTextField tF : texts) {
             tF.drawTextBox();
         }
+        this.delay.drawTextBox();
         this.drawCenteredString(fontRendererObj, I18n.format("menu.pvnika.autochat.name"), width / 2, 40, ColorUtil.colorToDec(new Color(0, 160, 0)));
     }
 
@@ -59,12 +62,16 @@ public class GuiAutoChat extends GuiBase {
         for (GuiTextField tF : texts) {
             tF.updateCursorCounter();
         }
+        this.delay.updateCursorCounter();
     }
 
     @Override
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
         for (GuiTextField tF : texts) {
             tF.textboxKeyTyped(typedChar, keyCode);
+        }
+        if (isNumericKey(typedChar, keyCode)){
+            this.delay.textboxKeyTyped(typedChar, keyCode);
         }
         super.keyTyped(typedChar, keyCode);
     }
@@ -89,9 +96,6 @@ public class GuiAutoChat extends GuiBase {
             refresh();
         }
     }
-
-
-
 
 
 }

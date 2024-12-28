@@ -76,4 +76,8 @@ public abstract class GuiBase extends GuiScreen {
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
+    public boolean isNumericKey(char typedChar, int keyCode){
+        return Character.isDigit(typedChar) || keyCode == 14 || keyCode == 28;
+    }
+
 }
