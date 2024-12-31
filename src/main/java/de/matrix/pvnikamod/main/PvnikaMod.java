@@ -71,7 +71,6 @@ public class PvnikaMod {
         this.modMetadata.description = EnumChatFormatting.WHITE + "A PvP Mod that has a lot of features like other clients, but this is mod doesn't require a unique client and can be combined with a lot of other mods. Feel free to create a feature request on GitHub :)\n" + EnumChatFormatting.LIGHT_PURPLE + "~matrix";
         this.modMetadata.credits = EnumChatFormatting.GREEN + "by MatrixCodeDE";
         this.modMetadata.logoFile = "assets/pvnikamod/images/logo.png";
-        this.modMetadata.updateJSON = "https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json";
         PvnikaMod.mod = PvnikaMod.this;
         PvnikaMod.this.mc = Minecraft.getMinecraft();
 
