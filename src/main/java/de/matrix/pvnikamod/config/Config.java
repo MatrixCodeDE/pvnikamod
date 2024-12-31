@@ -77,12 +77,13 @@ public class Config {
         this.visualsSettings.disableShift = this.config.get("visuals", "disableShift", false).getBoolean();
         this.visualsSettings.pingOnTab = this.config.get("visuals", "pingOnTab", false).getBoolean();
         this.visualsSettings.fullBright = this.config.get("visuals", "fullBright", false).getBoolean();
+        this.visualsSettings.motionBlur = this.config.get("visuals", "motionBlur", 0).getInt();
 
         this.visualsSettings.guiSizeHotbar = this.config.get("guiSize", "hotbar", -1).getInt();
 
         this.chatSettings.maxLen = this.config.get("chat", "maxLen", 100).getInt();
         this.chatSettings.noSpam = this.config.get("chat", "noSpam", false).getBoolean();
-        this.chatSettings.delay = this.config.get("chat", "delay", 0).getInt();
+        this.chatSettings.tickDelay = this.config.get("chat", "tickDelay", 0).getInt();
         this.chatSettings.keepRestart = this.config.get("chat", "keepRestart", false).getBoolean();
         this.chatSettings.autoTexts = this.config.get("chat", "autoTexts", new String[] {"", "", "", "", ""}).getStringList();
         this.chatSettings.autoModes = this.config.get("chat", "autoModes", new int[] {0, 0, 0, 0, 0}).getIntList();
@@ -132,10 +133,11 @@ public class Config {
         this.config.get("visuals", "disableShift", false).set(this.visualsSettings.disableShift);
         this.config.get("visuals", "pingOnTab", false).set(this.visualsSettings.pingOnTab);
         this.config.get("visuals", "fullBright", false).set(this.visualsSettings.fullBright);
+        this.config.get("visuals", "motionBlur", 0).set(this.visualsSettings.motionBlur);
 
         this.config.get("chat", "maxLen", 100).set(this.chatSettings.maxLen);
         this.config.get("chat", "noSpam", false).set(this.chatSettings.noSpam);
-        this.config.get("chat", "delay", 0).set(this.chatSettings.delay);
+        this.config.get("chat", "tickDelay", 0).set(this.chatSettings.tickDelay);
         this.config.get("chat", "keepRestart", false).set(this.chatSettings.keepRestart);
         this.config.get("chat", "autoTexts", new String[] {"", "", "", "", ""}).set(this.chatSettings.autoTexts);
         this.config.get("chat", "autoModes", new int[] {0, 0, 0, 0, 0}).set(this.chatSettings.autoModes);

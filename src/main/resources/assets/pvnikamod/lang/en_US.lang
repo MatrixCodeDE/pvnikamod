@@ -91,6 +91,7 @@ menu.pvnika.visuals.customMenu=Custom Menu
 menu.pvnika.visuals.disableShift=Disable Shift
 menu.pvnika.visuals.pingOnTab=Ping on Tab
 menu.pvnika.visuals.fullBright=Full Bright
+menu.pvnika.visuals.motionBlur=Motion Blur
 menu.pvnika.visuals.guiSize=Gui Size
 
 menu.pvnika.all.activated=Activated

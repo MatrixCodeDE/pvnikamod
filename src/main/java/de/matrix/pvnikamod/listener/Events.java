@@ -8,16 +8,12 @@ import de.matrix.pvnikamod.cosmetics.CosmeticsManager;
 import de.matrix.pvnikamod.renderer.CrosshairRenderer;
 import de.matrix.pvnikamod.modutils.ParticlesUtils;
 import de.matrix.pvnikamod.modutils.ZoomUtils;
+import de.matrix.pvnikamod.renderer.MotionBlurRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.model.ModelPlayer;
-import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.GuiIngameForge;
-import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -36,6 +32,7 @@ public class Events {
     private final ParticlesUtils particlesUtils;
     private final CosmeticsManager cosmeticsRenderer;
     private Implementation implementation;
+    private final MotionBlurRenderer motionBlurRenderer;
     private float playerHealth;
 
     private boolean toggled_sneak = false;
@@ -45,6 +42,8 @@ public class Events {
         this.mod = PvnikaMod.getInstance();
         this.config = this.mod.getConfig();
         this.mc = Minecraft.getMinecraft();
+
+        this.motionBlurRenderer = new MotionBlurRenderer();
         this.crosshairRenderer = new CrosshairRenderer();
         this.zoomUtils = this.mod.zoomUtils;
         this.implementation = new Implementation();
@@ -86,6 +85,7 @@ public class Events {
         } else {
             RuntimeSettings.connectedToServer = false;
         }
+        this.motionBlurRenderer.onTick();
     }
 
     @SubscribeEvent
@@ -120,6 +120,7 @@ public class Events {
         if (PvnikaMod.primaryTargetKey.isPressed()){
             this.mod.hitboxRenderer.assignPrimaryTarget();
         }
+        this.motionBlurRenderer.onKey();
     }
 
     @SubscribeEvent

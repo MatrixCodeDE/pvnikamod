@@ -19,6 +19,7 @@
     "renderer.MixinEntityRenderer",
     "renderer.MixinRender",
     "renderer.MixinRendererLivingEntity",
-    "renderer.MixinRenderManager"
+    "renderer.MixinRenderManager",
+    "renderer.RendererLivingEntityAccessor"
   ]
 }

@@ -12,13 +12,7 @@ import net.minecraft.world.demo.DemoWorldServer;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.fml.client.GuiModList;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.*;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -37,8 +31,9 @@ public abstract class MixinGuiMainMenu extends GuiScreen implements GuiYesNoCall
     protected GuiButton realmsButton;
     @Shadow
     protected abstract void addDemoButtons(int p_73972_1_, int p_73972_2_);
+    @Unique
     @Final
-    protected final Object threadLock = new Object();
+    protected final Object pvnikamod$threadLock = new Object();
     @Shadow
     protected String openGLWarning1;
     @Shadow
@@ -93,7 +88,7 @@ public abstract class MixinGuiMainMenu extends GuiScreen implements GuiYesNoCall
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, j + 72 + 12, 98, 20, I18n.format("menu.options")));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, j + 72 + 12, 98, 20, I18n.format("menu.quit")));
         this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, j + 72 + 12));
-        synchronized(this.threadLock) {
+        synchronized(this.pvnikamod$threadLock) {
             this.field_92023_s = this.fontRendererObj.getStringWidth(this.openGLWarning1);
             this.field_92024_r = this.fontRendererObj.getStringWidth(this.openGLWarning2);
             int k = Math.max(this.field_92023_s, this.field_92024_r);

@@ -2,11 +2,11 @@
   {
 	"modid": "pvnikamod",
 	"name": "Pvnika Mod",
-	"description": "A mod that is used by Pvnika.",
-	"version": "b0.9.4",
+	"description": "A PvP Mod that has a lot of features like other clients, but this is mod doesn't require a unique client and can be combined with a lot of other mods. Feel free to create a feature request on GitHub :)\n~matrix",
+	"version": "b0.9.7",
 	"mcversion": "1.8.9",
 	"url": "https://github.com/MatrixCodeDE",
-	"updateUrl": "https://github.com/MatrixCodeDE/pvnikamod/releases",
+	"updateJSON": "https://raw.githubusercontent.com/MatrixCodeDE/pvnikamod/refs/heads/main/update.json",
 	"authorList": [
 	  "MatrixCodeDE"
 	],

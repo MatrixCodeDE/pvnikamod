@@ -20,7 +20,8 @@ public class Chat {
     private final String[] winTriggers = new String[]{" (Win)", "Your team won!"};
     private boolean end;
     private boolean win;
-    private int delay = -1;
+    private int tickDelay = -1;
+    private long started = 0;
 
 
     public Chat(){
@@ -46,7 +47,7 @@ public class Chat {
                 for (String trig : this.triggers){
                     if (str.contains(trig)) {
                         this.end = true;
-                        this.delay = 5;
+                        this.tickDelay = this.config.chatSettings.tickDelay;
                         break;
                     }
                 }
@@ -54,7 +55,7 @@ public class Chat {
             for (String trig : this.winTriggers){
                 if (str.contains(trig)) {
                     this.win = true;
-                    this.delay = 10;
+                    this.tickDelay = this.config.chatSettings.tickDelay;
                     break;
                 }
             }
@@ -62,8 +63,8 @@ public class Chat {
     }
 
     public void waiter(){
-        if(delay <= 0 && delay != -1){
-            delay = -1;
+        if(tickDelay <= 0 && tickDelay != -1){
+            tickDelay = -1;
             String[] texts = this.config.chatSettings.autoTexts;
             int[] modes = this.config.chatSettings.autoModes;
             for (int cnt = 0; cnt < texts.length; cnt++) {
@@ -88,8 +89,8 @@ public class Chat {
             win = false;
             end = false;
         } else
-        if (delay > 0){
-            delay -= 1;
+        if (tickDelay > 0){
+            tickDelay -= 1;
         }
     }
 

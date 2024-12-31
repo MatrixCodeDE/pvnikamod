@@ -6,6 +6,7 @@ public class VisualsSettings {
     public boolean disableShift;
     public boolean pingOnTab;
     public boolean fullBright;
+    public int motionBlur;
 
     public int guiSizeHotbar;
 
