@@ -8,6 +8,7 @@
   "client": [
     "client.MixinInventoryEffectRenderer",
     "client.MixinInventoryPlayer",
+    "client.MixinNetworkPlayerInfo",
     "client.MixinPlayerControllerMP",
     "gui.MixinGuiIngameMenu",
     "gui.MixinGuiMainMenu",
@@ -16,10 +17,10 @@
     "gui.container.MixinGuiChest",
     "gui.container.MixinGuiCrafting",
     "gui.container.MixinGuiInventory",
+    "misc.RendererLivingEntityAccessor",
     "renderer.MixinEntityRenderer",
     "renderer.MixinRender",
     "renderer.MixinRendererLivingEntity",
-    "renderer.MixinRenderManager",
-    "renderer.RendererLivingEntityAccessor"
+    "renderer.MixinRenderManager"
   ]
 }

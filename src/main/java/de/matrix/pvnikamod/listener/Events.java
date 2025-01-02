@@ -9,11 +9,14 @@ import de.matrix.pvnikamod.renderer.CrosshairRenderer;
 import de.matrix.pvnikamod.modutils.ParticlesUtils;
 import de.matrix.pvnikamod.modutils.ZoomUtils;
 import de.matrix.pvnikamod.renderer.MotionBlurRenderer;
+import de.matrix.pvnikamod.utils.NameChangeMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.client.GuiIngameForge;
+import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -21,6 +24,8 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Mouse;
+
+import javax.naming.Name;
 
 public class Events {
 
@@ -157,6 +162,25 @@ public class Events {
     public void onRenderPlayer(RenderPlayerEvent.Post event) {
         EntityPlayer player = event.entityPlayer;
         cosmeticsRenderer.renderCosmetics(player, event.renderer,event.partialRenderTick);
+    }
+
+    @SubscribeEvent
+    public void onPlayerNameFormat(net.minecraftforge.event.entity.player.PlayerEvent.NameFormat event) {
+        NameChangeMap.registerPlayer(event.entityPlayer);
+        event.displayname = NameChangeMap.getSafe(event.entityPlayer.getPersistentID(), event.displayname);
+    }
+
+    @SubscribeEvent
+    public void onClientChat(ClientChatReceivedEvent event){
+        String origin = NameChangeMap.getContainedName(event.message);
+        if (origin != null){
+            String msg = event.message.getFormattedText();
+            String mod = NameChangeMap.getModifiedByName(origin);
+            if (mod != null){
+                msg = msg.replace(origin, mod);
+                event.message = new ChatComponentText(msg).setChatStyle(event.message.getChatStyle());
+            }
+        }
     }
 
 }

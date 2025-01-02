@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "de.matrix.pvnikamod"
-version = "b0.9.6"
+version = "b0.9.7"
 
 // Toolchains:
 java {

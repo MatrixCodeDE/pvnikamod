@@ -18,10 +18,9 @@ public class Chat {
 
     private final String[] triggers = new String[]{"1st Killer - ", "1st Place - ", "Winner: ", " - Damage Dealt - ", "Winning Team -", "1st - ", "Winners: ", "Winner: ", "Winning Team: ", " won the game!", "Top Seeker: ", "1st Place: ", "Last team standing!", "Winner #1 (", "Top Survivors", "Winners - ", "Your team won!", "Your team lost!", "Most Kills:"};
     private final String[] winTriggers = new String[]{" (Win)", "Your team won!"};
-    private boolean end;
     private boolean win;
-    private int tickDelay = -1;
-    private long started = 0;
+    private long timesend = 0;
+    private long deactivate = 0;
 
 
     public Chat(){
@@ -41,13 +40,15 @@ public class Chat {
     }
 
     public void handleChat(IChatComponent chatComponent){
+        if (this.deactivate > 0){
+            return;
+        }
         String str = EnumChatFormatting.getTextWithoutFormattingCodes(chatComponent.getUnformattedText());
         if (str != null && ( str.startsWith(" ") || str.startsWith("+") ) ){
-            if (!this.end) {
+            if (this.timesend <= 0) {
                 for (String trig : this.triggers){
                     if (str.contains(trig)) {
-                        this.end = true;
-                        this.tickDelay = this.config.chatSettings.tickDelay;
+                        this.timesend = System.currentTimeMillis() + this.config.chatSettings.delay;
                         break;
                     }
                 }
@@ -55,7 +56,9 @@ public class Chat {
             for (String trig : this.winTriggers){
                 if (str.contains(trig)) {
                     this.win = true;
-                    this.tickDelay = this.config.chatSettings.tickDelay;
+                    if (this.timesend <= 0){
+                        this.timesend = System.currentTimeMillis() + this.config.chatSettings.delay;
+                    }
                     break;
                 }
             }
@@ -63,8 +66,9 @@ public class Chat {
     }
 
     public void waiter(){
-        if(tickDelay <= 0 && tickDelay != -1){
-            tickDelay = -1;
+        if(this.canSend()){
+            this.timesend = 0;
+            this.deactivate = System.currentTimeMillis() + 5000;
             String[] texts = this.config.chatSettings.autoTexts;
             int[] modes = this.config.chatSettings.autoModes;
             for (int cnt = 0; cnt < texts.length; cnt++) {
@@ -75,28 +79,35 @@ public class Chat {
                         sendMessage(texts[cnt]);
                         break;
                     case 2: // Win
-                        if (win){
+                        if (this.win){
                             sendMessage(texts[cnt]);
                         }
                         break;
                     case 3: // Lose
-                        if (!win){
+                        if (!this.win){
                             sendMessage(texts[cnt]);
                         }
                         break;
                 }
             }
-            win = false;
-            end = false;
-        } else
-        if (tickDelay > 0){
-            tickDelay -= 1;
+            this.win = false;
+        }
+        if (this.deactivate > 0 && System.currentTimeMillis() > this.deactivate){
+            this.deactivate = 0;
         }
     }
 
     public void sendMessage(String message){
         if(message != null && !message.isEmpty())
             this.mc.thePlayer.sendChatMessage(message);
+    }
+
+    public boolean enabledSend(){
+        return (this.deactivate == 0) || (System.currentTimeMillis() > this.deactivate);
+    }
+
+    public boolean canSend(){
+        return this.timesend > 0 && System.currentTimeMillis() > this.timesend && this.enabledSend();
     }
 
 }

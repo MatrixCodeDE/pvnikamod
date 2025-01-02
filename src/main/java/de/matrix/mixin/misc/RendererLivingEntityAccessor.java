@@ -1,4 +1,4 @@
-package de.matrix.mixin.renderer;
+package de.matrix.mixin.misc;
 
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
